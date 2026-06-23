@@ -33,6 +33,7 @@ jobs:
       - name: Build types + functions
         run: |
           cd packages/types && npm ci && npm run build
+          cd "$GITHUB_WORKSPACE"
           bash scripts/prepare-functions-deploy.sh
 
       - name: Deploy Firestore rules + Functions
