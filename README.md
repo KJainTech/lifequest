@@ -2,6 +2,8 @@
 
 A premium, proficiency-based financial-literacy game for ages 5–17 · UAE-first.
 
+**Repository:** [github.com/KJainTech/lifequest](https://github.com/KJainTech/lifequest)
+
 ## Monorepo layout
 
 ```

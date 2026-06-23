@@ -65,3 +65,5 @@ admin/.next/
 # Secrets
 .env.local
 .env.production.local
+!.env.example
+!**/.env.example
