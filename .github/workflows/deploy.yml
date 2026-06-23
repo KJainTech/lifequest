@@ -1,0 +1,100 @@
+# Deploy LifeQuest — Firebase backend + Flutter web + DigitalOcean apps
+# Setup secrets first: ./scripts/bootstrap-secrets.sh
+
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      skip_do:
+        description: Skip DigitalOcean deploy
+        required: false
+        default: "false"
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  firebase:
+    name: Firebase backend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Verify secrets
+        run: |
+          test -n "${{ secrets.FIREBASE_TOKEN }}" || { echo "Missing FIREBASE_TOKEN secret"; exit 1; }
+          test -n "${{ secrets.FIREBASE_PROJECT_ID }}" || { echo "Missing FIREBASE_PROJECT_ID secret"; exit 1; }
+
+      - name: Build types + functions
+        run: |
+          cd packages/types && npm ci && npm run build
+          cd ../functions && npm ci && npm run build
+
+      - name: Deploy Firestore rules + Functions
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        run: |
+          npm install -g firebase-tools
+          firebase use "${{ secrets.FIREBASE_PROJECT_ID }}" --token "$FIREBASE_TOKEN"
+          firebase deploy --only firestore:rules,functions --token "$FIREBASE_TOKEN" --non-interactive
+
+  flutter-web:
+    name: Flutter web hosting
+    runs-on: ubuntu-latest
+    needs: firebase
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Build web
+        run: |
+          flutter pub get
+          flutter build web --release \
+            --dart-define=FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}
+
+      - name: Deploy Hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        run: |
+          npm install -g firebase-tools
+          firebase use "${{ secrets.FIREBASE_PROJECT_ID }}" --token "$FIREBASE_TOKEN"
+          firebase deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive
+
+  digitalocean:
+    name: DigitalOcean apps
+    runs-on: ubuntu-latest
+    if: inputs.skip_do != 'true'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify DO secret
+        run: test -n "${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}" || { echo "Missing DIGITALOCEAN_ACCESS_TOKEN"; exit 1; }
+
+      - name: Install doctl
+        run: |
+          curl -sL https://github.com/digitalocean/doctl/releases/download/v1.162.0/doctl-1.162.0-linux-amd64.tar.gz | tar xz
+          sudo mv doctl /usr/local/bin
+
+      - name: Deploy dashboard + admin
+        env:
+          DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+        run: |
+          doctl auth init -t "$DIGITALOCEAN_ACCESS_TOKEN"
+          for spec in dashboard-app admin-app; do
+            NAME="lifequest-${spec%-app}"
+            if doctl apps list --format Spec.Name --no-header | grep -qx "$NAME"; then
+              APP_ID=$(doctl apps list --format ID,Spec.Name --no-header | awk -v n="$NAME" '$2==n{print $1; exit}')
+              doctl apps update "$APP_ID" --spec "deploy/digitalocean/${spec}.yaml"
+              doctl apps create-deployment "$APP_ID"
+            else
+              doctl apps create --spec "deploy/digitalocean/${spec}.yaml" --wait
+            fi
+          done

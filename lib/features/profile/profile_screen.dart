@@ -9,7 +9,6 @@ import '../../app/theme/lq_theme.dart';
 import '../../core/tokens/lq_tokens.dart';
 import '../../core/tokens/lq_typography.dart';
 import '../../data/models/lq_models.dart';
-import '../../data/repositories/lq_repositories.dart';
 import '../../design/lq_button.dart';
 import '../../design/lq_canvas.dart';
 import '../../design/lq_card.dart';
