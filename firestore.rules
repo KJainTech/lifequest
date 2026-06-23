@@ -1,0 +1,123 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.admin == true;
+    }
+
+    function userDoc(uid) {
+      return get(/databases/$(database)/documents/users/$(uid)).data;
+    }
+
+    function isParentOf(childUid) {
+      return isSignedIn()
+        && userDoc(request.auth.uid).role == 'parent'
+        && userDoc(childUid).parentUid == request.auth.uid;
+    }
+
+    function isTeacherOfClass(classId) {
+      return isSignedIn()
+        && userDoc(request.auth.uid).role == 'teacher'
+        && get(/databases/$(database)/documents/classes/$(classId)).data.teacherUid == request.auth.uid;
+    }
+
+    function childInTeacherClass(childUid) {
+      return isSignedIn()
+        && userDoc(request.auth.uid).role == 'teacher'
+        && exists(/databases/$(database)/documents/users/$(childUid))
+        && userDoc(childUid).classIds.hasAny(
+          userDoc(request.auth.uid).classIds != null
+            ? userDoc(request.auth.uid).classIds
+            : []
+        );
+    }
+
+    // Users — profile fields only; no stats here
+    match /users/{uid} {
+      allow read: if isOwner(uid) || isParentOf(uid) || isAdmin();
+      allow create: if isOwner(uid)
+        && request.resource.data.role in ['child', 'parent', 'teacher']
+        && !('xp' in request.resource.data)
+        && !('coins' in request.resource.data)
+        && !('lqScore' in request.resource.data);
+      allow update: if isOwner(uid)
+        && !request.resource.data.diff(resource.data).affectedKeys()
+            .hasAny(['role', 'xp', 'coins', 'lqScore']);
+      allow delete: if isAdmin();
+    }
+
+    // Stats — Functions-only writes
+    match /profiles/{uid}/stats/{docId} {
+      allow read: if isOwner(uid) || isParentOf(uid) || isAdmin();
+      allow write: if false;
+    }
+
+    // Lesson progress — child can update status fields but not stars/completedAt from client
+    match /progress/{uid}/lessons/{lessonId} {
+      allow read: if isOwner(uid) || isParentOf(uid) || isAdmin();
+      allow create: if isOwner(uid)
+        && request.resource.data.status in ['available', 'in_progress'];
+      allow update: if isOwner(uid)
+        && !request.resource.data.diff(resource.data).affectedKeys()
+            .hasAny(['stars', 'quizScore', 'completedAt']);
+      allow delete: if isAdmin();
+    }
+
+    match /city/{uid} {
+      allow read: if isOwner(uid) || isParentOf(uid) || isAdmin();
+      allow write: if false;
+    }
+
+    match /badges/{uid}/{badgeId} {
+      allow read: if isOwner(uid) || isParentOf(uid) || isAdmin();
+      allow write: if false;
+    }
+
+    match /content/{concept}/variants/{variantId} {
+      allow read: if isSignedIn()
+        && (resource.data.reviewed == true || isAdmin());
+      allow write: if isAdmin();
+    }
+
+    match /content_queue/{docId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /audit_log/{docId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /classes/{classId} {
+      allow read: if isSignedIn()
+        && (resource.data.teacherUid == request.auth.uid
+            || request.auth.uid in resource.data.roster
+            || isAdmin());
+      allow create: if isSignedIn() && userDoc(request.auth.uid).role == 'teacher';
+      allow update: if isTeacherOfClass(classId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    match /coach/{uid}/notes/{noteId} {
+      allow read: if isOwner(uid) || isParentOf(uid) || isAdmin();
+      allow write: if false;
+    }
+
+    match /idempotency/{key} {
+      allow read, write: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

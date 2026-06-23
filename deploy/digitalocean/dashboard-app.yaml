@@ -1,0 +1,44 @@
+# LifeQuest parent/teacher dashboard — DigitalOcean App Platform
+# Docs: https://docs.digitalocean.com/products/app-platform/reference/app-spec/
+#
+# Before deploy:
+# 1. Replace GITHUB_REPO with your repo (or switch to Dockerfile deploy)
+# 2. Set Firebase NEXT_PUBLIC_* env vars in DO console or below
+# 3. doctl apps create --spec deploy/digitalocean/dashboard-app.yaml
+
+name: lifequest-dashboard
+region: nyc
+
+features:
+  - buildpack-stack=ubuntu-22
+
+services:
+  - name: web
+    github:
+      repo: KJainTech/lifequest
+      branch: main
+      deploy_on_push: true
+    source_dir: dashboard
+    environment_slug: node-js
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    http_port: 3000
+    build_command: npm ci && npm run build
+    run_command: npm start
+    routes:
+      - path: /
+    envs:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+        value: YOUR_FIREBASE_PROJECT_ID
+        type: SECRET
+      - key: NEXT_PUBLIC_FIREBASE_API_KEY
+        value: YOUR_FIREBASE_API_KEY
+        type: SECRET
+      - key: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+        value: YOUR_PROJECT.firebaseapp.com
+        type: SECRET
+      - key: NEXT_PUBLIC_FIREBASE_APP_ID
+        value: YOUR_FIREBASE_APP_ID
+        type: SECRET

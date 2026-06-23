@@ -1,0 +1,67 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# VS Code
+.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Environment
+.env
+.env.*
+*.keystore
+
+# Firebase
+google-services.json
+GoogleService-Info.plist
+firebase-debug.log
+.firebase/
+
+# Node
+node_modules/
+.next/
+functions/node_modules/
+functions/lib/
+packages/types/dist/
+dashboard/node_modules/
+dashboard/.next/
+admin/node_modules/
+admin/.next/
+
+# Secrets
+.env.local
+.env.production.local

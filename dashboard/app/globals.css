@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+
+  body {
+    @apply bg-lq-slate-50 text-lq-slate-900;
+  }
+}
+
+@layer components {
+  .lq-card {
+    @apply rounded-xl border border-lq-slate-200 bg-white p-5 shadow-card;
+  }
+
+  .lq-input {
+    @apply w-full rounded-lg border border-lq-slate-300 bg-white px-4 py-2.5 text-sm text-lq-slate-900 placeholder:text-lq-slate-400 transition-colors focus:border-lq-emerald-500 focus:outline-none focus:ring-2 focus:ring-lq-emerald-500/20;
+  }
+
+  .lq-btn-primary {
+    @apply inline-flex items-center justify-center rounded-lg bg-lq-emerald-600 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-lq-emerald-700 focus:outline-none focus:ring-2 focus:ring-lq-emerald-500/40 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .lq-btn-secondary {
+    @apply inline-flex items-center justify-center rounded-lg border border-lq-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-lq-slate-700 transition-colors hover:bg-lq-slate-100 focus:outline-none focus:ring-2 focus:ring-lq-slate-300/60;
+  }
+
+  .lq-label {
+    @apply mb-1.5 block text-sm font-medium text-lq-slate-700;
+  }
+}

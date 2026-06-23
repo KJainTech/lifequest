@@ -1,0 +1,32 @@
+PROJECT: LifeQuest — premium, proficiency-based financial-literacy game, ages 5–17, UAE-first.
+SOURCE OF TRUTH: /docs/BIBLE.md. Obey it. When unsure, ask before deviating.
+
+SURFACES:
+- Kid app: Flutter + Flame + Rive + Lottie + Riverpod + go_router. iOS/Android.
+- Parent/Teacher dashboard: Next.js (App Router) + TypeScript + Tailwind + shadcn/ui + Firebase JS SDK.
+- Admin: Next.js (App Router) + TypeScript + Tailwind + shadcn/ui.
+- Backend: Firebase (Auth, Firestore, Cloud Functions [TypeScript], Storage, Remote Config), Gemini via Functions.
+
+DESIGN LAW (BIBLE §4): premium-playful, NOT kiddish.
+- NO emoji in UI chrome. NO clip-art. NO default bubbly fonts.
+- Characters = Rive state-machine rigs. Icons = one custom duotone set. City = rendered art w/ depth + grain.
+- Use exact tokens: color/type/spacing/radius/elevation/spring/haptic/sound from BIBLE §4.
+- Everything springs (stiffness 220, damping 26). Press = scale .96. Respect reduced-motion. Hold 60fps.
+
+PRODUCT RULES:
+- Lesson loop is strict: Read → Quiz → Game → Reward. Game cannot be won without the lesson's concept.
+- NO leaderboards / NO competitive / NO addictive loops (school requirement).
+- Child-safe: no ads, no open child chat, parental gate, COPPA/GDPR-K posture.
+- Age sets difficulty; guide is cosmetic; screening sets level.
+- Economy is SERVER-AUTHORITATIVE via Cloud Functions; client NEVER writes xp/coins/lqScore/streak.
+- AI output is cached + guardrailed + schema-validated; NEVER show raw model output to a child.
+- UAE: AED currency; English + Arabic (RTL).
+
+CODE STANDARDS:
+- Strong typing (freezed/json_serializable in Flutter; zod + TS types in web/functions).
+- Repository pattern for data; no Firestore calls inside widgets/components.
+- Every screen has loading/empty/error/success states with in-voice copy.
+- Write tests for Functions logic and core widgets. Accessibility labels on all interactive elements.
+- Small, reviewable commits per slice. Never invent secrets; read from env/Remote Config.
+
+CURRENT PHASE: All playbook phases complete (1–11). Production: Firebase project, Rive assets, Gemini key, auth claims.
