@@ -5,7 +5,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 REPO="${GITHUB_REPO:-KJainTech/lifequest}"
-PROJECT_ID="${FIREBASE_PROJECT_ID:-lifequest}"
+PROJECT_ID="${FIREBASE_PROJECT_ID:-lifequest-97bf9}"
 
 echo "=== LifeQuest full deploy ==="
 echo "Project: $PROJECT_ID"
