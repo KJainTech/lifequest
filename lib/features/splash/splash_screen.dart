@@ -75,7 +75,11 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                     try {
                       final user = await auth.signInAnonymously();
                       if (!context.mounted) return;
-                      final profile = await auth.fetchProfile(user.uid);
+                      var profile = await auth.fetchProfile(user.uid);
+                      if (profile == null) {
+                        await auth.ensureChildAccount(user.uid);
+                        profile = await auth.fetchProfile(user.uid);
+                      }
                       if (!context.mounted) return;
                       if (profile?.onboardingComplete == true) {
                         context.go('/home');

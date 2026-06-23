@@ -45,6 +45,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       final user = ref.read(authProvider).valueOrNull;
       final profile = ref.read(userProfileProvider).valueOrNull;
 
+      if (user == null && path.startsWith('/onboarding')) {
+        return '/';
+      }
+
       if (profile?.onboardingComplete == true && path.startsWith('/onboarding')) {
         return '/home';
       }

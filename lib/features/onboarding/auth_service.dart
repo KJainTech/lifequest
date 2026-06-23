@@ -14,12 +14,18 @@ class AuthService {
   User? get currentUser => _auth.currentUser;
 
   Future<User> signInAnonymously() async {
-    if (_auth.currentUser != null) return _auth.currentUser!;
+    if (_auth.currentUser != null) {
+      await _auth.currentUser!.getIdToken(true);
+      return _auth.currentUser!;
+    }
     final cred = await _auth.signInAnonymously();
+    await cred.user!.getIdToken(true);
     return cred.user!;
   }
 
   Future<UserProfile?> fetchProfile(String uid) => _profiles.getProfile(uid);
+
+  Future<void> ensureChildAccount(String uid) => _profiles.ensureChildStub(uid);
 
   Future<void> saveOnboardingProfile({
     required String uid,

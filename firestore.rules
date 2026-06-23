@@ -21,18 +21,23 @@ service cloud.firestore {
 
     function isParentOf(childUid) {
       return isSignedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
         && userDoc(request.auth.uid).role == 'parent'
+        && exists(/databases/$(database)/documents/users/$(childUid))
         && userDoc(childUid).parentUid == request.auth.uid;
     }
 
     function isTeacherOfClass(classId) {
       return isSignedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
         && userDoc(request.auth.uid).role == 'teacher'
+        && exists(/databases/$(database)/documents/classes/$(classId))
         && get(/databases/$(database)/documents/classes/$(classId)).data.teacherUid == request.auth.uid;
     }
 
     function childInTeacherClass(childUid) {
       return isSignedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
         && userDoc(request.auth.uid).role == 'teacher'
         && exists(/databases/$(database)/documents/users/$(childUid))
         && userDoc(childUid).classIds.hasAny(

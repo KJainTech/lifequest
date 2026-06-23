@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../models/lq_models.dart';
 
@@ -30,9 +31,43 @@ class ProfileRepository {
   final FirebaseFirestore _firestore;
 
   Future<UserProfile?> getProfile(String uid) async {
-    final snap = await _firestore.doc('users/$uid').get();
-    if (!snap.exists || snap.data() == null) return null;
-    return UserProfile.fromMap(uid, snap.data()!);
+    return _withFirestoreRetry(() async {
+      final snap = await _firestore.doc('users/$uid').get();
+      if (!snap.exists || snap.data() == null) return null;
+      return UserProfile.fromMap(uid, snap.data()!);
+    });
+  }
+
+  /// Creates a minimal child profile so rules and onboarding can proceed.
+  Future<void> ensureChildStub(String uid) async {
+    await _withFirestoreRetry(() async {
+      await _firestore.doc('users/$uid').set(
+        {
+          'role': 'child',
+          'displayName': 'Explorer',
+          'onboardingComplete': false,
+          'locale': 'en',
+          'region': 'AE',
+          'proficiencyLevel': 1,
+        },
+        SetOptions(merge: true),
+      );
+    });
+  }
+
+  Future<T> _withFirestoreRetry<T>(Future<T> Function() action) async {
+    const attempts = 3;
+    for (var i = 0; i < attempts; i++) {
+      try {
+        return await action();
+      } on FirebaseException catch (e) {
+        final isLast = i == attempts - 1;
+        if (e.code != 'permission-denied' || isLast) rethrow;
+        await FirebaseAuth.instance.currentUser?.getIdToken(true);
+        await Future<void>.delayed(Duration(milliseconds: 200 * (i + 1)));
+      }
+    }
+    throw StateError('unreachable');
   }
 
   Future<void> saveProfile(UserProfile profile) async {

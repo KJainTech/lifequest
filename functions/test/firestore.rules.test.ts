@@ -109,6 +109,25 @@ describe('Firestore security rules', () => {
     );
   });
 
+  it('allows child to read own user doc before profile exists', async () => {
+    const db = childContext().firestore();
+    await assertSucceeds(getDoc(doc(db, 'users/child1')));
+  });
+
+  it('allows child to create own user profile stub', async () => {
+    const db = childContext().firestore();
+    await assertSucceeds(
+      setDoc(doc(db, 'users/child1'), {
+        role: 'child',
+        displayName: 'Explorer',
+        onboardingComplete: false,
+        locale: 'en',
+        region: 'AE',
+        proficiencyLevel: 1,
+      }),
+    );
+  });
+
   it('denies unauthenticated reads', async () => {
     const db = testEnv.unauthenticatedContext().firestore();
     await assertFails(getDoc(doc(db, 'users/child1')));
