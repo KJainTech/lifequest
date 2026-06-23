@@ -50,6 +50,8 @@ google-services.json
 GoogleService-Info.plist
 firebase-debug.log
 .firebase/
+functions/lifequest-types-*.tgz
+functions/package.json.bak
 
 # Node
 node_modules/

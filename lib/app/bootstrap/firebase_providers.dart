@@ -8,45 +8,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/models/lq_models.dart';
 import '../../data/repositories/lq_repositories.dart';
 import '../../data/services/cloud_functions_service.dart';
+import '../../firebase_options.dart';
 
-/// Set true to connect to local Firebase emulators.
+/// Set true to connect to local Firebase emulators (pass --dart-define=USE_FIREBASE_EMULATORS=true).
 const kUseFirebaseEmulators = bool.fromEnvironment(
   'USE_FIREBASE_EMULATORS',
-  defaultValue: kDebugMode,
+  defaultValue: false,
 );
 
 final firebaseInitializedProvider = FutureProvider<bool>((ref) async {
-  const apiKey = String.fromEnvironment(
-    'FIREBASE_API_KEY',
-    defaultValue: 'demo-api-key',
-  );
-  const projectId = String.fromEnvironment(
-    'FIREBASE_PROJECT_ID',
-    defaultValue: 'lifequest-dev',
-  );
-  const appId = String.fromEnvironment(
-    'FIREBASE_APP_ID',
-    defaultValue: '1:000000000000:web:demo',
-  );
-
   await Firebase.initializeApp(
-    options: FirebaseOptions(
-      apiKey: apiKey,
-      appId: appId,
-      messagingSenderId: const String.fromEnvironment(
-        'FIREBASE_MESSAGING_SENDER_ID',
-        defaultValue: '000000000000',
-      ),
-      projectId: projectId,
-      authDomain: const String.fromEnvironment(
-        'FIREBASE_AUTH_DOMAIN',
-        defaultValue: 'lifequest-dev.firebaseapp.com',
-      ),
-      storageBucket: const String.fromEnvironment(
-        'FIREBASE_STORAGE_BUCKET',
-        defaultValue: 'lifequest-dev.appspot.com',
-      ),
-    ),
+    options: DefaultFirebaseOptions.currentPlatform,
   );
 
   if (kUseFirebaseEmulators) {

@@ -1,5 +1,21 @@
 {
   "projects": {
     "default": "lifequest-97bf9"
-  }
+  },
+  "targets": {
+    "lifequest-97bf9": {
+      "hosting": {
+        "app": [
+          "lifequest-97bf9"
+        ],
+        "dashboard": [
+          "lifequest-dashboard"
+        ],
+        "admin": [
+          "lifequest-admin"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

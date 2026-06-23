@@ -5,7 +5,7 @@
 import * as admin from 'firebase-admin';
 
 if (!admin.apps.length) {
-  admin.initializeApp({ projectId: 'lifequest-dev' });
+  admin.initializeApp({ projectId: process.env.GCLOUD_PROJECT ?? 'lifequest-97bf9' });
 }
 
 const db = admin.firestore();

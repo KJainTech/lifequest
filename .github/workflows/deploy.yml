@@ -1,5 +1,4 @@
-# Deploy LifeQuest — Firebase backend + Flutter web + DigitalOcean apps
-# Setup secrets first: ./scripts/bootstrap-secrets.sh
+# Deploy LifeQuest — Firebase backend + Flutter web + dashboard/admin hosting
 
 name: Deploy
 
@@ -9,7 +8,7 @@ on:
       skip_do:
         description: Skip DigitalOcean deploy
         required: false
-        default: "false"
+        default: "true"
 
 concurrency:
   group: deploy-production
@@ -34,7 +33,7 @@ jobs:
       - name: Build types + functions
         run: |
           cd packages/types && npm ci && npm run build
-          cd ../functions && npm ci && npm run build
+          bash scripts/prepare-functions-deploy.sh
 
       - name: Deploy Firestore rules + Functions
         env:
@@ -44,23 +43,32 @@ jobs:
           firebase use "${{ secrets.FIREBASE_PROJECT_ID }}" --token "$FIREBASE_TOKEN"
           firebase deploy --only firestore:rules,functions --token "$FIREBASE_TOKEN" --non-interactive
 
-  flutter-web:
-    name: Flutter web hosting
+  web-apps:
+    name: Flutter + Next.js hosting
     runs-on: ubuntu-latest
     needs: firebase
     steps:
       - uses: actions/checkout@v4
+
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
 
-      - name: Build web
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Build Flutter web
         run: |
           flutter pub get
-          flutter build web --release \
-            --dart-define=FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}
+          flutter build web --release
 
-      - name: Deploy Hosting
+      - name: Build dashboard + admin
+        run: |
+          cd dashboard && npm ci && npm run build
+          cd ../admin && npm ci && npm run build
+
+      - name: Deploy Hosting (app, dashboard, admin)
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: |
