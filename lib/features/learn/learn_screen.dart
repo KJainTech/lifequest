@@ -7,6 +7,7 @@ import '../../app/theme/lq_theme.dart';
 import '../../core/tokens/lq_tokens.dart';
 import '../../core/tokens/lq_typography.dart';
 import '../../data/content/lesson_catalog.dart';
+import '../../data/content/lesson_progression.dart';
 import '../../data/models/lq_models.dart';
 import '../../data/providers/app_providers.dart';
 import '../../design/lq_canvas.dart';
@@ -14,19 +15,9 @@ import '../../design/lq_card.dart';
 import '../../design/lq_icons.dart';
 import '../../features/onboarding/auth_service.dart';
 
-/// Learn tab — lesson path with done / current / locked nodes.
+/// Learn tab — full quest path with dynamic current lesson.
 class LearnScreen extends ConsumerWidget {
   const LearnScreen({super.key});
-
-  LessonStatus _statusFor(LessonMeta meta, List<LessonProgress> progress) {
-    final p = progress.where((x) => x.lessonId == meta.id).firstOrNull;
-    if (p != null) return p.status;
-    if (meta.id == 'lesson_6') return LessonStatus.available;
-    if (meta.prerequisiteId == null) return LessonStatus.available;
-    final prereq = progress.where((x) => x.lessonId == meta.prerequisiteId).firstOrNull;
-    if (prereq?.status == LessonStatus.completed) return LessonStatus.available;
-    return LessonStatus.locked;
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -43,57 +34,87 @@ class LearnScreen extends ConsumerWidget {
           error: (e, _) => Center(
             child: Text('Could not load lessons ($e)', style: LQTypography.bodySm(colors)),
           ),
-          data: (progress) => CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.all(LQSpacing.gutter),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Learn', style: LQTypography.display(colors)),
-                      const SizedBox(height: LQSpacing.sm),
-                      Text(
-                        'Your quest path · $ageBand',
-                        style: LQTypography.bodySm(colors),
-                      ),
-                      const SizedBox(height: LQSpacing.xxl),
-                    ],
+          data: (progress) {
+            final current = LessonProgression.currentLesson(progress, profile);
+            final done = LessonProgression.completedCount(progress, profile);
+            final journeyDone = LessonProgression.isJourneyComplete(progress, profile);
+
+            return CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.all(LQSpacing.gutter),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Learn', style: LQTypography.display(colors)),
+                        const SizedBox(height: LQSpacing.sm),
+                        Text(
+                          journeyDone
+                              ? 'Coin Keeper journey complete · $done/${kCurriculum.length}'
+                              : current != null
+                                  ? 'Stage ${current.conceptOrder} of ${kCurriculum.length} · $ageBand'
+                                  : 'Your quest path · $ageBand',
+                          style: LQTypography.bodySm(colors),
+                        ),
+                        if (journeyDone) ...[
+                          const SizedBox(height: LQSpacing.lg),
+                          LQCard(
+                            colors: colors,
+                            child: Row(
+                              children: [
+                                LQDuotoneIcon(
+                                  icon: LQIconType.trophy,
+                                  size: 32,
+                                  primaryColor: colors.gold,
+                                  secondaryColor: colors.gold.withValues(alpha: 0.3),
+                                ),
+                                const SizedBox(width: LQSpacing.md),
+                                Expanded(
+                                  child: Text(
+                                    'You finished all six stages! Replay any lesson to practice.',
+                                    style: LQTypography.bodySm(colors),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                        const SizedBox(height: LQSpacing.xxl),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, i) {
-                    final meta = kCurriculum[i];
-                    final status = _statusFor(meta, progress);
-                    return Padding(
-                      padding: EdgeInsets.only(
-                        left: LQSpacing.gutter,
-                        right: LQSpacing.gutter,
-                        bottom: LQSpacing.lg,
-                      ),
-                      child: _LessonNode(
-                        colors: colors,
-                        meta: meta,
-                        status: status,
-                        index: i,
-                        onTap: status == LessonStatus.locked
-                            ? null
-                            : () {
-                                if (meta.id == 'lesson_6') {
-                                  context.push('/lesson/${meta.id}');
-                                }
-                              },
-                      ).animate(delay: (i * 60).ms).fadeIn().slideY(begin: 0.08, end: 0),
-                    );
-                  },
-                  childCount: kCurriculum.length,
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, i) {
+                      final meta = kCurriculum[i];
+                      final status = LessonProgression.statusFor(meta, progress, profile);
+                      final isCurrent = current?.id == meta.id;
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          left: LQSpacing.gutter,
+                          right: LQSpacing.gutter,
+                          bottom: LQSpacing.lg,
+                        ),
+                        child: _LessonNode(
+                          colors: colors,
+                          meta: meta,
+                          status: status,
+                          isCurrent: isCurrent,
+                          onTap: status == LessonStatus.locked
+                              ? null
+                              : () => context.push('/lesson/${meta.id}'),
+                        ).animate(delay: (i * 60).ms).fadeIn().slideY(begin: 0.08, end: 0),
+                      );
+                    },
+                    childCount: kCurriculum.length,
+                  ),
                 ),
-              ),
-              const SliverToBoxAdapter(child: SizedBox(height: 88)),
-            ],
-          ),
+                const SliverToBoxAdapter(child: SizedBox(height: 88)),
+              ],
+            );
+          },
         ),
       ),
     );
@@ -105,21 +126,20 @@ class _LessonNode extends StatelessWidget {
     required this.colors,
     required this.meta,
     required this.status,
-    required this.index,
+    required this.isCurrent,
     this.onTap,
   });
 
   final LQColors colors;
   final LessonMeta meta;
   final LessonStatus status;
-  final int index;
+  final bool isCurrent;
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     final isLocked = status == LessonStatus.locked;
     final isDone = status == LessonStatus.completed;
-    final isCurrent = !isLocked && !isDone && meta.id == 'lesson_6';
 
     return LQCard(
       colors: colors,
@@ -150,8 +170,14 @@ class _LessonNode extends StatelessWidget {
                 if (isCurrent) ...[
                   const SizedBox(height: LQSpacing.sm),
                   Text(
-                    'Ready now',
+                    'Your next quest',
                     style: LQTypography.microLabel(colors, color: colors.brand),
+                  ),
+                ] else if (isDone) ...[
+                  const SizedBox(height: LQSpacing.sm),
+                  Text(
+                    'Completed · tap to replay',
+                    style: LQTypography.microLabel(colors, color: colors.gold),
                   ),
                 ],
               ],
@@ -199,9 +225,7 @@ class _NodeIcon extends StatelessWidget {
       decoration: BoxDecoration(
         color: bg,
         shape: BoxShape.circle,
-        border: isCurrent
-            ? Border.all(color: colors.brand, width: 2)
-            : null,
+        border: isCurrent ? Border.all(color: colors.brand, width: 2) : null,
       ),
       alignment: Alignment.center,
       child: isLocked
@@ -213,12 +237,5 @@ class _NodeIcon extends StatelessWidget {
               ),
             ),
     );
-  }
-}
-
-extension _FirstOrNull<E> on Iterable<E> {
-  E? get firstOrNull {
-    final it = iterator;
-    return it.moveNext() ? it.current : null;
   }
 }

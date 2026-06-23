@@ -113,7 +113,7 @@ class _QuizPhaseViewState extends ConsumerState<QuizPhaseView> {
       error: (e, _) => Center(child: Text('Let\'s try that again.')),
       data: (content) {
         final questions = content.quizQuestions;
-        final answerKey = lesson6AnswerKey;
+        final answerKey = quizAnswerKeyFor(session.lessonId);
         final qIndex = session.quizQuestionIndex.clamp(0, questions.length - 1);
         final q = questions[qIndex];
 

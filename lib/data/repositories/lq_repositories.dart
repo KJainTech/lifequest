@@ -114,6 +114,13 @@ class ProgressRepository {
               .toList(),
         );
   }
+
+  Future<void> ensureLessonAvailable(String uid, String lessonId) async {
+    await _firestore.doc('progress/$uid/lessons/$lessonId').set(
+      {'status': 'available', 'updatedAt': DateTime.now().toIso8601String()},
+      SetOptions(merge: true),
+    );
+  }
 }
 
 class CityRepository {

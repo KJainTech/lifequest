@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../app/bootstrap/firebase_providers.dart';
 import '../../app/theme/lq_theme.dart';
+import '../../data/content/lesson_catalog.dart';
 import 'age_band.dart';
 import 'auth_service.dart';
 import 'onboarding_state.dart';
@@ -41,6 +42,13 @@ Future<void> completeOnboarding({
     locale: draft.locale,
     displayName: draft.displayName,
   );
+
+  final startOrder = proficiencyLevel >= 2 ? 3 : 1;
+  final startLesson = kCurriculum.firstWhere((l) => l.conceptOrder == startOrder);
+  await ref.read(progressRepositoryProvider).ensureLessonAvailable(
+        user.uid,
+        startLesson.id,
+      );
 
   ref.read(ageWorldProvider.notifier).state = guideToWorld(draft.guide);
 }

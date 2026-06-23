@@ -7,6 +7,8 @@ import '../../app/bootstrap/firebase_providers.dart';
 import '../../app/theme/lq_theme.dart';
 import '../../core/tokens/lq_tokens.dart';
 import '../../core/tokens/lq_typography.dart';
+import '../../data/content/lesson_catalog.dart';
+import '../../data/content/lesson_progression.dart';
 import '../../data/models/lq_models.dart';
 import '../../design/lq_badge.dart';
 import '../../design/lq_button.dart';
@@ -47,6 +49,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final colors = ref.watch(lqColorsProvider);
     final profile = ref.watch(userProfileProvider).valueOrNull;
     final stats = ref.watch(userStatsProvider).valueOrNull ?? UserStats.empty;
+    final lessonsAsync = ref.watch(userLessonsProvider);
+    final progress = lessonsAsync.valueOrNull ?? const <LessonProgress>[];
+    final currentLesson = LessonProgression.currentLesson(progress, profile);
+    final journeyDone = LessonProgression.isJourneyComplete(progress, profile);
     final name = profile?.displayName ?? 'Explorer';
     final initial = name.isNotEmpty ? name[0].toUpperCase() : 'E';
     final xpForLevel = stats.level * 100;
@@ -75,7 +81,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       lqScore: stats.lqScore,
                     ).animate().fadeIn().slideY(begin: 0.1, end: 0),
                     const SizedBox(height: LQSpacing.lg),
-                    _buildTodayLesson(colors),
+                    _buildTodayLesson(colors, currentLesson, journeyDone),
                     const SizedBox(height: LQSpacing.xxl),
                     Text('Your Badges', style: LQTypography.h2(colors)),
                     const SizedBox(height: LQSpacing.lg),
@@ -135,7 +141,47 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  Widget _buildTodayLesson(LQColors colors) {
+  Widget _buildTodayLesson(
+    LQColors colors,
+    LessonMeta? current,
+    bool journeyDone,
+  ) {
+    if (journeyDone) {
+      return LQCard(
+        colors: colors,
+        elevation: 2,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                StatPill(colors: colors, label: 'Complete', variant: StatPillVariant.xp),
+                const Spacer(),
+                StatPill(colors: colors, label: '6/6', variant: StatPillVariant.coins),
+              ],
+            ),
+            const SizedBox(height: LQSpacing.lg),
+            Text('Coin Keeper champion!', style: LQTypography.h2(colors)),
+            const SizedBox(height: LQSpacing.sm),
+            Text(
+              'Replay lessons, grow your city, and keep your streak alive.',
+              style: LQTypography.bodySm(colors),
+            ),
+            const SizedBox(height: LQSpacing.xxl),
+            LQButton(
+              label: 'Replay a lesson',
+              colors: colors,
+              expanded: true,
+              onPressed: () => context.go('/learn'),
+            ),
+          ],
+        ),
+      ).animate(delay: 100.ms).fadeIn().slideY(begin: 0.1, end: 0);
+    }
+
+    final lesson = current ?? kCurriculum.first;
+    final stageLabel = 'Stage ${lesson.conceptOrder}';
+
     return LQCard(
       colors: colors,
       elevation: 2,
@@ -144,32 +190,31 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         children: [
           Row(
             children: [
-              StatPill(
-                colors: colors,
-                label: 'Lesson 6',
-                variant: StatPillVariant.xp,
-              ),
+              StatPill(colors: colors, label: stageLabel, variant: StatPillVariant.xp),
               const Spacer(),
               StatPill(
                 colors: colors,
-                label: '+50 XP',
+                label: LessonProgression.xpLabelFor(lesson),
                 variant: StatPillVariant.coins,
               ),
             ],
           ),
           const SizedBox(height: LQSpacing.lg),
-          Text('Profit = Revenue − Cost', style: LQTypography.h2(colors)),
+          Text(lesson.title, style: LQTypography.h2(colors)),
           const SizedBox(height: LQSpacing.sm),
-          Text(
-            'Run your lemonade stand and learn when you actually make money.',
-            style: LQTypography.bodySm(colors),
-          ),
+          Text(lesson.subtitle, style: LQTypography.bodySm(colors)),
           const SizedBox(height: LQSpacing.xxl),
           LQButton(
-            label: 'Start',
+            label: current == null ? 'Explore path' : 'Start',
             colors: colors,
             expanded: true,
-            onPressed: () => context.go('/lesson/lesson_6'),
+            onPressed: () {
+              if (current != null) {
+                context.go('/lesson/${current.id}');
+              } else {
+                context.go('/learn');
+              }
+            },
           ),
         ],
       ),

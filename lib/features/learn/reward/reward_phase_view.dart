@@ -14,6 +14,10 @@ import '../../../design/lq_canvas.dart';
 import '../../../design/penny_mascot.dart';
 import '../../../design/stat_pill.dart';
 import '../../../features/onboarding/auth_service.dart';
+import '../../../data/content/lesson_catalog.dart';
+import '../../../data/content/lesson_progression.dart';
+import '../../../data/content/lesson_progression.dart';
+import '../../../design/lq_celebration.dart';
 import '../../city/city_providers.dart';
 import '../lesson_session.dart';
 
@@ -104,69 +108,107 @@ class _RewardPhaseViewState extends ConsumerState<RewardPhaseView> {
     final coins = (result['coins'] as num?)?.toInt() ?? 0;
     final lqScore = (result['lqScore'] as num?)?.toInt() ?? 0;
     final towerName = result['towerName'] as String?;
+    final nextLesson = LessonProgression.nextAfter(session.lessonId);
+    final journeyDone = nextLesson == null;
 
-    return LQCanvas(
-      colors: colors,
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(LQSpacing.gutter),
-          child: Column(
-            children: [
-              const Spacer(),
-              GuideMascot(
-                guide: guide,
-                size: 140,
-                state: PennyGuideState.celebrate,
-              ).animate().scale(
-                    begin: const Offset(0.8, 0.8),
-                    end: const Offset(1, 1),
-                    curve: Curves.elasticOut,
-                    duration: 700.ms,
-                  ),
-              const SizedBox(height: LQSpacing.xxxl),
-              Text('Lesson complete!', style: LQTypography.display(colors))
-                  .animate()
-                  .fadeIn(delay: 200.ms),
-              const SizedBox(height: LQSpacing.lg),
-              _StarsRow(colors: colors, count: stars)
-                  .animate()
-                  .fadeIn(delay: 350.ms),
-              const SizedBox(height: LQSpacing.xxl),
-              Wrap(
-                spacing: LQSpacing.sm,
-                alignment: WrapAlignment.center,
+    return Stack(
+      children: [
+        LQCelebrationBurst(colors: colors, active: stars >= 4),
+        LQCanvas(
+          colors: colors,
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(LQSpacing.gutter),
+              child: Column(
                 children: [
-                  StatPill(colors: colors, label: '+$xp XP', variant: StatPillVariant.xp),
-                  StatPill(colors: colors, label: '+$coins coins', variant: StatPillVariant.coins),
-                  StatPill(colors: colors, label: 'LQ $lqScore', variant: StatPillVariant.trend),
+                  const Spacer(),
+                  LQSuccessPop(
+                    child: GuideMascot(
+                      guide: guide,
+                      size: 140,
+                      state: PennyGuideState.celebrate,
+                    ),
+                  ),
+                  const SizedBox(height: LQSpacing.xxxl),
+                  LQSuccessPop(
+                    delay: 120.ms,
+                    child: Text(
+                      journeyDone ? 'Journey complete!' : 'Stage complete!',
+                      style: LQTypography.display(colors),
+                    ),
+                  ),
+                  const SizedBox(height: LQSpacing.lg),
+                  _StarsRow(colors: colors, count: stars),
+                  const SizedBox(height: LQSpacing.xxl),
+                  Wrap(
+                    spacing: LQSpacing.sm,
+                    alignment: WrapAlignment.center,
+                    children: [
+                      StatPill(colors: colors, label: '+$xp XP', variant: StatPillVariant.xp),
+                      StatPill(colors: colors, label: '+$coins coins', variant: StatPillVariant.coins),
+                      StatPill(colors: colors, label: 'LQ $lqScore', variant: StatPillVariant.trend),
+                    ],
+                  ).animate().fadeIn(delay: 450.ms),
+                  if (towerName != null) ...[
+                    const SizedBox(height: LQSpacing.lg),
+                    LQSuccessPop(
+                      delay: 200.ms,
+                      child: Text(
+                        '$towerName built!',
+                        style: LQTypography.h3(colors).copyWith(color: colors.gold),
+                      ),
+                    ),
+                  ],
+                  if (nextLesson != null) ...[
+                    const SizedBox(height: LQSpacing.lg),
+                    Text(
+                      'Next: ${nextLesson.title}',
+                      style: LQTypography.bodySm(colors),
+                      textAlign: TextAlign.center,
+                    ).animate().fadeIn(delay: 520.ms),
+                  ],
+                  const Spacer(flex: 2),
+                  LQButton(
+                    label: nextLesson != null
+                        ? 'Next stage'
+                        : 'Back to home',
+                    colors: colors,
+                    expanded: true,
+                    onPressed: () {
+                      if (towerName != null) {
+                        ref.read(pendingCityCelebrationProvider.notifier).state =
+                            towerName;
+                      }
+                      ref.read(lessonSessionProvider.notifier).clear();
+                      if (nextLesson != null) {
+                        context.go('/lesson/${nextLesson.id}');
+                      } else {
+                        context.go('/home');
+                      }
+                    },
+                  ).animate().fadeIn(delay: 650.ms),
+                  const SizedBox(height: LQSpacing.md),
+                  LQButton(
+                    label: 'See my city',
+                    colors: colors,
+                    variant: LQButtonVariant.ghost,
+                    expanded: true,
+                    onPressed: () {
+                      if (towerName != null) {
+                        ref.read(pendingCityCelebrationProvider.notifier).state =
+                            towerName;
+                      }
+                      ref.read(lessonSessionProvider.notifier).clear();
+                      context.go('/city');
+                    },
+                  ).animate().fadeIn(delay: 720.ms),
+                  const SizedBox(height: LQSpacing.lg),
                 ],
-              ).animate().fadeIn(delay: 450.ms),
-              if (towerName != null) ...[
-                const SizedBox(height: LQSpacing.lg),
-                Text(
-                  '$towerName built!',
-                  style: LQTypography.h3(colors).copyWith(color: colors.gold),
-                ).animate().fadeIn(delay: 550.ms),
-              ],
-              const Spacer(flex: 2),
-              LQButton(
-                label: 'See my city grow',
-                colors: colors,
-                expanded: true,
-                onPressed: () {
-                  if (towerName != null) {
-                    ref.read(pendingCityCelebrationProvider.notifier).state =
-                        towerName;
-                  }
-                  ref.read(lessonSessionProvider.notifier).clear();
-                  context.go('/city');
-                },
-              ).animate().fadeIn(delay: 650.ms),
-              const SizedBox(height: LQSpacing.lg),
-            ],
+              ),
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 }
