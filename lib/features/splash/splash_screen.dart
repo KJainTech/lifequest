@@ -61,7 +61,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                     .slideY(begin: 0.2, end: 0),
                 const SizedBox(height: LQSpacing.sm),
                 Text(
-                  'Marhaba — learn money by playing',
+                  'Marhaba learn money by playing',
                   style: LQTypography.body(colors),
                   textAlign: TextAlign.center,
                 ).animate().fadeIn(delay: 600.ms),
