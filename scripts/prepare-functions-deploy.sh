@@ -27,6 +27,7 @@ fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
 "
 
 echo "Installing $TGZ_NAME into functions..."
+rm -f package-lock.json
 npm install --no-audit --no-fund
 npm run build
 echo "Functions ready to deploy."
