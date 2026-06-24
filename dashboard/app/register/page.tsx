@@ -2,30 +2,27 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, useEffect, useState } from "react";
-import { useAuth } from "../components/AuthProvider";
-import { signInParent, authErrorMessage } from "../lib/auth";
+import { FormEvent, useState } from "react";
+import { registerParent, authErrorMessage } from "../../lib/auth";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const router = useRouter();
-  const { user, loading: authLoading } = useAuth();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!authLoading && user) {
-      router.replace("/parent");
-    }
-  }, [authLoading, user, router]);
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     setLoading(true);
     setError(null);
     try {
-      await signInParent(email, password);
+      await registerParent({
+        email,
+        password,
+        displayName: name,
+      });
       router.replace("/parent");
     } catch (err) {
       setError(authErrorMessage(err));
@@ -36,44 +33,39 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-lq-slate-100 to-lq-slate-50">
-      <header className="border-b border-lq-slate-200 bg-white/80 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4 sm:px-6">
-          <div className="flex items-center gap-3">
-            <div
-              className="flex h-9 w-9 items-center justify-center rounded-lg bg-lq-emerald-600 text-sm font-semibold text-white"
-              aria-hidden="true"
-            >
-              LQ
-            </div>
-            <span className="text-lg font-semibold tracking-tight text-lq-slate-900">
-              LifeQuest
-            </span>
-          </div>
-          <span className="text-sm text-lq-slate-500">Parent & Teacher</span>
-        </div>
-      </header>
-
       <main className="flex flex-1 items-center justify-center px-4 py-12 sm:px-6">
         <div className="w-full max-w-md">
           <div className="mb-8 text-center">
             <h1 className="text-2xl font-semibold tracking-tight text-lq-slate-900 sm:text-3xl">
-              Welcome back
+              Create parent account
             </h1>
             <p className="mt-2 text-sm text-lq-slate-500">
-              Sign in to view your child&apos;s live progress.
+              Link your child from the dashboard after signing up.
             </p>
           </div>
 
-          <form
-            className="lq-card space-y-5"
-            onSubmit={onSubmit}
-            aria-label="Sign in form"
-          >
+          <form className="lq-card space-y-5" onSubmit={onSubmit} aria-label="Register form">
             {error && (
               <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-800" role="alert">
                 {error}
               </p>
             )}
+
+            <div>
+              <label htmlFor="name" className="lq-label">
+                Your name
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                autoComplete="name"
+                className="lq-input"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
 
             <div>
               <label htmlFor="email" className="lq-label">
@@ -84,9 +76,7 @@ export default function LoginPage() {
                 name="email"
                 type="email"
                 autoComplete="email"
-                placeholder="you@example.com"
                 className="lq-input"
-                aria-required="true"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -101,10 +91,9 @@ export default function LoginPage() {
                 id="password"
                 name="password"
                 type="password"
-                autoComplete="current-password"
-                placeholder="Enter your password"
+                autoComplete="new-password"
                 className="lq-input"
-                aria-required="true"
+                minLength={6}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -112,22 +101,18 @@ export default function LoginPage() {
             </div>
 
             <button type="submit" className="lq-btn-primary w-full" disabled={loading}>
-              {loading ? "Signing in…" : "Sign in"}
+              {loading ? "Creating account…" : "Create account"}
             </button>
-
-            <p className="text-center text-sm text-lq-slate-500">
-              New parent?{" "}
-              <Link href="/register" className="font-medium text-lq-emerald-700 hover:underline">
-                Create an account
-              </Link>
-            </p>
           </form>
+
+          <p className="mt-6 text-center text-sm text-lq-slate-500">
+            Already have an account?{" "}
+            <Link href="/" className="font-medium text-lq-emerald-700 hover:underline">
+              Sign in
+            </Link>
+          </p>
         </div>
       </main>
-
-      <footer className="border-t border-lq-slate-200 py-6 text-center text-xs text-lq-slate-400">
-        LifeQuest — proficiency-based financial literacy
-      </footer>
     </div>
   );
 }

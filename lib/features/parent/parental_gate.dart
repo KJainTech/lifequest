@@ -25,8 +25,6 @@ class _ParentalGateState extends ConsumerState<ParentalGate> {
   late int _a;
   late int _b;
   final _controller = TextEditingController();
-  double _holdProgress = 0;
-  bool _holding = false;
 
   @override
   void initState() {
@@ -61,16 +59,6 @@ class _ParentalGateState extends ConsumerState<ParentalGate> {
           ),
         ),
       );
-    }
-  }
-
-  void _onHoldTick() {
-    if (!_holding) return;
-    setState(() => _holdProgress += 0.05);
-    if (_holdProgress >= 1) {
-      widget.onUnlocked();
-    } else {
-      Future.delayed(const Duration(milliseconds: 120), _onHoldTick);
     }
   }
 
@@ -115,49 +103,6 @@ class _ParentalGateState extends ConsumerState<ParentalGate> {
                 colors: widget.colors,
                 expanded: true,
                 onPressed: _checkAnswer,
-              ),
-              const SizedBox(height: LQSpacing.xxxl),
-              Text('Or hold to confirm', style: LQTypography.bodySm(widget.colors)),
-              const SizedBox(height: LQSpacing.md),
-              GestureDetector(
-                onLongPressStart: (_) {
-                  _holding = true;
-                  _holdProgress = 0;
-                  _onHoldTick();
-                },
-                onLongPressEnd: (_) {
-                  _holding = false;
-                  setState(() => _holdProgress = 0);
-                },
-                child: Container(
-                  height: 48,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: widget.colors.surface,
-                    borderRadius: BorderRadius.circular(LQRadius.control),
-                  ),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      FractionallySizedBox(
-                        alignment: Alignment.centerLeft,
-                        widthFactor: _holdProgress.clamp(0, 1),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: widget.colors.brand.withValues(alpha: 0.25),
-                            borderRadius: BorderRadius.circular(LQRadius.control),
-                          ),
-                        ),
-                      ),
-                      Center(
-                        child: Text(
-                          'Hold 3 seconds',
-                          style: LQTypography.label(widget.colors),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
               ),
             ],
           ),

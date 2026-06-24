@@ -28,8 +28,9 @@
 - [x] Splash screen (existing)
 - [x] Onboarding: guide → start → screening → profile save
 - [x] Riverpod session + lesson providers
-- [ ] Parent registration / invite code (web dashboard mock only)
-- [ ] Full parent auth on dashboard (static UI)
+- [x] Parent dashboard Firebase Auth (email login, register, sign-out, link child)
+- [x] Admin login + admin-claim guard
+- [ ] Teacher dashboard live data
 
 ## Creative DevPlan — Phase 2 City Map — PARTIAL
 

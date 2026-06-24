@@ -56,8 +56,8 @@ class _StartPointScreenState extends ConsumerState<StartPointScreen> {
             padding: const EdgeInsets.all(LQSpacing.gutter),
             child: OnboardingShell(
               colors: colors,
-              step: 2,
-              totalSteps: 3,
+              step: 3,
+              totalSteps: 4,
               title: 'Where should we begin?',
               subtitle: 'Tap your path — you can replay any stage later.',
               onBack: () => context.go('/onboarding/guide'),

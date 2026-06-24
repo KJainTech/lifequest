@@ -19,6 +19,7 @@ import '../../design/lq_mastery_card.dart';
 import '../../design/lq_money_tiles.dart';
 import '../../design/guide_mascot.dart';
 import '../../design/penny_mascot.dart';
+import '../../features/city/city_providers.dart';
 import '../../features/money/money_hub_snapshot.dart';
 import '../../features/onboarding/age_band.dart';
 import '../../features/onboarding/auth_service.dart';
@@ -110,6 +111,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     final profile = ref.watch(userProfileProvider).valueOrNull;
     final stats = ref.watch(userStatsProvider).valueOrNull ?? UserStats.empty;
     final lessons = ref.watch(userLessonsProvider).valueOrNull ?? const [];
+    final badges = ref.watch(userBadgesProvider).valueOrNull ?? const [];
+    final towers = ref.watch(userTowersProvider).valueOrNull ?? const [];
     final locale = ref.watch(appLocaleProvider);
     final guide = profile?.guide ?? 'penny';
     final name = profile?.displayName ?? 'Explorer';
@@ -120,8 +123,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       stats: stats,
       lessons: lessons,
       profile: profile,
-      badgeCount: 0,
-      cityBuildings: 0,
+      badgeCount: badges.length,
+      cityBuildings: towers.length,
     );
 
     return LQCanvas(
@@ -296,6 +299,29 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           LQSound.enabled = v;
                           if (v) LQSound.tap();
                         },
+                      ),
+                    ),
+                    const SizedBox(height: LQSpacing.lg),
+                    LQCard(
+                      colors: colors,
+                      onTap: () => context.push('/money'),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Money hub', style: LQTypography.h3(colors)),
+                                const SizedBox(height: LQSpacing.xs),
+                                Text(
+                                  'Balance, savings, streak, and city progress',
+                                  style: LQTypography.bodySm(colors),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Icon(Icons.chevron_right_rounded, color: colors.inkSoft),
+                        ],
                       ),
                     ),
                     const SizedBox(height: LQSpacing.lg),

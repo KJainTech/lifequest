@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -56,15 +57,16 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           _BrandMark(colors: colors),
-                          TextButton(
-                            onPressed: () => context.go('/showcase'),
-                            child: Text(
-                              'Preview',
-                              style: LQTypography.caption(colors).copyWith(
-                                color: colors.inkSoft,
+                          if (kDebugMode)
+                            TextButton(
+                              onPressed: () => context.go('/showcase'),
+                              child: Text(
+                                'Preview',
+                                style: LQTypography.caption(colors).copyWith(
+                                  color: colors.inkSoft,
+                                ),
                               ),
                             ),
-                          ),
                         ],
                       ),
                       SizedBox(height: compact ? LQSpacing.lg : LQSpacing.xxl),
@@ -175,7 +177,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       if (profile?.onboardingComplete == true) {
         context.go('/home');
       } else {
-        context.go('/onboarding/guide');
+        context.go('/onboarding/age');
       }
     } catch (e) {
       if (context.mounted) {

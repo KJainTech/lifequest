@@ -1,7 +1,11 @@
 "use client";
 
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { FormEvent, useEffect, useState } from "react";
+import { httpsCallable } from "firebase/functions";
+import { useAuth } from "../../components/AuthProvider";
+import { signOut } from "../../lib/auth";
+import { functions } from "../../lib/firebase";
 import { useParentDashboard } from "../../lib/useParentDashboard";
 
 function ScoreRing({ score }: { score: number }) {
@@ -57,8 +61,10 @@ const businessIqLabels = [
 ];
 
 export default function ParentDashboardClient() {
+  const router = useRouter();
   const params = useSearchParams();
   const childIdParam = params.get("childId");
+  const { user, loading: authLoading } = useAuth();
   const {
     children,
     selectedChildId,
@@ -69,6 +75,50 @@ export default function ParentDashboardClient() {
     error,
     derived,
   } = useParentDashboard(childIdParam);
+
+  const [childUidInput, setChildUidInput] = useState("");
+  const [linking, setLinking] = useState(false);
+  const [linkMessage, setLinkMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!authLoading && !user) {
+      router.replace("/");
+    }
+  }, [authLoading, user, router]);
+
+  async function handleSignOut() {
+    await signOut();
+    router.replace("/");
+  }
+
+  async function handleLinkChild(e: FormEvent) {
+    e.preventDefault();
+    const uid = childUidInput.trim();
+    if (!uid) return;
+    setLinking(true);
+    setLinkMessage(null);
+    try {
+      const linkChild = httpsCallable(functions, "linkChild");
+      await linkChild({ childUid: uid });
+      setSelectedChildId(uid);
+      setChildUidInput("");
+      setLinkMessage("Child linked successfully.");
+    } catch (err) {
+      setLinkMessage(
+        err instanceof Error ? err.message : "Could not link child account.",
+      );
+    } finally {
+      setLinking(false);
+    }
+  }
+
+  if (authLoading || !user) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-lq-slate-50">
+        <p className="text-sm text-lq-slate-500">Loading…</p>
+      </div>
+    );
+  }
 
   const childName = profileName;
   const lqScore = stats?.lqScore ?? 0;
@@ -93,13 +143,44 @@ export default function ParentDashboardClient() {
               </h1>
             </div>
           </div>
-          <Link href="/" className="lq-btn-secondary text-sm">
+          <button type="button" onClick={handleSignOut} className="lq-btn-secondary text-sm">
             Sign out
-          </Link>
+          </button>
         </div>
       </header>
 
       <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
+        {children.length === 0 && (
+          <section className="lq-card mb-6" aria-labelledby="link-child-heading">
+            <h2 id="link-child-heading" className="text-base font-semibold text-lq-slate-900">
+              Link a child account
+            </h2>
+            <p className="mt-2 text-sm text-lq-slate-600">
+              Open the LifeQuest app on your child&apos;s device, go to{" "}
+              <strong>Me → Parents</strong>, and copy their account ID. Paste it
+              below.
+            </p>
+            <form className="mt-4 flex flex-col gap-3 sm:flex-row" onSubmit={handleLinkChild}>
+              <input
+                type="text"
+                className="lq-input flex-1 font-mono text-sm"
+                placeholder="Child account ID"
+                value={childUidInput}
+                onChange={(e) => setChildUidInput(e.target.value)}
+                aria-label="Child account ID"
+              />
+              <button type="submit" className="lq-btn-primary shrink-0" disabled={linking}>
+                {linking ? "Linking…" : "Link child"}
+              </button>
+            </form>
+            {linkMessage && (
+              <p className="mt-3 text-sm text-lq-emerald-700" role="status">
+                {linkMessage}
+              </p>
+            )}
+          </section>
+        )}
+
         {children.length > 1 && (
           <div className="mb-6 flex flex-wrap gap-2">
             {children.map((c) => (
@@ -122,10 +203,6 @@ export default function ParentDashboardClient() {
         {error && (
           <div className="mb-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
             {error}
-            <p className="mt-1 text-xs text-red-600">
-              Sign in as a linked parent, or open with ?childId=UID while signed
-              in on the child device for pilot testing.
-            </p>
           </div>
         )}
 
@@ -133,13 +210,10 @@ export default function ParentDashboardClient() {
           <p className="text-sm text-lq-slate-500">Loading live progress…</p>
         )}
 
-        {!loading && !selectedChildId && (
+        {!loading && !selectedChildId && children.length === 0 && (
           <div className="lq-card">
             <p className="text-sm text-lq-slate-600">
-              Link a child account from the app, then sign in here with your
-              parent email. For pilots, append{" "}
-              <code className="rounded bg-lq-slate-100 px-1">?childId=UID</code>{" "}
-              to the URL.
+              No linked children yet. Link an account above to see live stats.
             </p>
           </div>
         )}
@@ -201,8 +275,7 @@ export default function ParentDashboardClient() {
                     Business IQ
                   </h2>
                   <p className="mt-1 text-sm text-lq-slate-500">
-                    Three pillars from your child&apos;s live stats — not mock
-                    data.
+                    Three pillars from your child&apos;s live stats.
                   </p>
                 </div>
               </div>

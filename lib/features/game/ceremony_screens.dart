@@ -227,7 +227,7 @@ class CityFinaleView extends ConsumerWidget {
                 expanded: true,
                 onPressed: () {
                   ref.read(lessonSessionProvider.notifier).finishCeremony();
-                  context.push('/city');
+                  context.go('/city');
                 },
               ),
               const SizedBox(height: LQSpacing.sm),

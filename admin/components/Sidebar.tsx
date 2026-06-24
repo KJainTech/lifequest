@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const navItems = [
   { href: "/", label: "Overview" },
@@ -8,7 +11,14 @@ const navItems = [
   { href: "/ai-costs", label: "AI Costs" },
 ];
 
-export function Sidebar() {
+export function Sidebar({ onSignOut }: { onSignOut?: () => Promise<void> }) {
+  const router = useRouter();
+
+  async function handleSignOut() {
+    if (onSignOut) await onSignOut();
+    router.replace("/login");
+  }
+
   return (
     <aside className="flex w-56 shrink-0 flex-col border-r border-surface-border bg-surface-raised">
       <div className="border-b border-surface-border px-5 py-6">
@@ -28,9 +38,18 @@ export function Sidebar() {
           </Link>
         ))}
       </nav>
-      <div className="border-t border-surface-border p-4">
+      <div className="border-t border-surface-border p-4 space-y-3">
+        {onSignOut && (
+          <button
+            type="button"
+            onClick={handleSignOut}
+            className="w-full rounded-md border border-surface-border px-3 py-2 text-sm text-ink-muted hover:bg-surface hover:text-ink"
+          >
+            Sign out
+          </button>
+        )}
         <p className="text-xs leading-relaxed text-ink-muted">
-          Phase 11 · Internal tooling
+          LifeQuest internal console
         </p>
       </div>
     </aside>

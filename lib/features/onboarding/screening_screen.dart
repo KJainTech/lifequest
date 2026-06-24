@@ -12,6 +12,7 @@ import '../../design/lq_canvas.dart';
 import '../../design/lq_card.dart';
 import '../../design/penny_mascot.dart';
 import 'onboarding_complete.dart';
+import 'onboarding_complete.dart';
 import 'onboarding_shell.dart';
 import 'onboarding_state.dart';
 import 'screening_questions.dart';
@@ -83,11 +84,17 @@ class _ScreeningScreenState extends ConsumerState<ScreeningScreen> {
       ref.read(screeningResultProvider.notifier).state = result;
       if (mounted) context.go('/onboarding/placement');
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Let\'s try that again. ($e)')),
-        );
-      }
+      final correct = _answers
+          .where((a) => a['selectedIndex'] == a['correctIndex'])
+          .length;
+      ref.read(screeningResultProvider.notifier).state = ScreeningResult(
+        placementLevel: 1,
+        skipAhead: false,
+        message: 'We\'ll start at Stage 1 for now.',
+        correct: correct,
+        total: _answers.length,
+      );
+      if (mounted) context.go('/onboarding/placement');
     } finally {
       if (mounted) setState(() => _submitting = false);
     }
@@ -107,8 +114,8 @@ class _ScreeningScreenState extends ConsumerState<ScreeningScreen> {
             padding: const EdgeInsets.all(LQSpacing.gutter),
             child: OnboardingShell(
               colors: colors,
-              step: 3,
-              totalSteps: 3,
+              step: 4,
+              totalSteps: 4,
               title: 'Screening Quest',
               subtitle: 'Question ${_index + 1} of ${_questions.length}',
               onBack: () => context.go('/onboarding/start'),

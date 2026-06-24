@@ -16,7 +16,7 @@ import 'age_band.dart';
 import 'onboarding_shell.dart';
 import 'onboarding_state.dart';
 
-/// Guide pick — first onboarding step (age hidden for now).
+/// Guide pick — step 2 after age.
 class GuidePickScreen extends ConsumerStatefulWidget {
   const GuidePickScreen({super.key});
 
@@ -46,11 +46,11 @@ class _GuidePickScreenState extends ConsumerState<GuidePickScreen> {
             padding: const EdgeInsets.all(LQSpacing.gutter),
             child: OnboardingShell(
               colors: colors,
-              step: 1,
-              totalSteps: 3,
+              step: 2,
+              totalSteps: 4,
               title: 'Pick your guide',
               subtitle: 'Your buddy will cheer you on through every stage.',
-              onBack: () => context.go('/'),
+              onBack: () => context.go('/onboarding/age'),
               child: Column(
                 children: [
                   Expanded(

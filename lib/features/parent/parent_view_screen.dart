@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../app/bootstrap/firebase_providers.dart';
@@ -9,6 +10,7 @@ import '../../data/content/lesson_catalog.dart';
 import '../../data/content/lesson_progression.dart';
 import '../../data/models/lq_models.dart';
 import '../../data/providers/app_providers.dart';
+import '../../design/lq_button.dart';
 import '../../design/lq_canvas.dart';
 import '../../design/lq_card.dart';
 import '../../features/onboarding/auth_service.dart';
@@ -24,6 +26,7 @@ class ParentViewScreen extends ConsumerWidget {
     final profile = ref.watch(userProfileProvider).valueOrNull;
     final lessons = ref.watch(userLessonsProvider).valueOrNull ?? const [];
     final name = profile?.displayName ?? 'your child';
+    final uid = ref.watch(authProvider).valueOrNull?.uid;
     final questLevel = LessonProgression.displayQuestLevel(lessons, profile);
     final questName = LessonProgression.displayQuestLevelName(lessons, profile);
     final journeyDone = LessonProgression.isJourneyComplete(lessons, profile);
@@ -116,6 +119,48 @@ class ParentViewScreen extends ConsumerWidget {
                         ],
                       ),
                     ),
+                    const SizedBox(height: LQSpacing.lg),
+                    if (uid != null)
+                      LQCard(
+                        colors: colors,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Link to web dashboard', style: LQTypography.h3(colors)),
+                            const SizedBox(height: LQSpacing.sm),
+                            Text(
+                              'Copy this account ID and paste it in the parent dashboard '
+                              'after you create a parent account.',
+                              style: LQTypography.bodySm(colors),
+                            ),
+                            const SizedBox(height: LQSpacing.md),
+                            SelectableText(
+                              uid,
+                              style: LQTypography.label(colors).copyWith(
+                                fontFamily: 'monospace',
+                              ),
+                            ),
+                            const SizedBox(height: LQSpacing.md),
+                            LQButton(
+                              label: 'Copy account ID',
+                              colors: colors,
+                              variant: LQButtonVariant.secondary,
+                              expanded: true,
+                              onPressed: () {
+                                Clipboard.setData(ClipboardData(text: uid));
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Account ID copied',
+                                      style: LQTypography.bodySm(colors),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
                     const SizedBox(height: LQSpacing.lg),
                     Text(
                       'For full reports and controls, use the web dashboard.',

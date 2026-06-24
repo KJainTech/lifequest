@@ -234,7 +234,7 @@ class _RewardPhaseViewState extends ConsumerState<RewardPhaseView> {
                     variant: LQButtonVariant.ghost,
                     expanded: true,
                     onPressed: () {
-                      _leaveLesson(() => context.push('/city'));
+                      _leaveLesson(() => context.go('/city'));
                     },
                   ).animate().fadeIn(delay: 720.ms),
                   const SizedBox(height: LQSpacing.lg),

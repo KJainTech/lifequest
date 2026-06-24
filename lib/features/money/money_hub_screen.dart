@@ -53,6 +53,37 @@ class MoneyHubScreen extends ConsumerWidget {
           slivers: [
             SliverToBoxAdapter(
               child: Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  LQSpacing.sm,
+                  LQSpacing.xs,
+                  LQSpacing.sm,
+                  0,
+                ),
+                child: Row(
+                  children: [
+                    IconButton(
+                      tooltip: 'Back to Me',
+                      onPressed: () {
+                        if (context.canPop()) {
+                          context.pop();
+                        } else {
+                          context.go('/profile');
+                        }
+                      },
+                      icon: Icon(Icons.arrow_back_rounded, color: colors.ink),
+                    ),
+                    const Spacer(),
+                    IconButton(
+                      tooltip: 'Home',
+                      onPressed: () => context.go('/home'),
+                      icon: Icon(Icons.cottage_outlined, color: colors.ink),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
                 padding: const EdgeInsets.all(LQSpacing.gutter),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -142,7 +173,7 @@ class MoneyHubScreen extends ConsumerWidget {
                           subtitle: '${snap.cityBuildings}/$kTotalStages buildings',
                           icon: Icons.location_city_outlined,
                           iconBg: colors.brand,
-                          onTap: () => context.push('/city'),
+                          onTap: () => context.go('/city'),
                         ).animate().fadeIn(delay: 280.ms).slideY(begin: 0.06, end: 0),
                         LQMoneyFeatureTile(
                           colors: colors,

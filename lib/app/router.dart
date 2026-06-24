@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../features/money/money_hub_screen.dart';
 import '../features/faq/faq_screen.dart';
 import '../features/city/city_screen.dart';
 import '../features/home/home_screen.dart';
@@ -59,15 +60,10 @@ final routerProvider = Provider<GoRouter>((ref) {
           profile != null &&
           !profile.onboardingComplete &&
           !path.startsWith('/onboarding')) {
-        return '/onboarding/guide';
-      }
-
-      if (path == '/onboarding/age') {
-        return '/onboarding/guide';
+        return '/onboarding/age';
       }
 
       if (path == '/progress') return '/awards';
-      if (path == '/money') return '/profile';
 
       return null;
     },
@@ -130,6 +126,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/city',
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) => const CityScreen(),
+      ),
+      GoRoute(
+        path: '/money',
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => const MoneyHubScreen(),
       ),
       GoRoute(
         path: '/wallet',
