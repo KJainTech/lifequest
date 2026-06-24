@@ -21,6 +21,7 @@ import '../../features/city/city_providers.dart';
 import '../../features/onboarding/age_band.dart';
 import '../../data/providers/notification_providers.dart';
 import '../../features/notifications/notifications_sheet.dart';
+import '../../features/onboarding/auth_service.dart';
 import '../../design/guide_mascot.dart';
 import '../../design/penny_mascot.dart';
 
