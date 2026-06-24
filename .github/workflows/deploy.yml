@@ -61,8 +61,11 @@ jobs:
 
       - name: Build Flutter web
         run: |
+          VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}')
           flutter pub get
-          flutter build web --release
+          flutter build web --release --pwa-strategy=none
+          perl -i -pe "s/<!-- build: .* -->/<!-- build: $VERSION -->/g" build/web/index.html
+          perl -i -pe "s/var BUILD = '[^']*'/var BUILD = '$VERSION'/g" build/web/index.html
 
       - name: Build dashboard + admin
         run: |
