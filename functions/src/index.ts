@@ -13,3 +13,4 @@ export { generateCoachNote } from './coach/generateCoachNote';
 export { refreshContent } from './content/refreshContent';
 export { generateContent, approveContent } from './content/generateContent';
 export { generateAdaptiveLesson } from './content/generateAdaptiveLesson';
+export { seedDemoVidya } from './admin/seedDemoVidya';

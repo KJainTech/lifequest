@@ -117,6 +117,13 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    match /notifications/{uid}/items/{itemId} {
+      allow read: if isOwner(uid) || isParentOf(uid) || isAdmin();
+      allow update: if isOwner(uid)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['read']);
+      allow create, delete: if false;
+    }
+
     match /idempotency/{key} {
       allow read, write: if false;
     }

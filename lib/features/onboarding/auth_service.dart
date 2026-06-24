@@ -23,6 +23,21 @@ class AuthService {
     return cred.user!;
   }
 
+  Future<User> signInWithEmail({
+    required String email,
+    required String password,
+  }) async {
+    if (_auth.currentUser != null) {
+      await _auth.signOut();
+    }
+    final cred = await _auth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    await cred.user!.getIdToken(true);
+    return cred.user!;
+  }
+
   Future<UserProfile?> fetchProfile(String uid) => _profiles.getProfile(uid);
 
   Future<void> ensureChildAccount(String uid) => _profiles.ensureChildStub(uid);

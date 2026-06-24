@@ -44,6 +44,16 @@ jobs:
           firebase use "${{ secrets.FIREBASE_PROJECT_ID }}" --token "$FIREBASE_TOKEN"
           firebase deploy --only firestore:rules,functions --token "$FIREBASE_TOKEN" --non-interactive
 
+      - name: Seed Vidya demo accounts
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        run: |
+          PROJECT="${{ secrets.FIREBASE_PROJECT_ID }}"
+          curl -sS -X POST \
+            "https://europe-west1-${PROJECT}.cloudfunctions.net/seedDemoVidya" \
+            -H "Content-Type: application/json" \
+            -d '{"data":{"secret":"lifequest-vidya-seed"}}'
+
   web-apps:
     name: Flutter + Next.js hosting
     runs-on: ubuntu-latest

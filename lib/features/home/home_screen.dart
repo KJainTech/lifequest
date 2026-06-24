@@ -19,7 +19,8 @@ import '../../features/city/city_buildings.dart';
 import '../../features/city/city_map_widget.dart';
 import '../../features/city/city_providers.dart';
 import '../../features/onboarding/age_band.dart';
-import '../../features/onboarding/auth_service.dart';
+import '../../data/providers/notification_providers.dart';
+import '../../features/notifications/notifications_sheet.dart';
 import '../../design/guide_mascot.dart';
 import '../../design/penny_mascot.dart';
 
@@ -79,6 +80,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           name: name,
                           guide: guide,
                           streak: stats.streak.count,
+                          notificationCount:
+                              ref.watch(unreadNotificationCountProvider),
+                          onNotifications: () => NotificationsSheet.show(context),
                           onProfile: () => context.go('/profile'),
                         ),
                         const SizedBox(height: LQSpacing.xl),
@@ -164,6 +168,8 @@ class _HomeHeader extends StatelessWidget {
     required this.name,
     required this.guide,
     required this.streak,
+    required this.notificationCount,
+    required this.onNotifications,
     required this.onProfile,
   });
 
@@ -171,6 +177,8 @@ class _HomeHeader extends StatelessWidget {
   final String name;
   final String guide;
   final int streak;
+  final int notificationCount;
+  final VoidCallback onNotifications;
   final VoidCallback onProfile;
 
   @override
@@ -190,7 +198,7 @@ class _HomeHeader extends StatelessWidget {
               Text('Hey, $name!', style: LQTypography.h2(colors)),
               if (streak > 0)
                 Text(
-                  '🔥 $streak-day streak — keep it going!',
+                  '$streak-day streak — keep it going!',
                   style: LQTypography.bodySm(colors),
                 )
               else
@@ -199,6 +207,15 @@ class _HomeHeader extends StatelessWidget {
                   style: LQTypography.bodySm(colors),
                 ),
             ],
+          ),
+        ),
+        IconButton(
+          tooltip: 'Notifications',
+          onPressed: onNotifications,
+          icon: Badge(
+            isLabelVisible: notificationCount > 0,
+            label: Text('$notificationCount'),
+            child: Icon(Icons.notifications_outlined, color: colors.ink),
           ),
         ),
         IconButton(

@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 import { authErrorMessage, signInAdmin, userIsAdmin } from "@/lib/auth";
+import { DEMO_VIDYA } from "@/lib/demoAccounts";
 import { useAuth } from "@/lib/AuthProvider";
 
 export default function AdminLoginPage() {
@@ -12,6 +13,11 @@ export default function AdminLoginPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  function fillAdminDemo() {
+    setEmail(DEMO_VIDYA.admin.email);
+    setPassword(DEMO_VIDYA.password);
+  }
 
   useEffect(() => {
     if (authLoading || !user) return;
@@ -94,6 +100,18 @@ export default function AdminLoginPage() {
         >
           {loading ? "Signing in…" : "Sign in"}
         </button>
+
+        <div className="rounded-md border border-surface-border bg-surface p-3 text-xs text-ink-muted">
+          <p className="font-medium text-ink">Demo — Vidya admin</p>
+          <p className="mt-1">{DEMO_VIDYA.admin.email}</p>
+          <button
+            type="button"
+            className="mt-2 text-brand underline"
+            onClick={fillAdminDemo}
+          >
+            Fill demo login
+          </button>
+        </div>
       </form>
     </div>
   );

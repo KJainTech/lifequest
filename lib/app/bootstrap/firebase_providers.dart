@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/models/lq_models.dart';
 import '../../data/repositories/lq_repositories.dart';
+import '../../data/repositories/notification_repository.dart';
 import '../../data/services/cloud_functions_service.dart';
 
 export 'firebase_bootstrap.dart' show kUseFirebaseEmulators;
@@ -35,6 +36,10 @@ final progressRepositoryProvider = Provider<ProgressRepository>((ref) {
 
 final cityRepositoryProvider = Provider<CityRepository>((ref) {
   return CityRepository(ref.watch(firestoreProvider));
+});
+
+final notificationRepositoryProvider = Provider<NotificationRepository>((ref) {
+  return NotificationRepository(ref.watch(firestoreProvider));
 });
 
 final cloudFunctionsProvider = Provider<CloudFunctionsService>((ref) {

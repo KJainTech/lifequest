@@ -217,6 +217,15 @@ export const completeLesson = onCall(async (request) => {
       },
     );
 
+    const notifId = `lesson_${payload.lessonId}_${Date.now()}`;
+    batch.set(db.doc(`notifications/${uid}/items/${notifId}`), {
+      title: 'Stage complete!',
+      body: `+${awards.coins} coins · ${meta?.title ?? 'Great work!'}`,
+      kind: 'reward',
+      read: false,
+      createdAt: nowIso(),
+    });
+
     await batch.commit();
 
     const result = {

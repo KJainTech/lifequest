@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 import { useAuth } from "../components/AuthProvider";
 import { signInParent, authErrorMessage } from "../lib/auth";
+import { DEMO_VIDYA } from "../lib/demoAccounts";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -13,6 +14,11 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  function fillParentDemo() {
+    setEmail(DEMO_VIDYA.parent.email);
+    setPassword(DEMO_VIDYA.password);
+  }
 
   useEffect(() => {
     if (!authLoading && user) {
@@ -122,6 +128,20 @@ export default function LoginPage() {
               </Link>
             </p>
           </form>
+
+          <div className="lq-card mt-6 space-y-3">
+            <p className="text-sm font-medium text-lq-slate-900">Demo account — Vidya</p>
+            <p className="text-xs text-lq-slate-500">
+              Parent: {DEMO_VIDYA.parent.email} · Password: {DEMO_VIDYA.password}
+            </p>
+            <button
+              type="button"
+              className="lq-btn-secondary w-full text-sm"
+              onClick={fillParentDemo}
+            >
+              Fill demo login
+            </button>
+          </div>
         </div>
       </main>
 

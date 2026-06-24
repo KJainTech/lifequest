@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/theme/lq_theme.dart';
 import '../../core/audio/lq_sound_service.dart';
+import '../../core/demo_accounts.dart';
 import '../../core/tokens/lq_tokens.dart';
 import '../../core/tokens/lq_typography.dart';
 import '../../data/content/lesson_catalog.dart';
@@ -25,6 +26,7 @@ class SplashScreen extends ConsumerStatefulWidget {
 
 class _SplashScreenState extends ConsumerState<SplashScreen> {
   PennyGuideState _mascotState = PennyGuideState.idle;
+  bool _demoLoading = false;
 
   @override
   void initState() {
@@ -142,6 +144,15 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                         expanded: true,
                         onPressed: () => _start(context),
                       ).animate().fadeIn(delay: 580.ms).slideY(begin: 0.1, end: 0),
+                      const SizedBox(height: LQSpacing.sm),
+                      LQButton(
+                        label: _demoLoading ? 'Signing in…' : 'Play as Vidya (demo)',
+                        colors: colors,
+                        variant: LQButtonVariant.secondary,
+                        expanded: true,
+                        enabled: !_demoLoading,
+                        onPressed: _demoLoading ? null : () => _startDemo(context),
+                      ).animate().fadeIn(delay: 600.ms),
                       const SizedBox(height: LQSpacing.md),
                       Text(
                         'Learn in class · Play at home · Grow your city',
@@ -160,6 +171,37 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _startDemo(BuildContext context) async {
+    LQSound.tap();
+    setState(() => _demoLoading = true);
+    final auth = ref.read(authServiceProvider);
+    try {
+      final user = await auth.signInWithEmail(
+        email: DemoAccounts.childEmail,
+        password: DemoAccounts.password,
+      );
+      if (!context.mounted) return;
+      final profile = await auth.fetchProfile(user.uid);
+      if (profile?.onboardingComplete == true) {
+        context.go('/home');
+      } else {
+        context.go('/onboarding/age');
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Demo sign-in failed. Ask your teacher to run demo setup. ($e)',
+            ),
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _demoLoading = false);
+    }
   }
 
   Future<void> _start(BuildContext context) async {
