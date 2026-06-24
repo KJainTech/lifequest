@@ -8,7 +8,7 @@ import {
   RegionSchema,
 } from '@lifequest/types';
 import { db, nowIso } from '../lib/firebase';
-import { fallbackContent } from './fallbackContent';
+import { legacyProfitFallback } from './fallbackContent';
 import { filterContentStrings } from './safetyFilter';
 
 const GenerateContentPayloadSchema = z.object({
@@ -53,7 +53,7 @@ export const generateContent = onCall(async (request) => {
   const params = GenerateContentPayloadSchema.parse(request.data ?? {});
   const prompt = `Generate JSON lesson content for concept "${params.concept}" age ${params.ageBand} UAE AED guide ${params.guide} locale ${params.locale}. Include readParagraphs (4), quizQuestions (5 with 4 options each), gameConfig for lemonade stand. Child-safe, no jargon.`;
 
-  let content = fallbackContent(params);
+  let content = legacyProfitFallback(params);
   let source = 'fallback';
   let tokensUsed = 0;
 

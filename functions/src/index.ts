@@ -12,3 +12,4 @@ export { joinClass } from './classes/joinClass';
 export { generateCoachNote } from './coach/generateCoachNote';
 export { refreshContent } from './content/refreshContent';
 export { generateContent, approveContent } from './content/generateContent';
+export { generateAdaptiveLesson } from './content/generateAdaptiveLesson';

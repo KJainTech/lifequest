@@ -37,6 +37,15 @@ export function scoreQuiz(
   for (let i = 0; i < maxScore; i++) {
     if (answers[i] === correctAnswers[i]) score++;
   }
+  return scoreQuizFromCount(score, maxScore);
+}
+
+/** Economy math from a raw correct-count (matches client LQScoring.scoreQuiz). */
+export function scoreQuizFromCount(
+  quizScore: number,
+  maxScore = 5,
+): QuizResult {
+  const score = Math.max(0, Math.min(maxScore, Math.round(quizScore)));
   const allCorrect = score === maxScore;
   const xpEarned = score * 10 + (allCorrect ? 20 : 0);
   const coinsEarned = allCorrect ? 15 : score * 2;
@@ -63,8 +72,13 @@ export function computeLqDelta(stars: number, gameWon: boolean): number {
 }
 
 export function levelFromXp(xp: number): number {
-  // Level N requires N * 100 XP cumulative threshold (simplified)
   return Math.max(1, Math.floor(Math.sqrt(xp / 50)) + 1);
+}
+
+/** XP at the start of a given level (inverse of levelFromXp). */
+export function xpThresholdForLevel(level: number): number {
+  if (level <= 1) return 0;
+  return (level - 1) * (level - 1) * 50;
 }
 
 export function computeBusinessIQDelta(
@@ -111,10 +125,7 @@ export function computeLessonAwards(params: {
     };
   }
 
-  const quiz = scoreQuiz(
-    Array(params.quizScore).fill(0),
-    Array(params.quizScore).fill(0),
-  );
+  const quiz = scoreQuizFromCount(params.quizScore);
   const game = scoreGamePlay(params.gameProfit, params.gameWon);
   const xp = quiz.xpEarned + game.xpEarned;
   const coins = quiz.coinsEarned + game.coinsEarned;
@@ -142,10 +153,38 @@ export function computeLessonAwards(params: {
   }
 
   const towerNames: Record<string, string> = {
-    lesson_6: 'Earning Tower',
-    lesson_1: 'Foundation Tower',
+    lesson_1: 'Coin Mint',
+    lesson_2: 'Piggy Shop',
+    lesson_3: 'Needs Mart',
+    lesson_4: 'Want Arcade',
+    lesson_5: 'First Stand',
+    lesson_6: 'Super Market',
   };
-  const towerName = towerNames[params.lessonId] ?? 'Skill Tower';
+
+  const districtBuildings: Record<number, string[]> = {
+    1: ['Coin Mint', 'Piggy Shop', 'Needs Mart', 'Want Arcade', 'First Stand'],
+    2: ['Super Market', 'Deal Store', 'Wait Café', 'List Library', 'Budget Booth'],
+    3: ['Goal Garden', 'Jar Factory', 'Patience Park', 'Interest Bank', 'Trophy Hall'],
+    4: ['Plan Office', 'Track Station', 'Fix Workshop', 'Needs Hub', 'Review Center'],
+    5: ['Lemon Stand', 'Price Tower', 'Busy Market', 'Profit Plaza', 'Reinvest HQ'],
+    6: ['Chore Center', 'Time Clock', 'Trade Market', 'Kindness Café', 'Values School'],
+    7: ['Dream Observatory', 'Rainy Shelter', 'Emergency Station', 'Steps Path', 'Future Bridge'],
+    8: ['Ad Alert Tower', 'Quality Shop', 'Review Reader', 'Return Desk', 'Scam Shield'],
+    9: ['Fair Split Park', 'Group Goal Hall', 'Talk Café', 'Team Budget HQ', 'Win Stadium'],
+    10: ['Master Mix', 'Scenario Lab', 'Give & Grow', 'Seed Invest', 'Graduation Arch'],
+  };
+
+  function buildingNameForLesson(lessonId: string): string {
+    if (towerNames[lessonId]) return towerNames[lessonId];
+    const match = /^lesson_(\d+)$/.exec(lessonId);
+    if (!match) return 'Skill Tower';
+    const order = Number.parseInt(match[1], 10);
+    const district = Math.ceil(order / 5);
+    const stage = ((order - 1) % 5);
+    return districtBuildings[district]?.[stage] ?? 'Skill Tower';
+  }
+
+  const towerName = buildingNameForLesson(params.lessonId);
 
   return {
     xp,

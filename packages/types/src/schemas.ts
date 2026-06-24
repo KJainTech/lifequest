@@ -31,7 +31,7 @@ export const UserProfileSchema = z.object({
   displayName: z.string().min(1).max(64),
   ageBand: AgeBandSchema.optional(),
   guide: GuideSchema.optional(),
-  proficiencyLevel: z.number().int().min(1).max(50).default(1),
+  proficiencyLevel: z.number().int().min(1).max(6).default(1),
   locale: LocaleSchema.default('en'),
   region: RegionSchema.default('AE'),
   parentUid: z.string().optional(),
@@ -46,6 +46,7 @@ export const UserStatsSchema = z.object({
   lqScore: z.number().int().min(0).max(900),
   businessIQ: BusinessIQSchema,
   streak: StreakSchema,
+  conceptSkills: z.record(z.string(), z.number().min(0).max(100)).optional(),
   updatedAt: z.string().datetime(),
 });
 

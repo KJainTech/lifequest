@@ -2,8 +2,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:lifequest/data/content/lesson_catalog.dart';
 
 void main() {
-  test('curriculum has lesson_6', () {
+  test('curriculum has 48 stages across 6 levels', () {
+    expect(kCurriculum.length, 48);
+    expect(kTotalStages, 48);
+    expect(kQuestLevelCount, 6);
+    expect(kStagesPerLevel.reduce((a, b) => a + b), 48);
     expect(lessonById('lesson_6')?.title, 'Profit = Revenue − Cost');
-    expect(kCurriculum.length, greaterThanOrEqualTo(6));
+    expect(kQuestLevelNames.first, 'Coin Keeper');
+    expect(kQuestLevelNames.last, 'Chief Money Officer');
   });
 }

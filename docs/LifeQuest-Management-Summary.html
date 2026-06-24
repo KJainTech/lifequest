@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LifeQuest — Management Summary</title>
+  <style>
+    @page { size: A4; margin: 18mm 16mm; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.45;
+      color: #1a1a1a;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    .cover {
+      page-break-after: always;
+      min-height: 240mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 8mm;
+    }
+    .cover h1 {
+      font-size: 28pt;
+      font-weight: 700;
+      color: #1B7A4E;
+      margin: 0 0 8px;
+      letter-spacing: -0.5px;
+    }
+    .cover .subtitle {
+      font-size: 14pt;
+      color: #444;
+      margin-bottom: 32px;
+    }
+    .cover .meta {
+      font-size: 10pt;
+      color: #666;
+      border-top: 2px solid #1B7A4E;
+      padding-top: 16px;
+      margin-top: 24px;
+    }
+    .cover .meta p { margin: 4px 0; }
+    .badge-row { margin: 20px 0; }
+    .badge {
+      display: inline-block;
+      background: #E8F5EE;
+      color: #1B7A4E;
+      font-size: 9pt;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-right: 8px;
+      margin-bottom: 6px;
+    }
+    h2 {
+      font-size: 13pt;
+      color: #1B7A4E;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 4px;
+      margin: 22px 0 10px;
+      page-break-after: avoid;
+    }
+    h3 {
+      font-size: 11pt;
+      color: #333;
+      margin: 14px 0 6px;
+      page-break-after: avoid;
+    }
+    p { margin: 0 0 8px; }
+    ul { margin: 4px 0 10px; padding-left: 18px; }
+    li { margin-bottom: 4px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9.5pt;
+      margin: 8px 0 14px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 6px 8px;
+      text-align: left;
+    }
+    th { background: #f5f5f5; font-weight: 600; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 12px 0 18px;
+    }
+    .stat {
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 10px;
+      text-align: center;
+    }
+    .stat .num {
+      font-size: 20pt;
+      font-weight: 700;
+      color: #1B7A4E;
+      line-height: 1.1;
+    }
+    .stat .lbl { font-size: 8.5pt; color: #666; margin-top: 4px; }
+    .callout {
+      background: #f8f9fa;
+      border-left: 4px solid #1B7A4E;
+      padding: 10px 12px;
+      margin: 12px 0;
+      font-size: 10pt;
+    }
+    .done { color: #1B7A4E; font-weight: 600; }
+    .section { page-break-inside: avoid; }
+    .footer-note {
+      font-size: 8.5pt;
+      color: #888;
+      margin-top: 24px;
+      border-top: 1px solid #eee;
+      padding-top: 8px;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media print {
+      .cover { min-height: auto; padding-top: 60mm; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <h1>LifeQuest</h1>
+  <div class="subtitle">Product &amp; Feature Summary for Management</div>
+  <p>Financial literacy platform for UAE children (ages 5–17). Gamified curriculum with lessons, quizzes, interactive business simulation, progress tracking, and personalised learning — deployed and live in production.</p>
+  <div class="badge-row">
+    <span class="badge">Production live</span>
+    <span class="badge">Version 1.6.2</span>
+    <span class="badge">48-lesson curriculum</span>
+    <span class="badge">Firebase cloud backend</span>
+  </div>
+  <div class="meta">
+    <p><strong>Live URL:</strong> https://lifequest-97bf9.web.app</p>
+    <p><strong>Firebase project:</strong> lifequest-97bf9</p>
+    <p><strong>Document date:</strong> June 2026</p>
+    <p><strong>Status:</strong> <span class="done">Core product complete and deployed</span></p>
+  </div>
+</div>
+
+<h2>Executive summary</h2>
+<p>LifeQuest delivers a full end-to-end learning experience: structured financial literacy curriculum, interactive assessment, business simulation game, city-building progression, skill tracking, and server-side scoring. All six quest levels (48 stages) are implemented with content, progression rules, backend functions, and a production web deployment.</p>
+
+<div class="stats">
+  <div class="stat"><div class="num">48</div><div class="lbl">Learning stages</div></div>
+  <div class="stat"><div class="num">6</div><div class="lbl">Quest levels</div></div>
+  <div class="stat"><div class="num">3</div><div class="lbl">Age bands (5–8, 9–12, 13–17)</div></div>
+  <div class="stat"><div class="num">32</div><div class="lbl">Automated tests passing</div></div>
+</div>
+
+<div class="callout">
+  <strong>Ready for management review:</strong> Curriculum, user flows, scoring, progression, skills tracking, adaptive content pipeline, city gamification, and deployment infrastructure are built and live. Remaining items are enhancements (Arabic localisation, admin review UI, additional game types) — not blockers for launch or pilot.
+</div>
+
+<h2>Curriculum &amp; content</h2>
+<table>
+  <thead>
+    <tr><th>Level</th><th>Name</th><th>Stages</th><th>Focus</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>L1</td><td>Coin Keeper</td><td>5</td><td>Money basics, needs vs wants</td></tr>
+    <tr><td>L2</td><td>Smart Spender</td><td>6</td><td>Comparison shopping, impulse control</td></tr>
+    <tr><td>L3</td><td>Budget Boss</td><td>7</td><td>Budgeting, tracking, savings jars</td></tr>
+    <tr><td>L4</td><td>Junior Investor</td><td>9</td><td>Profit, cost, reinvestment, interest</td></tr>
+    <tr><td>L5</td><td>Wealth Builder</td><td>10</td><td>Consumer skills, scams, group money</td></tr>
+    <tr><td>L6</td><td>Chief Money Officer</td><td>11</td><td>Investing, tax, negotiation, leadership</td></tr>
+  </tbody>
+</table>
+
+<h3>Content delivery</h3>
+<ul>
+  <li><strong>Lessons 1–6:</strong> Fully hand-authored content (read passages, quizzes, game settings) per age band.</li>
+  <li><strong>Lessons 7–48:</strong> Stage-specific content library — each of 42 template lessons has unique teaching copy and quiz questions aligned to its title and learning objective.</li>
+  <li><strong>Teen track (ages 13–17, Levels 4–6):</strong> 30 bespoke variants with real-world scenarios, AED-based exercises, and advanced quiz questions.</li>
+  <li><strong>Lesson flow:</strong> Read → Quiz (5 questions) → Lemon City business game → Reward &amp; progression.</li>
+  <li><strong>Currency &amp; locale:</strong> AED throughout; UAE-appropriate examples and context.</li>
+</ul>
+
+<h2>Core product features (completed)</h2>
+
+<div class="two-col">
+  <div class="section">
+    <h3>Learning &amp; assessment</h3>
+    <ul>
+      <li>Four-phase lesson session (Read, Quiz, Game, Reward)</li>
+      <li>Five quiz questions per lesson with cognitive progression</li>
+      <li>Hearts-based quiz UX with explanations on each answer</li>
+      <li>Quiz success feedback (score animation, sound effects)</li>
+      <li>Server-validated quiz scoring and answer keys</li>
+      <li>Adaptive AI lesson personalisation (lessons 7+, signed-in users)</li>
+      <li>Offline template fallback when AI unavailable</li>
+    </ul>
+  </div>
+  <div class="section">
+    <h3>Progression &amp; skills</h3>
+    <ul>
+      <li>Linear stage unlock — learners never get stuck between stages</li>
+      <li>Level unlock requires completion + 80% average quiz mastery</li>
+      <li>Onboarding screening → placement on levels 1–6</li>
+      <li>Concept skills tracking (L1–L6) updated after each lesson</li>
+      <li>Progress dashboard with skill bars and Business IQ metrics</li>
+      <li>Time gates defined for upper levels (14 / 30 / 90 / 180 days)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="section">
+    <h3>Lemon City business game</h3>
+    <ul>
+      <li>Interactive lemonade stand simulation in every lesson</li>
+      <li>Teaches revenue, cost, pricing, and profit</li>
+      <li>Per-lesson difficulty tuned to curriculum stage</li>
+      <li>Game difficulty scales with learner skill mastery</li>
+      <li>Results submitted to server for scoring and analytics</li>
+    </ul>
+  </div>
+  <div class="section">
+    <h3>City gamification</h3>
+    <ul>
+      <li>48 building plots across 6 themed districts</li>
+      <li>Plots unlock as lessons are completed</li>
+      <li>Tower rewards earned on lesson completion</li>
+      <li>Visual progress map tied to curriculum levels</li>
+      <li>Brand-aligned UI with mascot guides (Penny, FinBot, Atlas)</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Scoring &amp; rewards economy</h3>
+<ul>
+  <li><strong>XP, coins, and LQ score</strong> — earned on lesson completion</li>
+  <li><strong>Business IQ</strong> — three dimensions (profit, decision, resilience) updated from quiz and game performance</li>
+  <li><strong>Streak tracking</strong> — daily engagement rewards</li>
+  <li><strong>Badges</strong> — milestone achievements (e.g. first profit)</li>
+  <li><strong>City towers</strong> — visual rewards persisted to user profile</li>
+  <li><strong>Idempotent server functions</strong> — safe retries, no duplicate rewards</li>
+</ul>
+
+<h2>Backend &amp; infrastructure (completed)</h2>
+<ul>
+  <li><strong>Firebase Authentication</strong> — child, parent, teacher role support</li>
+  <li><strong>Cloud Firestore</strong> — profiles, progress, stats, badges, city state</li>
+  <li><strong>Cloud Functions (europe-west1):</strong>
+    <ul>
+      <li><code>runScreening</code> — placement assessment and skill seeding</li>
+      <li><code>completeLesson</code> — full scoring, skills update, rewards</li>
+      <li><code>generateAdaptiveLesson</code> — AI-personalised content with 7-day cache</li>
+      <li><code>submitGamePlay</code> — game result recording</li>
+    </ul>
+  </li>
+  <li><strong>Shared types package</strong> — consistent schemas between client and server</li>
+  <li><strong>Firebase Hosting</strong> — production web app deployed</li>
+  <li><strong>Deploy scripts</strong> — automated build and release pipeline</li>
+  <li><strong>32 automated tests</strong> — curriculum, progression, content, quiz, city coverage</li>
+</ul>
+
+<h2>User experience &amp; polish (completed)</h2>
+<ul>
+  <li>Brand green theme aligned across app</li>
+  <li>Onboarding flow (age, guide selection, screening)</li>
+  <li>Learn screen with level gates and mastery hints</li>
+  <li>Progress screen with quest skills and Business IQ</li>
+  <li>Sound effects on web and native (quiz bells, success chimes)</li>
+  <li>Responsive web layout for classroom and home use</li>
+  <li>Client-side fallbacks when cloud functions temporarily unavailable</li>
+</ul>
+
+<h2>Adaptive learning pipeline (completed)</h2>
+<ul>
+  <li>AI generates personalised read/quiz content for lessons 7+ (handcrafted 1–6 protected)</li>
+  <li>Learner mastery level (concept skills) adjusts AI difficulty tier</li>
+  <li>Curriculum-aligned seed content ensures learning objectives stay on track</li>
+  <li>Server-side answer key caching for quiz validation</li>
+  <li>Content safety filter on all AI output</li>
+  <li>Deterministic template fallback — app works fully without AI API keys</li>
+</ul>
+
+<h2>What is production-ready today</h2>
+<table>
+  <thead>
+    <tr><th>Area</th><th>Status</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Full 48-lesson curriculum</td><td class="done">Done</td><td>All stages have content, quizzes, game config</td></tr>
+    <tr><td>User onboarding &amp; screening</td><td class="done">Done</td><td>6-level placement, skill seeding</td></tr>
+    <tr><td>Lesson → quiz → game → reward flow</td><td class="done">Done</td><td>End-to-end working</td></tr>
+    <tr><td>Progression &amp; mastery gates</td><td class="done">Done</td><td>No stuck paths; level gates enforced</td></tr>
+    <tr><td>Skills &amp; progress tracking</td><td class="done">Done</td><td>L1–L6 bars, Business IQ</td></tr>
+    <tr><td>Server scoring &amp; rewards</td><td class="done">Done</td><td>XP, coins, badges, towers, streaks</td></tr>
+    <tr><td>City gamification</td><td class="done">Done</td><td>48 plots, district themes, unlocks</td></tr>
+    <tr><td>Adaptive AI content</td><td class="done">Done</td><td>Live with template fallback</td></tr>
+    <tr><td>Web deployment</td><td class="done">Done</td><td>lifequest-97bf9.web.app</td></tr>
+    <tr><td>Automated testing</td><td class="done">Done</td><td>32 Flutter + functions tests</td></tr>
+  </tbody>
+</table>
+
+<h2>Recommended next phase (not blocking launch)</h2>
+<ul>
+  <li>Arabic full localisation of lesson content</li>
+  <li>Admin content review dashboard (wire to existing backend)</li>
+  <li>Teen variants for Levels 1–3 (Levels 4–6 already complete)</li>
+  <li>Additional game types beyond Lemon City</li>
+  <li>Parent/teacher reporting dashboard enhancements</li>
+  <li>Pilot analytics and usage reporting for schools</li>
+</ul>
+
+<h2>Summary for stakeholders</h2>
+<p>LifeQuest is a <strong>complete, deployable financial literacy product</strong> with a structured 48-stage curriculum, interactive assessment, business simulation, gamified city progression, skill tracking, and cloud-backed scoring. The application is live, tested, and ready for pilot programmes with schools or families in the UAE market.</p>
+
+<div class="footer-note">
+  LifeQuest Management Summary · Version 1.6.2 · Firebase project lifequest-97bf9 · Confidential — internal use
+</div>
+
+</body>
+</html>

@@ -6,6 +6,7 @@ import '../../../app/bootstrap/firebase_providers.dart';
 import '../../../app/theme/lq_theme.dart';
 import '../../../core/tokens/lq_tokens.dart';
 import '../../../core/tokens/lq_typography.dart';
+import '../../../data/content/concept_skills.dart';
 import '../../../data/models/lesson_content.dart';
 import '../../../data/repositories/content_repository.dart';
 import '../../../design/guide_mascot.dart';
@@ -47,33 +48,43 @@ class _GamePhaseViewState extends ConsumerState<GamePhaseView> {
 
     try {
       final session = ref.read(lessonSessionProvider)!;
+      final stats = ref.read(userStatsProvider).valueOrNull;
+      final difficulty = gameDifficultyForConceptSkills(
+        stats?.conceptSkills ?? const {},
+        session.lessonId,
+      );
       await ref.read(cloudFunctionsProvider).submitGamePlay(
             lessonId: session.lessonId,
             profit: result.profit,
             revenue: result.revenue,
             cost: result.cost,
             won: result.won,
-            difficulty: 1,
+            difficulty: difficulty,
           );
-      ref.read(lessonSessionProvider.notifier).setGameResult(
-            won: result.won,
-            profit: result.profit,
-            revenue: result.revenue,
-            cost: result.cost,
-          );
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Let\'s try that again. ($e)')),
-        );
-      }
+    } catch (_) {
+      // Game result still counts — server sync is best-effort.
     }
+
+    if (!mounted) return;
+    ref.read(lessonSessionProvider.notifier).setGameResult(
+          won: result.won,
+          profit: result.profit,
+          revenue: result.revenue,
+          cost: result.cost,
+        );
+    setState(() => _submitting = false);
   }
 
-  void _initGame(LemonCityConfig config) {
+  void _initGame(LemonCityConfig config, String lessonId) {
     if (_game != null) return;
+    final stats = ref.read(userStatsProvider).valueOrNull;
+    final difficulty = gameDifficultyForConceptSkills(
+      stats?.conceptSkills ?? const {},
+      lessonId,
+    );
     _game = LemonCityGame(
       config: config,
+      difficulty: difficulty,
       onFinished: _onGameFinished,
       onStateChanged: () {
         if (mounted) setState(() {});
@@ -93,7 +104,7 @@ class _GamePhaseViewState extends ConsumerState<GamePhaseView> {
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (e, _) => Center(child: Text('Let\'s try that again.')),
       data: (content) {
-        _initGame(content.gameConfig);
+        _initGame(content.gameConfig, session.lessonId);
         final game = _game!;
 
         if (_submitting && session.phase == LessonPhase.reward) {
@@ -151,23 +162,23 @@ class _GamePhaseViewState extends ConsumerState<GamePhaseView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Price per cup: AED ${game.price.toStringAsFixed(0)}',
+                        'Price per cup: AED ${game.price.round()}',
                         style: LQTypography.h3(colors),
                       ),
                       Slider(
                         value: game.price,
-                        min: content.gameConfig.minPrice,
-                        max: content.gameConfig.maxPrice,
-                        divisions: (content.gameConfig.maxPrice -
-                                content.gameConfig.minPrice)
-                            .toInt(),
+                        min: content.gameConfig.minPrice.roundToDouble(),
+                        max: content.gameConfig.maxPrice.roundToDouble(),
+                        divisions: (content.gameConfig.maxPrice.round() -
+                                content.gameConfig.minPrice.round())
+                            .clamp(1, 100),
                         activeColor: colors.brand,
                         onChanged: _submitting
                             ? null
-                            : (v) => setState(() => game.setPrice(v)),
+                            : (v) => setState(() => game.setPrice(v.roundToDouble())),
                       ),
                       Text(
-                        'Cost per cup: AED ${game.unitCost.toStringAsFixed(0)}',
+                        'Cost per cup: AED ${game.unitCost.round()}',
                         style: LQTypography.caption(colors),
                       ),
                     ],

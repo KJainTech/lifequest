@@ -13,7 +13,7 @@ enum PennyGuideState {
   levelUp,
 }
 
-/// Penny mascot — Rive rig with custom-painted fallback per Phase 1
+/// Penny — cute modern bear guide (Rive rig + custom-painted fallback).
 class PennyMascot extends StatefulWidget {
   const PennyMascot({
     super.key,
@@ -45,7 +45,7 @@ class _PennyMascotState extends State<PennyMascot>
       vsync: this,
       duration: const Duration(milliseconds: 2400),
     )..repeat(reverse: true);
-    _breathAnimation = Tween<double>(begin: 0, end: 3).animate(
+    _breathAnimation = Tween<double>(begin: 0, end: 2.5).animate(
       CurvedAnimation(parent: _breathController, curve: Curves.easeInOut),
     );
     _loadRive();
@@ -70,7 +70,7 @@ class _PennyMascotState extends State<PennyMascot>
         _applyState(widget.state);
       }
     } catch (_) {
-      // Rive asset not yet commissioned — fallback painter is used
+      // Rive asset not yet commissioned — bear fallback is used
     }
   }
 
@@ -120,7 +120,7 @@ class _PennyMascotState extends State<PennyMascot>
       builder: (context, child) {
         return CustomPaint(
           size: Size(widget.size, widget.size),
-          painter: _PennyFallbackPainter(
+          painter: _BearFallbackPainter(
             state: widget.state,
             breathOffset: _breathAnimation.value,
           ),
@@ -130,9 +130,9 @@ class _PennyMascotState extends State<PennyMascot>
   }
 }
 
-/// Premium custom-painted Penny until Rive rig is commissioned
-class _PennyFallbackPainter extends CustomPainter {
-  _PennyFallbackPainter({
+/// Modern low-poly bear — warm, cute, clean (matches Lemon City aesthetic).
+class _BearFallbackPainter extends CustomPainter {
+  _BearFallbackPainter({
     required this.state,
     required this.breathOffset,
   });
@@ -140,11 +140,17 @@ class _PennyFallbackPainter extends CustomPainter {
   final PennyGuideState state;
   final double breathOffset;
 
-  static const _brand = Color(0xFFFF8A4C);
-  static const _brandDeep = Color(0xFFE2611F);
-  static const _mint = Color(0xFF4FD1A5);
-  static const _violet = Color(0xFF9D7BFF);
-  static const _ink = Color(0xFF2A2140);
+  static const _fur = Color(0xFFC4956A);
+  static const _furDark = Color(0xFFA67B52);
+  static const _furLight = Color(0xFFD4AD82);
+  static const _muzzle = Color(0xFFFFF5EB);
+  static const _belly = Color(0xFFFFFAF4);
+  static const _nose = Color(0xFF3D3028);
+  static const _cheek = Color(0xFFFFB8A0);
+  static const _brand = Color(0xFF28B77F);
+  static const _brandLight = Color(0xFF9AF4C8);
+  static const _gold = Color(0xFFFFD93D);
+  static const _ink = Color(0xFF2A2420);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -157,89 +163,136 @@ class _PennyFallbackPainter extends CustomPainter {
 
     _drawShadow(canvas);
     _drawBody(canvas);
-    _drawEars(canvas);
+    _drawHead(canvas);
     _drawFace(canvas);
-    _drawAccessories(canvas);
+    _drawExtras(canvas);
 
     canvas.restore();
   }
 
   void _drawShadow(Canvas canvas) {
     final shadow = Paint()
-      ..color = _ink.withValues(alpha: 0.12)
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 12);
+      ..color = _ink.withValues(alpha: 0.1)
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10);
     canvas.drawOval(
-      Rect.fromCenter(center: const Offset(0, 52), width: 90, height: 20),
+      Rect.fromCenter(center: const Offset(0, 58), width: 80, height: 16),
       shadow,
     );
   }
 
   void _drawBody(Canvas canvas) {
-    final bodyGradient = RadialGradient(
-      colors: [_brand, _brandDeep],
-      center: const Alignment(-0.2, -0.3),
-    );
-    final bodyPaint = Paint()
-      ..shader = bodyGradient.createShader(
-        Rect.fromCenter(center: const Offset(0, 10), width: 100, height: 90),
-      );
+    // Round torso
     canvas.drawOval(
-      Rect.fromCenter(center: const Offset(0, 10), width: 100, height: 90),
-      bodyPaint,
+      Rect.fromCenter(center: const Offset(0, 28), width: 72, height: 64),
+      Paint()..color = _fur,
     );
-
-    final belly = Paint()..color = Colors.white.withValues(alpha: 0.15);
+    // Belly patch
     canvas.drawOval(
-      Rect.fromCenter(center: const Offset(0, 20), width: 50, height: 40),
-      belly,
+      Rect.fromCenter(center: const Offset(0, 32), width: 40, height: 36),
+      Paint()..color = _belly,
     );
+    // Green coin badge — brand tie-in
+    canvas.drawCircle(const Offset(0, 30), 14, Paint()..color = _brand);
+    canvas.drawCircle(
+      const Offset(0, 30),
+      14,
+      Paint()
+        ..color = _ink.withValues(alpha: 0.15)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 1.5,
+    );
+    final coinText = TextPainter(
+      text: const TextSpan(
+        text: '¢',
+        style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w800),
+      ),
+      textDirection: TextDirection.ltr,
+    )..layout();
+    coinText.paint(canvas, const Offset(-4, 22));
   }
 
-  void _drawEars(Canvas canvas) {
-    final earPaint = Paint()..color = _brandDeep;
-    canvas.drawCircle(const Offset(-38, -30), 18, earPaint);
-    canvas.drawCircle(const Offset(38, -30), 18, earPaint);
-    final innerEar = Paint()..color = const Color(0xFFFFB088);
-    canvas.drawCircle(const Offset(-38, -28), 10, innerEar);
-    canvas.drawCircle(const Offset(38, -28), 10, innerEar);
+  void _drawHead(Canvas canvas) {
+    // Ears
+    canvas.drawCircle(const Offset(-34, -28), 16, Paint()..color = _furDark);
+    canvas.drawCircle(const Offset(34, -28), 16, Paint()..color = _furDark);
+    canvas.drawCircle(const Offset(-34, -26), 9, Paint()..color = _furLight);
+    canvas.drawCircle(const Offset(34, -26), 9, Paint()..color = _furLight);
+
+    // Head
+    canvas.drawCircle(const Offset(0, -8), 38, Paint()..color = _fur);
+    // Subtle highlight
+    canvas.drawCircle(
+      const Offset(-8, -16),
+      12,
+      Paint()..color = _furLight.withValues(alpha: 0.35),
+    );
   }
 
   void _drawFace(Canvas canvas) {
-    final snout = Paint()..color = const Color(0xFFFFB088);
+    // Muzzle
     canvas.drawOval(
-      Rect.fromCenter(center: const Offset(0, 18), width: 44, height: 32),
-      snout,
+      Rect.fromCenter(center: const Offset(0, 2), width: 36, height: 28),
+      Paint()..color = _muzzle,
+    );
+
+    // Nose
+    canvas.drawOval(
+      Rect.fromCenter(center: const Offset(0, -2), width: 12, height: 9),
+      Paint()..color = _nose,
     );
 
     final eyeY = switch (state) {
-      PennyGuideState.sleep => -8.0,
-      PennyGuideState.worried => -14.0,
-      _ => -12.0,
+      PennyGuideState.sleep => -6.0,
+      PennyGuideState.worried => -12.0,
+      _ => -10.0,
     };
 
     if (state == PennyGuideState.sleep) {
       _drawClosedEyes(canvas, eyeY);
-    } else if (state == PennyGuideState.happy ||
-        state == PennyGuideState.celebrate ||
-        state == PennyGuideState.levelUp) {
+    } else if (_isHappy) {
       _drawHappyEyes(canvas, eyeY);
+      _drawBlush(canvas);
     } else if (state == PennyGuideState.worried) {
-      _drawWorriedEyes(canvas, eyeY);
+      _drawNormalEyes(canvas, eyeY);
+      _drawWorriedBrows(canvas);
     } else {
       _drawNormalEyes(canvas, eyeY);
     }
 
-    canvas.drawCircle(const Offset(0, 12), 5, Paint()..color = _ink);
     _drawMouth(canvas);
+
+    if (state == PennyGuideState.think) {
+      canvas.drawCircle(const Offset(48, -36), 12, Paint()..color = Colors.white);
+      canvas.drawCircle(
+        const Offset(48, -36),
+        12,
+        Paint()
+          ..color = _ink.withValues(alpha: 0.12)
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1.5,
+      );
+    }
+  }
+
+  bool get _isHappy =>
+      state == PennyGuideState.happy ||
+      state == PennyGuideState.celebrate ||
+      state == PennyGuideState.levelUp ||
+      state == PennyGuideState.wave;
+
+  void _drawBlush(Canvas canvas) {
+    final blush = Paint()..color = _cheek.withValues(alpha: 0.5);
+    canvas.drawCircle(const Offset(-24, 2), 6, blush);
+    canvas.drawCircle(const Offset(24, 2), 6, blush);
   }
 
   void _drawNormalEyes(Canvas canvas, double y) {
-    canvas.drawCircle(Offset(-16, y), 8, Paint()..color = Colors.white);
-    canvas.drawCircle(Offset(16, y), 8, Paint()..color = Colors.white);
-    canvas.drawCircle(Offset(-14, y + 1), 4, Paint()..color = _ink);
-    canvas.drawCircle(Offset(18, y + 1), 4, Paint()..color = _ink);
-    canvas.drawCircle(Offset(-13, y), 1.5, Paint()..color = Colors.white);
-    canvas.drawCircle(Offset(19, y), 1.5, Paint()..color = Colors.white);
+    canvas.drawCircle(Offset(-14, y), 7, Paint()..color = Colors.white);
+    canvas.drawCircle(Offset(14, y), 7, Paint()..color = Colors.white);
+    canvas.drawCircle(Offset(-12, y + 1), 3.5, Paint()..color = _ink);
+    canvas.drawCircle(Offset(16, y + 1), 3.5, Paint()..color = _ink);
+    canvas.drawCircle(Offset(-11, y - 1), 1.5, Paint()..color = Colors.white);
+    canvas.drawCircle(Offset(17, y - 1), 1.5, Paint()..color = Colors.white);
   }
 
   void _drawHappyEyes(Canvas canvas, double y) {
@@ -249,30 +302,23 @@ class _PennyFallbackPainter extends CustomPainter {
       ..strokeWidth = 2.5
       ..strokeCap = StrokeCap.round;
     canvas.drawArc(
-      Rect.fromCenter(center: Offset(-16, y), width: 14, height: 10),
-      0.2,
-      2.8,
-      false,
-      paint,
+      Rect.fromCenter(center: Offset(-14, y), width: 12, height: 8),
+      0.3, 2.6, false, paint,
     );
     canvas.drawArc(
-      Rect.fromCenter(center: Offset(16, y), width: 14, height: 10),
-      0.2,
-      2.8,
-      false,
-      paint,
+      Rect.fromCenter(center: Offset(14, y), width: 12, height: 8),
+      0.3, 2.6, false, paint,
     );
   }
 
-  void _drawWorriedEyes(Canvas canvas, double y) {
-    _drawNormalEyes(canvas, y);
+  void _drawWorriedBrows(Canvas canvas) {
     final brow = Paint()
       ..color = _ink
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2
       ..strokeCap = StrokeCap.round;
-    canvas.drawLine(const Offset(-24, -22), const Offset(-8, -18), brow);
-    canvas.drawLine(const Offset(24, -22), const Offset(8, -18), brow);
+    canvas.drawLine(const Offset(-22, -20), const Offset(-8, -16), brow);
+    canvas.drawLine(const Offset(22, -20), const Offset(8, -16), brow);
   }
 
   void _drawClosedEyes(Canvas canvas, double y) {
@@ -281,8 +327,8 @@ class _PennyFallbackPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2
       ..strokeCap = StrokeCap.round;
-    canvas.drawLine(Offset(-22, y), Offset(-10, y), paint);
-    canvas.drawLine(Offset(10, y), Offset(22, y), paint);
+    canvas.drawLine(Offset(-20, y), Offset(-8, y), paint);
+    canvas.drawLine(Offset(8, y), Offset(20, y), paint);
   }
 
   void _drawMouth(Canvas canvas) {
@@ -298,98 +344,54 @@ class _PennyFallbackPainter extends CustomPainter {
       case PennyGuideState.levelUp:
       case PennyGuideState.wave:
         canvas.drawArc(
-          Rect.fromCenter(center: const Offset(0, 24), width: 20, height: 12),
-          0.2,
-          2.8,
-          false,
-          paint,
+          Rect.fromCenter(center: const Offset(0, 10), width: 18, height: 10),
+          0.2, 2.8, false, paint,
         );
       case PennyGuideState.worried:
         canvas.drawArc(
-          Rect.fromCenter(center: const Offset(0, 30), width: 14, height: 8),
-          3.5,
-          2,
-          false,
-          paint,
+          Rect.fromCenter(center: const Offset(0, 16), width: 12, height: 7),
+          3.5, 2, false, paint,
         );
       case PennyGuideState.think:
-        canvas.drawCircle(const Offset(6, 26), 3, paint);
+        canvas.drawCircle(const Offset(4, 12), 2.5, paint);
       case PennyGuideState.sleep:
-        canvas.drawLine(const Offset(-4, 26), const Offset(4, 26), paint);
+        canvas.drawLine(const Offset(-3, 12), const Offset(3, 12), paint);
       default:
-        canvas.drawLine(const Offset(-6, 26), const Offset(6, 26), paint);
+        canvas.drawLine(const Offset(-5, 12), const Offset(5, 12), paint);
     }
   }
 
-  void _drawAccessories(Canvas canvas) {
-    final coin = Paint()..color = const Color(0xFFFFC23D);
-    canvas.drawCircle(const Offset(0, 38), 12, coin);
-    canvas.drawCircle(
-      const Offset(0, 38),
-      12,
-      Paint()
-        ..color = _ink.withValues(alpha: 0.3)
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 1.5,
-    );
-    final cPaint = Paint()
-      ..color = _ink.withValues(alpha: 0.5)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.5;
-    canvas.drawArc(
-      Rect.fromCenter(center: const Offset(0, 38), width: 8, height: 8),
-      -0.5,
-      4,
-      false,
-      cPaint,
-    );
-
+  void _drawExtras(Canvas canvas) {
     if (state == PennyGuideState.wave) {
       final arm = Paint()
-        ..color = _brand
+        ..color = _furLight
         ..style = PaintingStyle.stroke
-        ..strokeWidth = 12
+        ..strokeWidth = 14
         ..strokeCap = StrokeCap.round;
-      canvas.drawLine(const Offset(42, 0), const Offset(58, -30), arm);
-      canvas.drawCircle(const Offset(58, -30), 8, Paint()..color = _brand);
+      canvas.drawLine(const Offset(36, 8), const Offset(54, -24), arm);
+      canvas.drawCircle(const Offset(54, -24), 9, Paint()..color = _fur);
     }
 
-    if (state == PennyGuideState.celebrate ||
-        state == PennyGuideState.levelUp) {
-      _drawSparkle(canvas, const Offset(-50, -40), _mint);
-      _drawSparkle(canvas, const Offset(50, -35), _violet);
-      _drawSparkle(canvas, const Offset(45, 50), _mint);
-    }
-
-    if (state == PennyGuideState.think) {
-      canvas.drawCircle(const Offset(50, -40), 14, Paint()..color = Colors.white);
-      canvas.drawCircle(
-        const Offset(50, -40),
-        14,
-        Paint()
-          ..color = _ink.withValues(alpha: 0.15)
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = 1.5,
-      );
-      canvas.drawCircle(const Offset(46, -44), 2, Paint()..color = _violet);
-      canvas.drawCircle(const Offset(52, -42), 2, Paint()..color = _mint);
-      canvas.drawCircle(const Offset(50, -36), 2, Paint()..color = _violet);
+    if (state == PennyGuideState.celebrate || state == PennyGuideState.levelUp) {
+      _sparkle(canvas, const Offset(-48, -44), _gold);
+      _sparkle(canvas, const Offset(50, -40), _brandLight);
+      _sparkle(canvas, const Offset(44, 48), _brand);
     }
   }
 
-  void _drawSparkle(Canvas canvas, Offset pos, Color color) {
+  void _sparkle(Canvas canvas, Offset pos, Color color) {
     final paint = Paint()
       ..color = color
       ..strokeWidth = 2
       ..strokeCap = StrokeCap.round;
-    canvas.drawLine(pos, pos + const Offset(0, -8), paint);
-    canvas.drawLine(pos, pos + const Offset(6, 0), paint);
-    canvas.drawLine(pos, pos + const Offset(0, 6), paint);
-    canvas.drawLine(pos, pos + const Offset(-6, 0), paint);
+    canvas.drawLine(pos, pos + const Offset(0, -7), paint);
+    canvas.drawLine(pos, pos + const Offset(5, 0), paint);
+    canvas.drawLine(pos, pos + const Offset(0, 5), paint);
+    canvas.drawLine(pos, pos + const Offset(-5, 0), paint);
   }
 
   @override
-  bool shouldRepaint(covariant _PennyFallbackPainter oldDelegate) {
+  bool shouldRepaint(covariant _BearFallbackPainter oldDelegate) {
     return oldDelegate.state != state ||
         oldDelegate.breathOffset != breathOffset;
   }

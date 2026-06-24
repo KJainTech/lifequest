@@ -71,7 +71,7 @@ class LemonCityGame extends FlameGame {
 
   @override
   Future<void> onLoad() async {
-    price = config.defaultPrice;
+    price = config.defaultPrice.roundToDouble();
     _running = true;
   }
 
@@ -97,7 +97,10 @@ class LemonCityGame extends FlameGame {
   }
 
   void setPrice(double p) {
-    price = p.clamp(config.minPrice, config.maxPrice);
+    price = p.roundToDouble().clamp(
+      config.minPrice.roundToDouble(),
+      config.maxPrice.roundToDouble(),
+    );
     onStateChanged();
   }
 

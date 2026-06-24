@@ -121,6 +121,35 @@ class ProgressRepository {
       SetOptions(merge: true),
     );
   }
+
+  /// Client-safe completion — only touches status (rules block stars/score).
+  Future<void> markLessonCompleted(String uid, String lessonId) async {
+    final ref = _firestore.doc('progress/$uid/lessons/$lessonId');
+    final snap = await ref.get();
+    if (!snap.exists) {
+      await ref.set({
+        'status': 'in_progress',
+        'updatedAt': DateTime.now().toIso8601String(),
+      });
+    }
+    await ref.set(
+      {
+        'status': 'completed',
+        'updatedAt': DateTime.now().toIso8601String(),
+      },
+      SetOptions(merge: true),
+    );
+  }
+
+  Future<void> markLessonInProgress(String uid, String lessonId) async {
+    await _firestore.doc('progress/$uid/lessons/$lessonId').set(
+      {
+        'status': 'in_progress',
+        'updatedAt': DateTime.now().toIso8601String(),
+      },
+      SetOptions(merge: true),
+    );
+  }
 }
 
 class CityRepository {

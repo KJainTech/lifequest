@@ -23,6 +23,7 @@ export function defaultStats() {
     lqScore: 0,
     businessIQ: { profit: 0, decision: 0, resilience: 0 },
     streak: { count: 0, lastActive: null as string | null },
+    conceptSkills: {} as Record<string, number>,
     updatedAt: nowIso(),
   };
 }

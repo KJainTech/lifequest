@@ -1,10 +1,32 @@
-/// Curriculum metadata — full ladder; content served from cache/Firestore.
+import 'curriculum_builder.dart';
+
+export 'curriculum_builder.dart'
+    show
+        kQuestLevelCount,
+        kQuestLevelNames,
+        kQuestLevelTiers,
+        kStagesPerLevel,
+        kStagesPerQuestLevel,
+        kTotalStages,
+        kMasteryQuizScore,
+        kLevelTimeGateDays,
+        QuestTier,
+        stagesInQuestLevel,
+        firstOrderForQuestLevel,
+        tierLabel,
+        timeGateLabel;
+
+/// Curriculum metadata — 48 stages across 6 quest levels.
 class LessonMeta {
   const LessonMeta({
     required this.id,
     required this.title,
     required this.subtitle,
     required this.conceptOrder,
+    required this.questLevel,
+    required this.stageInLevel,
+    required this.questLevelName,
+    required this.conceptSlug,
     this.prerequisiteId,
   });
 
@@ -12,56 +34,29 @@ class LessonMeta {
   final String title;
   final String subtitle;
   final int conceptOrder;
+  final int questLevel;
+  final int stageInLevel;
+  final String questLevelName;
+  final String conceptSlug;
   final String? prerequisiteId;
 }
 
-const kCurriculum = <LessonMeta>[
-  LessonMeta(
-    id: 'lesson_1',
-    title: 'Needs vs Wants',
-    subtitle: 'Spot the difference before you spend',
-    conceptOrder: 1,
-  ),
-  LessonMeta(
-    id: 'lesson_2',
-    title: 'Saving Jar',
-    subtitle: 'Set a goal and watch it grow',
-    conceptOrder: 2,
-    prerequisiteId: 'lesson_1',
-  ),
-  LessonMeta(
-    id: 'lesson_3',
-    title: 'Smart Spending',
-    subtitle: 'Compare before you buy',
-    conceptOrder: 3,
-    prerequisiteId: 'lesson_2',
-  ),
-  LessonMeta(
-    id: 'lesson_4',
-    title: 'Budget Basics',
-    subtitle: 'Plan your AED for the week',
-    conceptOrder: 4,
-    prerequisiteId: 'lesson_3',
-  ),
-  LessonMeta(
-    id: 'lesson_5',
-    title: 'Cost of Goods',
-    subtitle: 'What it takes to make something',
-    conceptOrder: 5,
-    prerequisiteId: 'lesson_4',
-  ),
-  LessonMeta(
-    id: 'lesson_6',
-    title: 'Profit = Revenue − Cost',
-    subtitle: 'Run your stand and learn when you earn',
-    conceptOrder: 6,
-    prerequisiteId: 'lesson_5',
-  ),
-];
+final kCurriculum = buildCurriculum();
 
 LessonMeta? lessonById(String id) {
   for (final l in kCurriculum) {
     if (l.id == id) return l;
   }
   return null;
+}
+
+LessonMeta? lessonByOrder(int conceptOrder) {
+  for (final l in kCurriculum) {
+    if (l.conceptOrder == conceptOrder) return l;
+  }
+  return null;
+}
+
+List<LessonMeta> lessonsForQuestLevel(int questLevel) {
+  return kCurriculum.where((l) => l.questLevel == questLevel).toList();
 }

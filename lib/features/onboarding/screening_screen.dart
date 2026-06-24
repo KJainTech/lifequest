@@ -107,8 +107,8 @@ class _ScreeningScreenState extends ConsumerState<ScreeningScreen> {
             padding: const EdgeInsets.all(LQSpacing.gutter),
             child: OnboardingShell(
               colors: colors,
-              step: 4,
-              totalSteps: 4,
+              step: 3,
+              totalSteps: 3,
               title: 'Screening Quest',
               subtitle: 'Question ${_index + 1} of ${_questions.length}',
               onBack: () => context.go('/onboarding/start'),

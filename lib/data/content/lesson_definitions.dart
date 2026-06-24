@@ -1,4 +1,6 @@
 import '../models/lesson_content.dart';
+import 'lesson_catalog.dart';
+import 'lesson_templates.dart';
 
 /// Server-matched quiz answer indices (see functions/src/content/answerKeys.ts).
 const kQuizAnswerKeys = <String, List<int>>{
@@ -11,27 +13,35 @@ const kQuizAnswerKeys = <String, List<int>>{
 };
 
 List<int> quizAnswerKeyFor(String lessonId) {
-  return kQuizAnswerKeys[lessonId] ??
-      List.filled(5, 0); // fallback — should not happen
+  if (kQuizAnswerKeys.containsKey(lessonId)) {
+    return kQuizAnswerKeys[lessonId]!;
+  }
+  final meta = lessonById(lessonId);
+  if (meta != null) return templateQuizAnswerKey(meta.conceptOrder);
+  return List.filled(5, 0);
 }
 
 LessonContent buildLessonContent(String lessonId, String ageBand) {
-  switch (lessonId) {
-    case 'lesson_1':
-      return _lesson1(ageBand);
-    case 'lesson_2':
-      return _lesson2(ageBand);
-    case 'lesson_3':
-      return _lesson3(ageBand);
-    case 'lesson_4':
-      return _lesson4(ageBand);
-    case 'lesson_5':
-      return _lesson5(ageBand);
-    case 'lesson_6':
-      return _lesson6(ageBand);
-    default:
-      throw LessonContentNotFoundException(lessonId);
+  final meta = lessonById(lessonId);
+  if (meta == null) throw LessonContentNotFoundException(lessonId);
+
+  if (meta.conceptOrder <= 6) {
+    switch (lessonId) {
+      case 'lesson_1':
+        return _lesson1(ageBand);
+      case 'lesson_2':
+        return _lesson2(ageBand);
+      case 'lesson_3':
+        return _lesson3(ageBand);
+      case 'lesson_4':
+        return _lesson4(ageBand);
+      case 'lesson_5':
+        return _lesson5(ageBand);
+      case 'lesson_6':
+        return _lesson6(ageBand);
+    }
   }
+  return buildTemplateLesson(meta, ageBand);
 }
 
 class LessonContentNotFoundException implements Exception {

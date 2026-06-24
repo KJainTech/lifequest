@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../features/faq/faq_screen.dart';
 import '../features/city/city_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/learn/learn_screen.dart';
@@ -19,6 +20,7 @@ import '../features/profile/profile_screen.dart';
 import '../features/showcase/showcase_screen.dart';
 import '../features/shell/kid_shell_screen.dart';
 import '../features/splash/splash_screen.dart';
+import '../features/wallet/wallet_screen.dart';
 import 'bootstrap/firebase_providers.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -57,8 +59,15 @@ final routerProvider = Provider<GoRouter>((ref) {
           profile != null &&
           !profile.onboardingComplete &&
           !path.startsWith('/onboarding')) {
-        return '/onboarding/age';
+        return '/onboarding/guide';
       }
+
+      if (path == '/onboarding/age') {
+        return '/onboarding/guide';
+      }
+
+      if (path == '/progress') return '/awards';
+      if (path == '/money') return '/profile';
 
       return null;
     },
@@ -118,6 +127,21 @@ final routerProvider = Provider<GoRouter>((ref) {
         },
       ),
       GoRoute(
+        path: '/city',
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => const CityScreen(),
+      ),
+      GoRoute(
+        path: '/wallet',
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => const WalletScreen(),
+      ),
+      GoRoute(
+        path: '/faq',
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => const FaqScreen(),
+      ),
+      GoRoute(
         path: '/lesson/:lessonId',
         parentNavigatorKey: _rootNavigatorKey,
         pageBuilder: (context, state) {
@@ -160,7 +184,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: '/progress',
+                path: '/awards',
                 builder: (context, state) => const ProgressScreen(),
               ),
             ],

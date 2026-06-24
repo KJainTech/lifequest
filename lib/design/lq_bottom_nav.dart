@@ -5,9 +5,9 @@ import '../core/tokens/lq_tokens.dart';
 import '../core/tokens/lq_typography.dart';
 import 'lq_icons.dart';
 
-enum LQNavTab { home, learn, city, progress, profile }
+/// Play-first nav: Home · Learn · City · Awards · Me
+enum LQNavTab { home, learn, city, awards, profile }
 
-/// Bottom navigation with custom duotone icons per §4.4
 class LQBottomNav extends StatelessWidget {
   const LQBottomNav({
     super.key,
@@ -22,32 +22,39 @@ class LQBottomNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return DecoratedBox(
       decoration: BoxDecoration(
         color: colors.surface,
-        boxShadow: LQElevation.e2(colors.ink),
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      padding: const EdgeInsets.only(
-        top: LQSpacing.sm,
-        bottom: LQSpacing.sm,
+        border: Border(top: BorderSide(color: colors.border)),
+        boxShadow: [
+          BoxShadow(
+            color: colors.ink.withValues(alpha: 0.04),
+            blurRadius: 12,
+            offset: const Offset(0, -2),
+          ),
+        ],
       ),
       child: SafeArea(
         top: false,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: LQNavTab.values.map((tab) {
-            final isActive = tab == current;
-            return _NavItem(
-              colors: colors,
-              tab: tab,
-              isActive: isActive,
-              onTap: () {
-                LQHaptics.selectionClick();
-                onChanged(tab);
-              },
-            );
-          }).toList(),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: LQSpacing.sm,
+            vertical: LQSpacing.xs,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: LQNavTab.values.map((tab) {
+              return _NavItem(
+                colors: colors,
+                tab: tab,
+                isActive: tab == current,
+                onTap: () {
+                  LQHaptics.selectionClick();
+                  onChanged(tab);
+                },
+              );
+            }).toList(),
+          ),
         ),
       ),
     );
@@ -70,6 +77,7 @@ class _NavItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (icon, label) = _tabData(tab);
+    final tint = isActive ? colors.brand : colors.inkSoft;
 
     return GestureDetector(
       onTap: onTap,
@@ -82,16 +90,17 @@ class _NavItem extends StatelessWidget {
           children: [
             LQDuotoneIcon(
               icon: icon,
-              size: 24,
-              primaryColor: isActive ? colors.brand : colors.inkSoft,
-              secondaryColor: isActive
-                  ? colors.brand.withValues(alpha: 0.3)
-                  : colors.inkSoft.withValues(alpha: 0.2),
+              size: isActive ? 24 : 22,
+              primaryColor: tint,
+              secondaryColor: tint.withValues(alpha: 0.25),
             ),
             const SizedBox(height: 2),
             Text(
               label,
-              style: LQTypography.microNav(colors, isActive: isActive),
+              style: LQTypography.microNav(colors, isActive: isActive).copyWith(
+                color: tint,
+                fontSize: 10,
+              ),
             ),
           ],
         ),
@@ -103,7 +112,7 @@ class _NavItem extends StatelessWidget {
         LQNavTab.home => (LQIconType.home, 'Home'),
         LQNavTab.learn => (LQIconType.learn, 'Learn'),
         LQNavTab.city => (LQIconType.city, 'City'),
-        LQNavTab.progress => (LQIconType.progress, 'Progress'),
-        LQNavTab.profile => (LQIconType.profile, 'Profile'),
+        LQNavTab.awards => (LQIconType.trophy, 'Awards'),
+        LQNavTab.profile => (LQIconType.profile, 'Me'),
       };
 }

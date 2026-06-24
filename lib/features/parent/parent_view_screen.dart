@@ -5,7 +5,10 @@ import '../../app/bootstrap/firebase_providers.dart';
 import '../../app/theme/lq_theme.dart';
 import '../../core/tokens/lq_tokens.dart';
 import '../../core/tokens/lq_typography.dart';
+import '../../data/content/lesson_catalog.dart';
+import '../../data/content/lesson_progression.dart';
 import '../../data/models/lq_models.dart';
+import '../../data/providers/app_providers.dart';
 import '../../design/lq_canvas.dart';
 import '../../design/lq_card.dart';
 import '../../features/onboarding/auth_service.dart';
@@ -19,7 +22,20 @@ class ParentViewScreen extends ConsumerWidget {
     final colors = ref.watch(lqColorsProvider);
     final stats = ref.watch(userStatsProvider).valueOrNull ?? UserStats.empty;
     final profile = ref.watch(userProfileProvider).valueOrNull;
+    final lessons = ref.watch(userLessonsProvider).valueOrNull ?? const [];
     final name = profile?.displayName ?? 'your child';
+    final questLevel = LessonProgression.displayQuestLevel(lessons, profile);
+    final questName = LessonProgression.displayQuestLevelName(lessons, profile);
+    final journeyDone = LessonProgression.isJourneyComplete(lessons, profile);
+    final sessionsThisWeek = lessons
+        .where((p) {
+          if (p.completedAt == null) return false;
+          final dt = DateTime.tryParse(p.completedAt!);
+          if (dt == null) return false;
+          final now = DateTime.now();
+          return dt.isAfter(now.subtract(const Duration(days: 7)));
+        })
+        .length;
 
     return LQCanvas(
       colors: colors,
@@ -61,7 +77,15 @@ class ParentViewScreen extends ConsumerWidget {
                           Text('This week', style: LQTypography.h3(colors)),
                           const SizedBox(height: LQSpacing.sm),
                           Text(
-                            'LQ ${stats.lqScore} · Level ${stats.level} · '
+                            journeyDone
+                                ? 'Programme complete · Chief Money Officer'
+                                : 'Quest Level $questLevel · $questName',
+                            style: LQTypography.bodySm(colors),
+                          ),
+                          const SizedBox(height: LQSpacing.xs),
+                          Text(
+                            '$sessionsThisWeek stage${sessionsThisWeek == 1 ? '' : 's'} '
+                            'this week · LQ ${stats.lqScore} · '
                             '${stats.streak.count}-day streak',
                             style: LQTypography.bodySm(colors),
                           ),

@@ -1,0 +1,4290 @@
+{
+  "standard": {
+    "Hello Coins": {
+      "learn": "Money comes as coins and notes. We use it to trade for things people make and sell.",
+      "apply": "Find three coins or notes at home and name what each could buy.",
+      "quiz": [
+        {
+          "prompt": "Money helps us…",
+          "correct": "Trade for goods and services",
+          "wrong": [
+            "Win every game",
+            "Avoid school",
+            "Hide forever"
+          ]
+        },
+        {
+          "prompt": "Coins and notes are…",
+          "correct": "Tools for buying",
+          "wrong": [
+            "Only for collecting",
+            "Worthless paper",
+            "Secret codes"
+          ]
+        },
+        {
+          "prompt": "Where does money usually live safely?",
+          "correct": "A wallet or bank",
+          "wrong": [
+            "On the floor",
+            "In random pockets",
+            "Lost outside"
+          ]
+        },
+        {
+          "prompt": "Learning about coins helps you…",
+          "correct": "Count what you have",
+          "wrong": [
+            "Spend without thinking",
+            "Ignore prices",
+            "Skip saving"
+          ]
+        },
+        {
+          "prompt": "Why meet money early?",
+          "correct": "Make smarter choices later",
+          "wrong": [
+            "Spend everything fast",
+            "Never plan",
+            "Avoid math"
+          ]
+        }
+      ]
+    },
+    "Needs First": {
+      "learn": "Needs keep you healthy and safe — food, shelter, and school supplies come first.",
+      "apply": "Name one need you covered today before any fun spending.",
+      "quiz": [
+        {
+          "prompt": "A **need** is something that…",
+          "correct": "Keeps you safe and healthy",
+          "wrong": [
+            "Is always fun",
+            "Costs the most",
+            "Never matters"
+          ]
+        },
+        {
+          "prompt": "Which is usually a need?",
+          "correct": "School lunch",
+          "wrong": [
+            "Extra candy only",
+            "Rare collectible",
+            "Brand new game"
+          ]
+        },
+        {
+          "prompt": "Needs before wants means…",
+          "correct": "Essentials first",
+          "wrong": [
+            "Fun first always",
+            "Buy everything",
+            "Skip meals"
+          ]
+        },
+        {
+          "prompt": "Smart first step with AED 15?",
+          "correct": "Pay needs, then wants",
+          "wrong": [
+            "Buy all wants first",
+            "Spend everything",
+            "Guess prices"
+          ]
+        },
+        {
+          "prompt": "Needs vs wants — why care?",
+          "correct": "Money lasts longer",
+          "wrong": [
+            "To waste money",
+            "To confuse parents",
+            "To avoid saving"
+          ]
+        }
+      ]
+    },
+    "Want Later": {
+      "learn": "Wants are fun but optional — they can wait until needs and savings are covered.",
+      "apply": "Pick one want and write why it can wait until next week.",
+      "quiz": [
+        {
+          "prompt": "A **want** is…",
+          "correct": "Nice but not essential",
+          "wrong": [
+            "Always required",
+            "Same as rent",
+            "Never optional"
+          ]
+        },
+        {
+          "prompt": "Want later teaches…",
+          "correct": "Patience with spending",
+          "wrong": [
+            "Instant buying",
+            "Hiding receipts",
+            "Borrowing secretly"
+          ]
+        },
+        {
+          "prompt": "You see a toy and lunch. Pick first.",
+          "correct": "Buy lunch first",
+          "wrong": [
+            "Buy the toy first",
+            "Buy both without thinking",
+            "Skip lunch"
+          ]
+        },
+        {
+          "prompt": "Waiting on wants helps…",
+          "correct": "Avoid regret",
+          "wrong": [
+            "Spend faster",
+            "Ignore budgets",
+            "Skip goals"
+          ]
+        },
+        {
+          "prompt": "Fun stuff can wait when…",
+          "correct": "Needs are not covered yet",
+          "wrong": [
+            "You have extra savings",
+            "It is on sale",
+            "Friends buy it"
+          ]
+        }
+      ]
+    },
+    "Coin Count": {
+      "learn": "Adding small piles of coins quickly shows how much you really have to spend.",
+      "apply": "Count coins in one jar and write the total in AED.",
+      "quiz": [
+        {
+          "prompt": "Counting coins helps you…",
+          "correct": "Know what you have",
+          "wrong": [
+            "Confuse you",
+            "Waste time",
+            "Avoid saving"
+          ]
+        },
+        {
+          "prompt": "AED 5 + AED 3 equals…",
+          "correct": "AED 8",
+          "wrong": [
+            "AED 2",
+            "AED 15",
+            "AED 53"
+          ]
+        },
+        {
+          "prompt": "Before spending, you should…",
+          "correct": "Know your total",
+          "wrong": [
+            "Guess randomly",
+            "Spend first",
+            "Ignore small coins"
+          ]
+        },
+        {
+          "prompt": "Small coins matter because…",
+          "correct": "They add up",
+          "wrong": [
+            "They are worthless",
+            "Shops reject them",
+            "They disappear"
+          ]
+        },
+        {
+          "prompt": "Fast counting helps at…",
+          "correct": "The checkout line",
+          "wrong": [
+            "Only video games",
+            "Never in real life",
+            "Only banks"
+          ]
+        }
+      ]
+    },
+    "First Choice": {
+      "learn": "Your first money choice sets a habit — pick the option that matches your goal.",
+      "apply": "Make one small spend today and explain why it was smart.",
+      "quiz": [
+        {
+          "prompt": "A smart first choice…",
+          "correct": "Matches your goal",
+          "wrong": [
+            "Spends everything",
+            "Ignores needs",
+            "Copies friends blindly"
+          ]
+        },
+        {
+          "prompt": "Before choosing, ask…",
+          "correct": "Need or want?",
+          "wrong": [
+            "Who is fastest?",
+            "What is trending?",
+            "Can I borrow?"
+          ]
+        },
+        {
+          "prompt": "Pick one smart spend means…",
+          "correct": "Think before paying",
+          "wrong": [
+            "Tap instantly",
+            "Never compare",
+            "Hide the receipt"
+          ]
+        },
+        {
+          "prompt": "Good habits start when…",
+          "correct": "You practice small choices",
+          "wrong": [
+            "You spend all at once",
+            "You skip planning",
+            "You avoid tracking"
+          ]
+        },
+        {
+          "prompt": "Why learn early choices?",
+          "correct": "Build lifelong skills",
+          "wrong": [
+            "Spend faster",
+            "Ignore prices",
+            "Never plan"
+          ]
+        }
+      ]
+    },
+    "Needs vs Wants": {
+      "learn": "Needs keep you going; wants are extras. Spot the difference before you spend.",
+      "apply": "Sort one purchase today into need or want.",
+      "quiz": [
+        {
+          "prompt": "A need is…",
+          "correct": "Essential for health or school",
+          "wrong": [
+            "Always the fun option",
+            "Whatever ads say",
+            "Never important"
+          ]
+        },
+        {
+          "prompt": "Water on a hot day is a…",
+          "correct": "Need",
+          "wrong": [
+            "Want only",
+            "Never buy",
+            "Game prize"
+          ]
+        },
+        {
+          "prompt": "Wants are okay when…",
+          "correct": "Needs are covered first",
+          "wrong": [
+            "You skip meals",
+            "You borrow secretly",
+            "You hide receipts"
+          ]
+        },
+        {
+          "prompt": "Spot the difference to…",
+          "correct": "Spend more wisely",
+          "wrong": [
+            "Spend faster",
+            "Avoid math",
+            "Never save"
+          ]
+        },
+        {
+          "prompt": "Before buying, ask…",
+          "correct": "Need or want?",
+          "wrong": [
+            "Is it viral?",
+            "Who bought first?",
+            "Can I hide it?"
+          ]
+        }
+      ]
+    },
+    "Saving Jar": {
+      "learn": "A saving jar holds coins for a goal — watching it grow builds patience.",
+      "apply": "Name a goal and move AED 2 into your jar today.",
+      "quiz": [
+        {
+          "prompt": "A saving jar is for…",
+          "correct": "Future goals",
+          "wrong": [
+            "Instant spending",
+            "Random toys today",
+            "Secret debt"
+          ]
+        },
+        {
+          "prompt": "Goals should be…",
+          "correct": "Specific and dated",
+          "wrong": [
+            "Vague and never",
+            "Impossible always",
+            "Ignored"
+          ]
+        },
+        {
+          "prompt": "Watching the jar grow teaches…",
+          "correct": "Delayed gratification",
+          "wrong": [
+            "Spend everything",
+            "Skip tracking",
+            "Borrow more"
+          ]
+        },
+        {
+          "prompt": "Every coin in the jar…",
+          "correct": "Moves you closer",
+          "wrong": [
+            "Disappears",
+            "Is wasted",
+            "Is forbidden"
+          ]
+        },
+        {
+          "prompt": "Saving first helps…",
+          "correct": "Reach big dreams",
+          "wrong": [
+            "Avoid planning",
+            "Spend randomly",
+            "Ignore needs"
+          ]
+        }
+      ]
+    },
+    "Smart Spending": {
+      "learn": "Compare options before you buy — same item, different shops, different prices.",
+      "apply": "Check two prices for one item you want this week.",
+      "quiz": [
+        {
+          "prompt": "Compare before you buy to…",
+          "correct": "Find better value",
+          "wrong": [
+            "Spend faster",
+            "Ignore quality",
+            "Buy the first thing"
+          ]
+        },
+        {
+          "prompt": "Same snack, different cost means…",
+          "correct": "Shop around helps",
+          "wrong": [
+            "Price never changes",
+            "All shops identical",
+            "Skip thinking"
+          ]
+        },
+        {
+          "prompt": "Smart spending feels…",
+          "correct": "In control",
+          "wrong": [
+            "Stressful always",
+            "Random",
+            "Impossible"
+          ]
+        },
+        {
+          "prompt": "A real deal still…",
+          "correct": "Gets what you need",
+          "wrong": [
+            "Is always 90% off",
+            "Needs no checking",
+            "Ignores quality"
+          ]
+        },
+        {
+          "prompt": "Before paying, check…",
+          "correct": "Price and need",
+          "wrong": [
+            "Only color",
+            "Only ads",
+            "Only friends"
+          ]
+        }
+      ]
+    },
+    "Budget Basics": {
+      "learn": "A weekly budget lists money in and out — plan AED before you spend it.",
+      "apply": "Write a simple AED plan for this week with one need and one save line.",
+      "quiz": [
+        {
+          "prompt": "A budget is…",
+          "correct": "A money plan",
+          "wrong": [
+            "A type of game",
+            "A bank loan",
+            "A shopping mall"
+          ]
+        },
+        {
+          "prompt": "Plan your AED for the week means…",
+          "correct": "Assign every dirham",
+          "wrong": [
+            "Spend without limits",
+            "Borrow every week",
+            "Ignore totals"
+          ]
+        },
+        {
+          "prompt": "If you overspend one line…",
+          "correct": "Adjust other buckets",
+          "wrong": [
+            "Give up forever",
+            "Delete all money",
+            "Stop learning"
+          ]
+        },
+        {
+          "prompt": "Budget basics protect…",
+          "correct": "Essentials first",
+          "wrong": [
+            "Only toys",
+            "Only games",
+            "Only candy"
+          ]
+        },
+        {
+          "prompt": "Review your plan to…",
+          "correct": "Fix mistakes early",
+          "wrong": [
+            "Never improve",
+            "Waste time",
+            "Skip goals"
+          ]
+        }
+      ]
+    },
+    "Cost of Goods": {
+      "learn": "Making something costs materials and time — that is the cost of goods.",
+      "apply": "List two costs to make one lemonade cup at a stand.",
+      "quiz": [
+        {
+          "prompt": "Cost of goods includes…",
+          "correct": "Materials and time",
+          "wrong": [
+            "Only profit",
+            "Only revenue",
+            "Only tax"
+          ]
+        },
+        {
+          "prompt": "If lemons cost AED 2, that is…",
+          "correct": "Part of cost",
+          "wrong": [
+            "Pure profit",
+            "Free money",
+            "Revenue only"
+          ]
+        },
+        {
+          "prompt": "Higher material cost means…",
+          "correct": "You must price carefully",
+          "wrong": [
+            "Automatic profit",
+            "No planning needed",
+            "Customers pay double"
+          ]
+        },
+        {
+          "prompt": "Knowing costs helps…",
+          "correct": "Set a fair price",
+          "wrong": [
+            "Hide expenses",
+            "Sell below cost",
+            "Ignore math"
+          ]
+        },
+        {
+          "prompt": "Cost of goods is paid…",
+          "correct": "Before you earn revenue",
+          "wrong": [
+            "After all profit",
+            "Never tracked",
+            "Only by banks"
+          ]
+        }
+      ]
+    },
+    "Profit = Revenue − Cost": {
+      "learn": "Revenue is money in from sales; cost is money out; profit is what remains.",
+      "apply": "Run Lemon City — price above cost to earn on each cup.",
+      "quiz": [
+        {
+          "prompt": "Profit equals…",
+          "correct": "Revenue minus cost",
+          "wrong": [
+            "Cost minus revenue",
+            "Revenue plus tax only",
+            "Random luck"
+          ]
+        },
+        {
+          "prompt": "Price below cost means…",
+          "correct": "Loss on each sale",
+          "wrong": [
+            "Big profit",
+            "Break even always",
+            "Double revenue"
+          ]
+        },
+        {
+          "prompt": "Revenue is…",
+          "correct": "Money from customers",
+          "wrong": [
+            "Money you spend",
+            "Only savings",
+            "Only tax"
+          ]
+        },
+        {
+          "prompt": "To earn profit, price must be…",
+          "correct": "Above unit cost",
+          "wrong": [
+            "Below cost",
+            "Equal to zero",
+            "Hidden"
+          ]
+        },
+        {
+          "prompt": "Lemon City teaches…",
+          "correct": "Price above cost to win",
+          "wrong": [
+            "Give cups free",
+            "Ignore customers",
+            "Skip counting"
+          ]
+        }
+      ]
+    },
+    "Compare Prices": {
+      "learn": "The same item can cost different amounts — compare shops before you pay.",
+      "apply": "Check two prices for one snack online or in a store.",
+      "quiz": [
+        {
+          "prompt": "Compare prices to…",
+          "correct": "Find the best value",
+          "wrong": [
+            "Spend faster",
+            "Ignore quality",
+            "Buy the first thing"
+          ]
+        },
+        {
+          "prompt": "Same snack, different cost means…",
+          "correct": "Shop around helps",
+          "wrong": [
+            "All prices equal",
+            "Never compare",
+            "Quality never matters"
+          ]
+        },
+        {
+          "prompt": "Before buying, check…",
+          "correct": "At least two prices",
+          "wrong": [
+            "Only the ad",
+            "Only color",
+            "Only brand hype"
+          ]
+        },
+        {
+          "prompt": "Cheapest is best when…",
+          "correct": "Quality still meets your need",
+          "wrong": [
+            "It breaks instantly",
+            "You never use it",
+            "It is expired"
+          ]
+        },
+        {
+          "prompt": "Compare prices saves…",
+          "correct": "AED for other goals",
+          "wrong": [
+            "Nothing ever",
+            "Only time",
+            "Your receipt"
+          ]
+        }
+      ]
+    },
+    "Wait a Day": {
+      "learn": "Sleep on big wants — tomorrow you may not want it as much.",
+      "apply": "Write one want you will wait 24 hours before buying.",
+      "quiz": [
+        {
+          "prompt": "Waiting a day before buying helps…",
+          "correct": "Avoid impulse buys",
+          "wrong": [
+            "Spend faster",
+            "Hide money",
+            "Skip thinking"
+          ]
+        },
+        {
+          "prompt": "Impulse buying means…",
+          "correct": "Buying without thinking",
+          "wrong": [
+            "Planning ahead",
+            "Saving every coin",
+            "Comparing shops"
+          ]
+        },
+        {
+          "prompt": "Emotions calm down when you…",
+          "correct": "Wait before paying",
+          "wrong": [
+            "Tap instantly",
+            "Borrow secretly",
+            "Skip meals"
+          ]
+        },
+        {
+          "prompt": "Sleep on big wants teaches…",
+          "correct": "Patience",
+          "wrong": [
+            "Instant gratification",
+            "Ignoring budgets",
+            "Random spending"
+          ]
+        },
+        {
+          "prompt": "After waiting, you might…",
+          "correct": "Decide you do not need it",
+          "wrong": [
+            "Always buy more",
+            "Forget your budget",
+            "Spend double"
+          ]
+        }
+      ]
+    },
+    "Deal Detective": {
+      "learn": "Spot real vs fake deals — check the original price and the fine print.",
+      "apply": "Find a “sale” sign and verify the price before and after the discount.",
+      "quiz": [
+        {
+          "prompt": "Fake deals often…",
+          "correct": "Hide the true price",
+          "wrong": [
+            "Always save money",
+            "Teach math",
+            "Help charities"
+          ]
+        },
+        {
+          "prompt": "A deal detective checks…",
+          "correct": "Original price and need",
+          "wrong": [
+            "Only bright colors",
+            "Only loud music",
+            "Only friend opinions"
+          ]
+        },
+        {
+          "prompt": "\"Buy two get one\" may…",
+          "correct": "Make you spend more than planned",
+          "wrong": [
+            "Always save AED",
+            "Never affect budget",
+            "Replace saving"
+          ]
+        },
+        {
+          "prompt": "Real savings mean…",
+          "correct": "You pay less than usual for same item",
+          "wrong": [
+            "You buy extra wants",
+            "Price does not matter",
+            "No comparison needed"
+          ]
+        },
+        {
+          "prompt": "Before a flash sale, ask…",
+          "correct": "Do I still need this?",
+          "wrong": [
+            "Who is fastest?",
+            "Is it trending?",
+            "Can I borrow?"
+          ]
+        }
+      ]
+    },
+    "Shopping List": {
+      "learn": "A shopping list keeps you on plan — stick to it to avoid surprise spending.",
+      "apply": "Write a list before your next shop trip and follow it.",
+      "quiz": [
+        {
+          "prompt": "A shopping list stops you from…",
+          "correct": "Random extra spending",
+          "wrong": [
+            "Saving more",
+            "Learning prices",
+            "Helping friends"
+          ]
+        },
+        {
+          "prompt": "Stick to your plan means…",
+          "correct": "Buy listed items first",
+          "wrong": [
+            "Grab every aisle deal",
+            "Skip needs",
+            "Forget totals"
+          ]
+        },
+        {
+          "prompt": "Lists help because…",
+          "correct": "You decide before shopping",
+          "wrong": [
+            "Stores choose for you",
+            "Ads disappear",
+            "Prices vanish"
+          ]
+        },
+        {
+          "prompt": "If not on the list…",
+          "correct": "Pause and ask why",
+          "wrong": [
+            "Always buy it",
+            "Borrow for it",
+            "Hide it"
+          ]
+        },
+        {
+          "prompt": "Planning the list saves…",
+          "correct": "Time and money",
+          "wrong": [
+            "Nothing",
+            "Only receipts",
+            "Your password"
+          ]
+        }
+      ]
+    },
+    "Small Budget": {
+      "learn": "AED 20 for the week means every dirham has a job — plan before spending.",
+      "apply": "Split AED 20 into needs, wants, and save on paper.",
+      "quiz": [
+        {
+          "prompt": "AED 20 weekly budget means…",
+          "correct": "Plan every dirham",
+          "wrong": [
+            "Spend without limits",
+            "Borrow every week",
+            "Ignore totals"
+          ]
+        },
+        {
+          "prompt": "Small budgets teach…",
+          "correct": "Trade-offs",
+          "wrong": [
+            "Unlimited buying",
+            "Ignoring needs",
+            "Secret debt"
+          ]
+        },
+        {
+          "prompt": "When money is limited…",
+          "correct": "Prioritize needs",
+          "wrong": [
+            "Buy everything",
+            "Skip tracking",
+            "Guess prices"
+          ]
+        },
+        {
+          "prompt": "Leftover dirhams can…",
+          "correct": "Go to savings",
+          "wrong": [
+            "Disappear",
+            "Must be wasted",
+            "Never count"
+          ]
+        },
+        {
+          "prompt": "Tracking AED 20 helps…",
+          "correct": "See where money went",
+          "wrong": [
+            "Hide from parents",
+            "Spend faster",
+            "Avoid learning"
+          ]
+        }
+      ]
+    },
+    "Spend Smart": {
+      "learn": "Every dirham has a job — spend, save, or give on purpose.",
+      "apply": "Give each AED in your allowance a job on paper tonight.",
+      "quiz": [
+        {
+          "prompt": "Smart spending feels…",
+          "correct": "In control",
+          "wrong": [
+            "Stressful always",
+            "Random",
+            "Impossible"
+          ]
+        },
+        {
+          "prompt": "Every dirham has a job means…",
+          "correct": "Plan before spending",
+          "wrong": [
+            "Spend instantly",
+            "Never save",
+            "Ignore lists"
+          ]
+        },
+        {
+          "prompt": "Before spending, ask…",
+          "correct": "Does this match my plan?",
+          "wrong": [
+            "Is it viral?",
+            "Who bought first?",
+            "Can I hide it?"
+          ]
+        },
+        {
+          "prompt": "Smart spenders…",
+          "correct": "Track results",
+          "wrong": [
+            "Avoid math",
+            "Skip receipts",
+            "Never review"
+          ]
+        },
+        {
+          "prompt": "Purposeful spending builds…",
+          "correct": "Long-term habits",
+          "wrong": [
+            "Random luck",
+            "Secret debt",
+            "Instant regret"
+          ]
+        }
+      ]
+    },
+    "Week Plan": {
+      "learn": "Split money into buckets — needs, wants, and savings for the week.",
+      "apply": "Draw three jars and label them for this week.",
+      "quiz": [
+        {
+          "prompt": "A week plan splits money into…",
+          "correct": "Buckets with jobs",
+          "wrong": [
+            "One mystery pile",
+            "Only games",
+            "Random guesses"
+          ]
+        },
+        {
+          "prompt": "A budget is…",
+          "correct": "A money plan",
+          "wrong": [
+            "A type of game",
+            "A bank loan",
+            "A shopping mall"
+          ]
+        },
+        {
+          "prompt": "Needs bucket protects…",
+          "correct": "Essentials first",
+          "wrong": [
+            "Only toys",
+            "Only candy",
+            "Only apps"
+          ]
+        },
+        {
+          "prompt": "Planning buckets helps…",
+          "correct": "Avoid surprise empty pockets",
+          "wrong": [
+            "Spend faster",
+            "Skip saving",
+            "Ignore totals"
+          ]
+        },
+        {
+          "prompt": "Review buckets to…",
+          "correct": "Adjust next week",
+          "wrong": [
+            "Never change",
+            "Delete money",
+            "Stop learning"
+          ]
+        }
+      ]
+    },
+    "Track Spend": {
+      "learn": "Write what you buy — tracking shows where AED really goes.",
+      "apply": "Log three purchases today with amounts in AED.",
+      "quiz": [
+        {
+          "prompt": "Track spending to…",
+          "correct": "See where AED goes",
+          "wrong": [
+            "Hide from parents",
+            "Spend faster",
+            "Avoid saving"
+          ]
+        },
+        {
+          "prompt": "A spending log should include…",
+          "correct": "Item and amount",
+          "wrong": [
+            "Only feelings",
+            "Only colors",
+            "Only ads"
+          ]
+        },
+        {
+          "prompt": "Tracking reveals…",
+          "correct": "Patterns in your habits",
+          "wrong": [
+            "Nothing useful",
+            "Only games",
+            "Secret codes"
+          ]
+        },
+        {
+          "prompt": "If you skip tracking…",
+          "correct": "Surprises hit harder",
+          "wrong": [
+            "You save more automatically",
+            "Budgets fix themselves",
+            "Prices drop"
+          ]
+        },
+        {
+          "prompt": "Weekly totals help you…",
+          "correct": "Fix the plan",
+          "wrong": [
+            "Ignore mistakes",
+            "Spend blindly",
+            "Borrow always"
+          ]
+        }
+      ]
+    },
+    "Oops Fix": {
+      "learn": "Overspending happens — adjust other buckets and learn for next time.",
+      "apply": "If you overspent this week, move AED from wants to needs on paper.",
+      "quiz": [
+        {
+          "prompt": "If you overspend one bucket…",
+          "correct": "Adjust other buckets",
+          "wrong": [
+            "Give up forever",
+            "Delete all money",
+            "Stop learning"
+          ]
+        },
+        {
+          "prompt": "Oops fix means…",
+          "correct": "Adjust and learn",
+          "wrong": [
+            "Quit budgeting",
+            "Hide errors",
+            "Spend more"
+          ]
+        },
+        {
+          "prompt": "After a mistake, you should…",
+          "correct": "Review what happened",
+          "wrong": [
+            "Never track again",
+            "Spend double",
+            "Ignore parents"
+          ]
+        },
+        {
+          "prompt": "Fixing a budget teaches…",
+          "correct": "Resilience",
+          "wrong": [
+            "Perfection only",
+            "Never spending",
+            "Random luck"
+          ]
+        },
+        {
+          "prompt": "Small fixes keep…",
+          "correct": "Your plan alive",
+          "wrong": [
+            "Secrets safe",
+            "Debt hidden",
+            "Goals impossible"
+          ]
+        }
+      ]
+    },
+    "Needs Bucket": {
+      "learn": "Protect essentials first — the needs bucket covers food, school, and shelter items.",
+      "apply": "List three needs your bucket must cover this week.",
+      "quiz": [
+        {
+          "prompt": "Needs bucket protects…",
+          "correct": "Essentials first",
+          "wrong": [
+            "Only toys",
+            "Only games",
+            "Only candy"
+          ]
+        },
+        {
+          "prompt": "Before wants spending…",
+          "correct": "Fill needs bucket",
+          "wrong": [
+            "Empty savings",
+            "Borrow secretly",
+            "Skip meals"
+          ]
+        },
+        {
+          "prompt": "School supplies are usually…",
+          "correct": "Needs",
+          "wrong": [
+            "Never required",
+            "Pure wants",
+            "Always free"
+          ]
+        },
+        {
+          "prompt": "Protecting needs means…",
+          "correct": "Stable week",
+          "wrong": [
+            "Random spending",
+            "Ignoring rent",
+            "Skipping lunch"
+          ]
+        },
+        {
+          "prompt": "If needs bucket is short…",
+          "correct": "Cut wants first",
+          "wrong": [
+            "Skip school",
+            "Hide bills",
+            "Spend more"
+          ]
+        }
+      ]
+    },
+    "Review Day": {
+      "learn": "Look back and learn — review day asks if you followed your plan.",
+      "apply": "Answer: Did I follow my plan? Write one sentence why or why not.",
+      "quiz": [
+        {
+          "prompt": "Review day helps you…",
+          "correct": "Fix mistakes early",
+          "wrong": [
+            "Never improve",
+            "Waste time",
+            "Skip goals"
+          ]
+        },
+        {
+          "prompt": "Weekly review asks…",
+          "correct": "Did I follow my plan?",
+          "wrong": [
+            "Who wins online?",
+            "What is trending?",
+            "Ignore totals"
+          ]
+        },
+        {
+          "prompt": "Honest review leads to…",
+          "correct": "Better next week",
+          "wrong": [
+            "Hiding errors",
+            "Random spending",
+            "Giving up"
+          ]
+        },
+        {
+          "prompt": "Compare plan vs actual to…",
+          "correct": "Spot gaps",
+          "wrong": [
+            "Avoid math",
+            "Skip saving",
+            "Spend faster"
+          ]
+        },
+        {
+          "prompt": "Review day builds…",
+          "correct": "Budget boss skill",
+          "wrong": [
+            "Secret debt",
+            "Impulse habits",
+            "Ignored goals"
+          ]
+        }
+      ]
+    },
+    "Goal Glow": {
+      "learn": "Name your saving dream — specific goals glow brighter when you track them.",
+      "apply": "Write one savings goal with a date and AED target.",
+      "quiz": [
+        {
+          "prompt": "Goals should be…",
+          "correct": "Specific and dated",
+          "wrong": [
+            "Vague and never",
+            "Impossible always",
+            "Ignored"
+          ]
+        },
+        {
+          "prompt": "Goal glow means…",
+          "correct": "Clear picture of your dream",
+          "wrong": [
+            "Random spending",
+            "Hidden wishes",
+            "No tracking"
+          ]
+        },
+        {
+          "prompt": "Naming a goal helps…",
+          "correct": "Stay motivated",
+          "wrong": [
+            "Spend faster",
+            "Skip jars",
+            "Borrow more"
+          ]
+        },
+        {
+          "prompt": "Track progress to…",
+          "correct": "Celebrate small wins",
+          "wrong": [
+            "Ignore savings",
+            "Quit early",
+            "Hide coins"
+          ]
+        },
+        {
+          "prompt": "A dated goal answers…",
+          "correct": "When will I reach it?",
+          "wrong": [
+            "Who is fastest?",
+            "What is viral?",
+            "Can I borrow?"
+          ]
+        }
+      ]
+    },
+    "Jar Rules": {
+      "learn": "Every coin has a job — jar rules split spend, save, and give clearly.",
+      "apply": "Label jars: Spend, Save, Give — move today’s coins accordingly.",
+      "quiz": [
+        {
+          "prompt": "Jar rules mean…",
+          "correct": "Every coin has a job",
+          "wrong": [
+            "Throw coins anywhere",
+            "Only one jar",
+            "Never save"
+          ]
+        },
+        {
+          "prompt": "Saving jar is for…",
+          "correct": "Future plans",
+          "wrong": [
+            "Random toys today",
+            "Instant spending",
+            "Secret debt"
+          ]
+        },
+        {
+          "prompt": "Give jar teaches…",
+          "correct": "Sharing with a plan",
+          "wrong": [
+            "Spending all",
+            "Ignoring others",
+            "Hiding money"
+          ]
+        },
+        {
+          "prompt": "Splitting coins builds…",
+          "correct": "Discipline",
+          "wrong": [
+            "Random luck",
+            "Impulse habits",
+            "Secret debt"
+          ]
+        },
+        {
+          "prompt": "When jars are labeled…",
+          "correct": "Choices are clearer",
+          "wrong": [
+            "Math disappears",
+            "Prices vanish",
+            "Ads stop"
+          ]
+        }
+      ]
+    },
+    "Stand Setup": {
+      "learn": "Cost to make one cup includes lemons, sugar, cups, and your time.",
+      "apply": "List every cost for one lemonade cup before setting price.",
+      "quiz": [
+        {
+          "prompt": "Stand setup tracks…",
+          "correct": "Cost per unit",
+          "wrong": [
+            "Only revenue",
+            "Only profit",
+            "Only ads"
+          ]
+        },
+        {
+          "prompt": "Materials for one cup are…",
+          "correct": "Part of unit cost",
+          "wrong": [
+            "Free always",
+            "Pure profit",
+            "Customer tips"
+          ]
+        },
+        {
+          "prompt": "Your time at the stand is…",
+          "correct": "A real cost",
+          "wrong": [
+            "Worthless",
+            "Not counted",
+            "Only fun"
+          ]
+        },
+        {
+          "prompt": "Knowing setup cost helps…",
+          "correct": "Price above cost",
+          "wrong": [
+            "Sell below cost",
+            "Ignore math",
+            "Give cups free"
+          ]
+        },
+        {
+          "prompt": "Lemon City stand teaches…",
+          "correct": "Unit economics",
+          "wrong": [
+            "Random luck",
+            "Only games",
+            "Hidden fees"
+          ]
+        }
+      ]
+    },
+    "Price Pick": {
+      "learn": "Pick a price customers will pay but still covers your cost plus profit.",
+      "apply": "Test two prices — which earns profit without scaring customers away?",
+      "quiz": [
+        {
+          "prompt": "Price pick balances…",
+          "correct": "Cost and willingness to pay",
+          "wrong": [
+            "Only colors",
+            "Only ads",
+            "Only luck"
+          ]
+        },
+        {
+          "prompt": "Price too low means…",
+          "correct": "You lose money",
+          "wrong": [
+            "You earn more",
+            "Customers pay double",
+            "Costs disappear"
+          ]
+        },
+        {
+          "prompt": "Fair price covers…",
+          "correct": "Cost plus some profit",
+          "wrong": [
+            "Only wants",
+            "Only tax",
+            "Nothing"
+          ]
+        },
+        {
+          "prompt": "Ask customers implicitly by…",
+          "correct": "Watching sales at each price",
+          "wrong": [
+            "Guessing once",
+            "Never changing",
+            "Ignoring feedback"
+          ]
+        },
+        {
+          "prompt": "Good pricing feels…",
+          "correct": "Win-win",
+          "wrong": [
+            "Random",
+            "Impossible",
+            "Always loss"
+          ]
+        }
+      ]
+    },
+    "Busy Day": {
+      "learn": "Serve more customers when demand is high — busy days boost revenue.",
+      "apply": "In Lemon City, try a busier day with fair pricing.",
+      "quiz": [
+        {
+          "prompt": "Busy days teach…",
+          "correct": "Volume matters",
+          "wrong": [
+            "Nothing useful",
+            "To stop selling",
+            "To avoid work"
+          ]
+        },
+        {
+          "prompt": "More cups sold at profit means…",
+          "correct": "Higher total revenue",
+          "wrong": [
+            "Automatic loss",
+            "Zero cost",
+            "Free materials"
+          ]
+        },
+        {
+          "prompt": "When demand is high…",
+          "correct": "Prepare enough stock",
+          "wrong": [
+            "Close the stand",
+            "Raise price randomly",
+            "Ignore customers"
+          ]
+        },
+        {
+          "prompt": "Busy day profit depends on…",
+          "correct": "Price above cost × cups sold",
+          "wrong": [
+            "Luck only",
+            "Ads only",
+            "Weather only"
+          ]
+        },
+        {
+          "prompt": "Plan for busy days by…",
+          "correct": "Having supplies ready",
+          "wrong": [
+            "Skipping cost math",
+            "Hiding prices",
+            "Giving free cups"
+          ]
+        }
+      ]
+    },
+    "Profit Smile": {
+      "learn": "Revenue minus cost equals profit — smile when the number is positive.",
+      "apply": "Calculate profit for one Lemon City day in AED.",
+      "quiz": [
+        {
+          "prompt": "Profit equals…",
+          "correct": "Revenue minus cost",
+          "wrong": [
+            "Cost minus revenue",
+            "Revenue plus tax only",
+            "Random luck"
+          ]
+        },
+        {
+          "prompt": "Positive profit means…",
+          "correct": "You earned after costs",
+          "wrong": [
+            "You lost money",
+            "Price was zero",
+            "Customers paid nothing"
+          ]
+        },
+        {
+          "prompt": "Profit smile comes when…",
+          "correct": "Price beats unit cost",
+          "wrong": [
+            "You sell below cost",
+            "You skip counting",
+            "You ignore customers"
+          ]
+        },
+        {
+          "prompt": "Track both sides…",
+          "correct": "Revenue and cost",
+          "wrong": [
+            "Only fun",
+            "Only ads",
+            "Only colors"
+          ]
+        },
+        {
+          "prompt": "Reinvest profit to…",
+          "correct": "Grow the stand",
+          "wrong": [
+            "Spend on random wants only",
+            "Hide earnings",
+            "Stop tracking"
+          ]
+        }
+      ]
+    },
+    "Reinvest": {
+      "learn": "Put some profit back into the business — better cups or more lemons grow sales.",
+      "apply": "Choose one reinvestment that could earn more next week.",
+      "quiz": [
+        {
+          "prompt": "Reinvest profit to…",
+          "correct": "Grow the stand",
+          "wrong": [
+            "Spend on wants only",
+            "Hide earnings",
+            "Stop tracking"
+          ]
+        },
+        {
+          "prompt": "Reinvesting means…",
+          "correct": "Buy tools for future revenue",
+          "wrong": [
+            "Waste all profit",
+            "Never save",
+            "Ignore costs"
+          ]
+        },
+        {
+          "prompt": "Smart reinvest picks…",
+          "correct": "Items that boost sales or cut cost",
+          "wrong": [
+            "Random toys",
+            "Unneeded gadgets",
+            "Secret debt"
+          ]
+        },
+        {
+          "prompt": "Grow your little business by…",
+          "correct": "Improving what you sell",
+          "wrong": [
+            "Lowering quality",
+            "Ignoring customers",
+            "Skipping math"
+          ]
+        },
+        {
+          "prompt": "Profit used wisely…",
+          "correct": "Comes back bigger",
+          "wrong": [
+            "Disappears always",
+            "Is taxed away instantly",
+            "Never helps"
+          ]
+        }
+      ]
+    },
+    "Interest Intro": {
+      "learn": "Interest is money growing slowly when savings stay in a bank.",
+      "apply": "Ask a parent how savings can earn small interest over time.",
+      "quiz": [
+        {
+          "prompt": "Interest is…",
+          "correct": "Money growing over time",
+          "wrong": [
+            "A type of game",
+            "Always bad",
+            "Instant rich"
+          ]
+        },
+        {
+          "prompt": "Savings in a bank may…",
+          "correct": "Earn small interest",
+          "wrong": [
+            "Vanish instantly",
+            "Never change",
+            "Become debt"
+          ]
+        },
+        {
+          "prompt": "Interest grows when…",
+          "correct": "Money stays saved",
+          "wrong": [
+            "You spend all",
+            "You hide cash",
+            "You skip school"
+          ]
+        },
+        {
+          "prompt": "Slow growth teaches…",
+          "correct": "Patience",
+          "wrong": [
+            "Gambling",
+            "Impulse buys",
+            "Secret loans"
+          ]
+        },
+        {
+          "prompt": "Junior investors learn…",
+          "correct": "How money can grow",
+          "wrong": [
+            "To spend faster",
+            "To ignore math",
+            "To avoid plans"
+          ]
+        }
+      ]
+    },
+    "Rainy Day": {
+      "learn": "Save for surprises — a rainy-day fund covers emergencies without panic.",
+      "apply": "Move AED 2 into savings this week for a surprise.",
+      "quiz": [
+        {
+          "prompt": "Emergency fund is for…",
+          "correct": "Surprises",
+          "wrong": [
+            "Only toys",
+            "Vacations only",
+            "Never use"
+          ]
+        },
+        {
+          "prompt": "Rainy-day savings protect…",
+          "correct": "Your plan when shocks hit",
+          "wrong": [
+            "Only games",
+            "Only ads",
+            "Only luck"
+          ]
+        },
+        {
+          "prompt": "Without rainy-day savings…",
+          "correct": "Small problems feel huge",
+          "wrong": [
+            "You never need money",
+            "Prices disappear",
+            "Budgets vanish"
+          ]
+        },
+        {
+          "prompt": "Start small by…",
+          "correct": "Saving a little regularly",
+          "wrong": [
+            "Spending all now",
+            "Borrowing always",
+            "Ignoring needs"
+          ]
+        },
+        {
+          "prompt": "Future you benefits when…",
+          "correct": "You save early",
+          "wrong": [
+            "You spend all now",
+            "You skip school",
+            "You borrow lots"
+          ]
+        }
+      ]
+    },
+    "Plan Steps": {
+      "learn": "Break big goals into small steps — each step gets a date and AED amount.",
+      "apply": "Split one big goal into three weekly steps.",
+      "quiz": [
+        {
+          "prompt": "Plan steps break goals…",
+          "correct": "Into small tasks",
+          "wrong": [
+            "Into confusion",
+            "Into debt only",
+            "Into nothing"
+          ]
+        },
+        {
+          "prompt": "Small steps feel…",
+          "correct": "Achievable",
+          "wrong": [
+            "Impossible",
+            "Random",
+            "Pointless"
+          ]
+        },
+        {
+          "prompt": "Each step needs…",
+          "correct": "A target and timeline",
+          "wrong": [
+            "Only luck",
+            "Only ads",
+            "Only friends"
+          ]
+        },
+        {
+          "prompt": "Tracking steps shows…",
+          "correct": "Progress over time",
+          "wrong": [
+            "Nothing",
+            "Only games",
+            "Secret codes"
+          ]
+        },
+        {
+          "prompt": "Big goals succeed when…",
+          "correct": "Steps are followed",
+          "wrong": [
+            "You skip planning",
+            "You spend all",
+            "You hide receipts"
+          ]
+        }
+      ]
+    },
+    "Future You": {
+      "learn": "Thank yourself later — choices today help future you stay calm and ready.",
+      "apply": "Write a note to future you about one smart money choice you made.",
+      "quiz": [
+        {
+          "prompt": "Future you benefits when…",
+          "correct": "You save early",
+          "wrong": [
+            "You spend all now",
+            "You skip school",
+            "You borrow lots"
+          ]
+        },
+        {
+          "prompt": "Long-term thinking means…",
+          "correct": "Weigh today vs tomorrow",
+          "wrong": [
+            "Only instant fun",
+            "Never planning",
+            "Random clicks"
+          ]
+        },
+        {
+          "prompt": "Saving for future you is…",
+          "correct": "A gift to yourself",
+          "wrong": [
+            "A punishment",
+            "Always boring",
+            "Never useful"
+          ]
+        },
+        {
+          "prompt": "Future goals need…",
+          "correct": "Consistent small actions",
+          "wrong": [
+            "One lucky day",
+            "Secret debt",
+            "Ignoring math"
+          ]
+        },
+        {
+          "prompt": "Thank yourself later by…",
+          "correct": "Following your plan now",
+          "wrong": [
+            "Spending everything",
+            "Hiding money",
+            "Skipping reviews"
+          ]
+        }
+      ]
+    },
+    "Ad Alert": {
+      "learn": "Not every sale is real — ads make wants feel urgent; pause and compare.",
+      "apply": "Spot one ad today and ask: need or want?",
+      "quiz": [
+        {
+          "prompt": "Sale ads sometimes…",
+          "correct": "Exaggerate savings",
+          "wrong": [
+            "Always tell truth",
+            "Replace budgeting",
+            "Guarantee profit"
+          ]
+        },
+        {
+          "prompt": "Ad alert means…",
+          "correct": "Pause before buying",
+          "wrong": [
+            "Buy instantly",
+            "Trust every claim",
+            "Skip comparison"
+          ]
+        },
+        {
+          "prompt": "Flashy ads target…",
+          "correct": "Your emotions",
+          "wrong": [
+            "Only math class",
+            "Only banks",
+            "Only teachers"
+          ]
+        },
+        {
+          "prompt": "Before clicking buy…",
+          "correct": "Check need and price",
+          "wrong": [
+            "Only color",
+            "Only music",
+            "Only friends"
+          ]
+        },
+        {
+          "prompt": "Ads make wants feel…",
+          "correct": "Urgent",
+          "wrong": [
+            "Free always",
+            "Unimportant",
+            "Impossible"
+          ]
+        }
+      ]
+    },
+    "Quality Check": {
+      "learn": "Cheap vs worth it — lowest price fails if the item breaks fast.",
+      "apply": "Compare two similar items: price, reviews, and expected life.",
+      "quiz": [
+        {
+          "prompt": "Quality means…",
+          "correct": "Lasts and works well",
+          "wrong": [
+            "Costs the most",
+            "Never matters",
+            "Is always shiny"
+          ]
+        },
+        {
+          "prompt": "Cheapest can cost more if…",
+          "correct": "It breaks quickly",
+          "wrong": [
+            "It lasts years",
+            "It fits your need",
+            "It has good reviews"
+          ]
+        },
+        {
+          "prompt": "Worth-it buys balance…",
+          "correct": "Price and durability",
+          "wrong": [
+            "Only ads",
+            "Only color",
+            "Only hype"
+          ]
+        },
+        {
+          "prompt": "Before choosing cheap…",
+          "correct": "Read reviews or ask",
+          "wrong": [
+            "Buy blindly",
+            "Skip research",
+            "Ignore returns"
+          ]
+        },
+        {
+          "prompt": "Quality check protects…",
+          "correct": "Your AED long term",
+          "wrong": [
+            "Only stores",
+            "Only ads",
+            "Only luck"
+          ]
+        }
+      ]
+    },
+    "Review Read": {
+      "learn": "Ask before you buy — read reviews to learn from others’ experience.",
+      "apply": "Find two reviews for something you might buy.",
+      "quiz": [
+        {
+          "prompt": "Reviews help you…",
+          "correct": "Decide wisely",
+          "wrong": [
+            "Spend faster",
+            "Avoid thinking",
+            "Skip prices"
+          ]
+        },
+        {
+          "prompt": "Review read means…",
+          "correct": "Learn from others",
+          "wrong": [
+            "Copy every opinion",
+            "Ignore facts",
+            "Buy instantly"
+          ]
+        },
+        {
+          "prompt": "Look for reviews that…",
+          "correct": "Mention quality and value",
+          "wrong": [
+            "Only use emojis",
+            "Hide prices",
+            "Are all perfect"
+          ]
+        },
+        {
+          "prompt": "Too many perfect reviews may…",
+          "correct": "Be suspicious",
+          "wrong": [
+            "Always guarantee quality",
+            "Replace budgeting",
+            "Mean free items"
+          ]
+        },
+        {
+          "prompt": "Ask before you buy…",
+          "correct": "Saves regret",
+          "wrong": [
+            "Wastes time always",
+            "Stops all fun",
+            "Is never useful"
+          ]
+        }
+      ]
+    },
+    "Return Rules": {
+      "learn": "Know store policies — return rules let you fix mistakes safely.",
+      "apply": "Check return policy for one shop you use often.",
+      "quiz": [
+        {
+          "prompt": "Return rules let you…",
+          "correct": "Fix mistakes",
+          "wrong": [
+            "Never help",
+            "Cost extra always",
+            "Stop learning"
+          ]
+        },
+        {
+          "prompt": "Before buying online…",
+          "correct": "Read return policy",
+          "wrong": [
+            "Skip all text",
+            "Trust ads only",
+            "Hide receipts"
+          ]
+        },
+        {
+          "prompt": "Keep receipts to…",
+          "correct": "Prove purchase if needed",
+          "wrong": [
+            "Throw away",
+            "Confuse stores",
+            "Avoid refunds"
+          ]
+        },
+        {
+          "prompt": "Return windows mean…",
+          "correct": "Limited time to bring back",
+          "wrong": [
+            "Forever returns",
+            "No rules ever",
+            "Free money"
+          ]
+        },
+        {
+          "prompt": "Policies protect…",
+          "correct": "Buyers and sellers fairly",
+          "wrong": [
+            "Only stores",
+            "Only scammers",
+            "Nobody"
+          ]
+        }
+      ]
+    },
+    "Scam Shield": {
+      "learn": "Too-good offers trick us — scam shield means verify before you pay.",
+      "apply": "Learn one sign of an online scam and share with a parent.",
+      "quiz": [
+        {
+          "prompt": "Scam offers often…",
+          "correct": "Sound too perfect",
+          "wrong": [
+            "Are always safe",
+            "Teach math",
+            "Help savings"
+          ]
+        },
+        {
+          "prompt": "Scam shield means…",
+          "correct": "Verify before paying",
+          "wrong": [
+            "Click every link",
+            "Share passwords",
+            "Send gift cards"
+          ]
+        },
+        {
+          "prompt": "Never share…",
+          "correct": "Passwords or OTP codes",
+          "wrong": [
+            "Your name",
+            "Your hobby",
+            "Your favorite color"
+          ]
+        },
+        {
+          "prompt": "If pressured to pay fast…",
+          "correct": "Pause and ask an adult",
+          "wrong": [
+            "Pay instantly",
+            "Ignore parents",
+            "Borrow secretly"
+          ]
+        },
+        {
+          "prompt": "Free iPhone messages are usually…",
+          "correct": "Scams",
+          "wrong": [
+            "Always real",
+            "From banks",
+            "Required"
+          ]
+        }
+      ]
+    },
+    "Split Fair": {
+      "learn": "Share costs with friends fairly — everyone pays their agreed share.",
+      "apply": "Plan a group snack and split costs evenly or by what each ordered.",
+      "quiz": [
+        {
+          "prompt": "Fair split means…",
+          "correct": "Everyone pays fairly",
+          "wrong": [
+            "One person pays all",
+            "Random guessing",
+            "Hide costs"
+          ]
+        },
+        {
+          "prompt": "Before group spending…",
+          "correct": "Agree on split rules",
+          "wrong": [
+            "Assume someone else pays",
+            "Skip talking",
+            "Borrow secretly"
+          ]
+        },
+        {
+          "prompt": "Split fair avoids…",
+          "correct": "Resentment",
+          "wrong": [
+            "All fun",
+            "All savings",
+            "All planning"
+          ]
+        },
+        {
+          "prompt": "Track group costs with…",
+          "correct": "Clear notes or app",
+          "wrong": [
+            "Memory only",
+            "Ignoring totals",
+            "Hidden fees"
+          ]
+        },
+        {
+          "prompt": "When costs differ by item…",
+          "correct": "Pay for what you ordered",
+          "wrong": [
+            "Split randomly",
+            "One person always pays",
+            "Never discuss"
+          ]
+        }
+      ]
+    },
+    "Group Goal": {
+      "learn": "Save together for fun — group goals work when everyone agrees on the target.",
+      "apply": "Set a small group savings goal with friends or family.",
+      "quiz": [
+        {
+          "prompt": "Group goals work when…",
+          "correct": "Everyone agrees",
+          "wrong": [
+            "One person decides",
+            "No one talks",
+            "Secrets only"
+          ]
+        },
+        {
+          "prompt": "Save together for fun means…",
+          "correct": "Shared target and timeline",
+          "wrong": [
+            "Random spending",
+            "Hidden jars",
+            "No tracking"
+          ]
+        },
+        {
+          "prompt": "Group savings need…",
+          "correct": "Clear rules",
+          "wrong": [
+            "No plan",
+            "Only wants",
+            "Only games"
+          ]
+        },
+        {
+          "prompt": "Celebrate when…",
+          "correct": "Goal is reached together",
+          "wrong": [
+            "One person quits",
+            "Nobody tracks",
+            "Everyone spends early"
+          ]
+        },
+        {
+          "prompt": "Talk about money…",
+          "correct": "Kindly and clearly",
+          "wrong": [
+            "Never",
+            "Only when angry",
+            "Only online strangers"
+          ]
+        }
+      ]
+    },
+    "Talk Money": {
+      "learn": "Kind honest conversations about money build trust with family and friends.",
+      "apply": "Ask one money question to a parent or teacher today.",
+      "quiz": [
+        {
+          "prompt": "Talk money with friends…",
+          "correct": "Kindly and clearly",
+          "wrong": [
+            "Never",
+            "Only when angry",
+            "Only online"
+          ]
+        },
+        {
+          "prompt": "Honest talks help…",
+          "correct": "Avoid surprises",
+          "wrong": [
+            "Hide all spending",
+            "Borrow secretly",
+            "Skip budgets"
+          ]
+        },
+        {
+          "prompt": "When discussing costs…",
+          "correct": "Use facts not blame",
+          "wrong": [
+            "Shout",
+            "Hide receipts",
+            "Ignore others"
+          ]
+        },
+        {
+          "prompt": "Money talks at home teach…",
+          "correct": "Shared values",
+          "wrong": [
+            "Secret debt",
+            "Random luck",
+            "Only games"
+          ]
+        },
+        {
+          "prompt": "Asking questions shows…",
+          "correct": "Curiosity and respect",
+          "wrong": [
+            "Weakness",
+            "Rudeness",
+            "Never learning"
+          ]
+        }
+      ]
+    },
+    "Team Budget": {
+      "learn": "Plan a class project budget — list costs, split tasks, track totals.",
+      "apply": "Draft a team budget for a small project with three line items.",
+      "quiz": [
+        {
+          "prompt": "Team budget needs…",
+          "correct": "A shared plan",
+          "wrong": [
+            "No plan",
+            "Only wants",
+            "Only games"
+          ]
+        },
+        {
+          "prompt": "Plan a class project by…",
+          "correct": "Listing all costs",
+          "wrong": [
+            "Guessing once",
+            "Ignoring supplies",
+            "Skipping totals"
+          ]
+        },
+        {
+          "prompt": "Roles in team budget…",
+          "correct": "Who buys what",
+          "wrong": [
+            "Random chaos",
+            "One secret payer",
+            "No tracking"
+          ]
+        },
+        {
+          "prompt": "Track team spending to…",
+          "correct": "Stay on target",
+          "wrong": [
+            "Hide overspend",
+            "Borrow always",
+            "Quit early"
+          ]
+        },
+        {
+          "prompt": "Win together means…",
+          "correct": "Celebrate shared success",
+          "wrong": [
+            "One winner only",
+            "Ignore others",
+            "Skip saving"
+          ]
+        }
+      ]
+    },
+    "Win Together": {
+      "learn": "Celebrate group success — winning together means everyone followed the plan.",
+      "apply": "Thank one teammate for helping the budget stay on track.",
+      "quiz": [
+        {
+          "prompt": "Win together means…",
+          "correct": "Celebrate shared success",
+          "wrong": [
+            "One winner only",
+            "Ignore others",
+            "Skip saving"
+          ]
+        },
+        {
+          "prompt": "Group success needs…",
+          "correct": "Everyone’s effort",
+          "wrong": [
+            "Luck only",
+            "Ads only",
+            "Secrets only"
+          ]
+        },
+        {
+          "prompt": "After reaching a group goal…",
+          "correct": "Reflect what worked",
+          "wrong": [
+            "Spend all instantly",
+            "Hide results",
+            "Never plan again"
+          ]
+        },
+        {
+          "prompt": "Shared wins build…",
+          "correct": "Trust",
+          "wrong": [
+            "Secret debt",
+            "Random spending",
+            "Ignored plans"
+          ]
+        },
+        {
+          "prompt": "Celebrate fairly by…",
+          "correct": "Recognizing all helpers",
+          "wrong": [
+            "Taking all credit",
+            "Ignoring budget",
+            "Skipping thanks"
+          ]
+        }
+      ]
+    },
+    "Master Mix": {
+      "learn": "Blend all your skills — saving, spending, investing, and giving work together.",
+      "apply": "Pick one real decision this week and write pros and cons.",
+      "quiz": [
+        {
+          "prompt": "Master mix means…",
+          "correct": "Using all money skills",
+          "wrong": [
+            "Spending all fast",
+            "Ignoring budgets",
+            "Only games"
+          ]
+        },
+        {
+          "prompt": "CMO skills include…",
+          "correct": "Plan, save, invest, give",
+          "wrong": [
+            "Only spending",
+            "Only borrowing",
+            "Only hiding"
+          ]
+        },
+        {
+          "prompt": "Balanced money life…",
+          "correct": "Matches your values",
+          "wrong": [
+            "Ignores needs",
+            "Skips saving",
+            "Random luck"
+          ]
+        },
+        {
+          "prompt": "Review all skills to…",
+          "correct": "See gaps",
+          "wrong": [
+            "Never improve",
+            "Spend faster",
+            "Avoid math"
+          ]
+        },
+        {
+          "prompt": "Blend skills daily by…",
+          "correct": "Small intentional choices",
+          "wrong": [
+            "Instant clicks",
+            "Secret debt",
+            "No planning"
+          ]
+        }
+      ]
+    },
+    "Real Scenario": {
+      "learn": "Choose in a tough moment — weigh options, not just feelings.",
+      "apply": "Describe one tough money choice and what you picked.",
+      "quiz": [
+        {
+          "prompt": "Real scenarios need…",
+          "correct": "Thoughtful choices",
+          "wrong": [
+            "Random guesses",
+            "Instant clicks",
+            "No planning"
+          ]
+        },
+        {
+          "prompt": "Tough moments test…",
+          "correct": "Your habits",
+          "wrong": [
+            "Only luck",
+            "Only ads",
+            "Only games"
+          ]
+        },
+        {
+          "prompt": "Before deciding, list…",
+          "correct": "Pros and cons",
+          "wrong": [
+            "Only emojis",
+            "Only trends",
+            "Only friends"
+          ]
+        },
+        {
+          "prompt": "Ask for help when…",
+          "correct": "Stakes are high",
+          "wrong": [
+            "Never",
+            "Always hide",
+            "Skip parents"
+          ]
+        },
+        {
+          "prompt": "After a tough choice…",
+          "correct": "Review the outcome",
+          "wrong": [
+            "Never learn",
+            "Repeat blindly",
+            "Ignore results"
+          ]
+        }
+      ]
+    },
+    "Give & Grow": {
+      "learn": "Charity with a plan — give thoughtfully without hurting your goals.",
+      "apply": "Choose a small give amount that fits your save/spend plan.",
+      "quiz": [
+        {
+          "prompt": "Give and grow balances…",
+          "correct": "Charity and goals",
+          "wrong": [
+            "Only spending",
+            "Only borrowing",
+            "Only hiding"
+          ]
+        },
+        {
+          "prompt": "Giving with a plan means…",
+          "correct": "Budgeted generosity",
+          "wrong": [
+            "Give everything",
+            "Ignore needs",
+            "Secret debt"
+          ]
+        },
+        {
+          "prompt": "Helping others feels best when…",
+          "correct": "It is sustainable",
+          "wrong": [
+            "It breaks your budget",
+            "It is random",
+            "It is hidden"
+          ]
+        },
+        {
+          "prompt": "Grow and give teaches…",
+          "correct": "Abundance mindset",
+          "wrong": [
+            "Scarcity fear only",
+            "Never saving",
+            "Random luck"
+          ]
+        },
+        {
+          "prompt": "Pick give amount by…",
+          "correct": "Checking your jars first",
+          "wrong": [
+            "Guessing",
+            "Borrowing",
+            "Ignoring totals"
+          ]
+        }
+      ]
+    },
+    "Seed Invest": {
+      "learn": "Plant money like a seed — investing is delayed reward with risk and time.",
+      "apply": "Learn one safe way kids can think about long-term investing.",
+      "quiz": [
+        {
+          "prompt": "Investing is…",
+          "correct": "Planting money to grow",
+          "wrong": [
+            "Gambling always",
+            "Wasting coins",
+            "Avoiding math"
+          ]
+        },
+        {
+          "prompt": "Seed invest means…",
+          "correct": "Start small and wait",
+          "wrong": [
+            "Spend all now",
+            "Hide cash",
+            "Skip school"
+          ]
+        },
+        {
+          "prompt": "Growth takes…",
+          "correct": "Time and patience",
+          "wrong": [
+            "One click",
+            "Secret loans",
+            "Ignoring plans"
+          ]
+        },
+        {
+          "prompt": "Risk in investing means…",
+          "correct": "Value can go up or down",
+          "wrong": [
+            "Always doubles",
+            "Never changes",
+            "Is free money"
+          ]
+        },
+        {
+          "prompt": "Learn before investing…",
+          "correct": "Reduces mistakes",
+          "wrong": [
+            "Is useless",
+            "Stops all fun",
+            "Is only for adults"
+          ]
+        }
+      ]
+    },
+    "Portfolio Play": {
+      "learn": "Spread risk wisely — do not put every dirham in one place.",
+      "apply": "Sketch three buckets: save, invest learning, spend — with percentages.",
+      "quiz": [
+        {
+          "prompt": "Portfolio play means…",
+          "correct": "Spread risk wisely",
+          "wrong": [
+            "All in one bet",
+            "Ignore diversification",
+            "Random guessing"
+          ]
+        },
+        {
+          "prompt": "Diversification reduces…",
+          "correct": "Big losses from one mistake",
+          "wrong": [
+            "All learning",
+            "All saving",
+            "All giving"
+          ]
+        },
+        {
+          "prompt": "Multiple buckets help when…",
+          "correct": "One area dips",
+          "wrong": [
+            "Everything fails",
+            "You never track",
+            "You spend all"
+          ]
+        },
+        {
+          "prompt": "Spread risk wisely is…",
+          "correct": "Not putting all eggs in one basket",
+          "wrong": [
+            "Buying one item only",
+            "Hiding everything",
+            "Skipping plans"
+          ]
+        },
+        {
+          "prompt": "Review portfolio to…",
+          "correct": "Rebalance over time",
+          "wrong": [
+            "Never change",
+            "Spend all",
+            "Ignore math"
+          ]
+        }
+      ]
+    },
+    "Tax Basics": {
+      "learn": "Some money goes to taxes — they fund roads, schools, and public services.",
+      "apply": "Ask a parent what taxes pay for in your community.",
+      "quiz": [
+        {
+          "prompt": "Tax basics teach…",
+          "correct": "Money funds public services",
+          "wrong": [
+            "To avoid all money",
+            "To spend faster",
+            "To skip school"
+          ]
+        },
+        {
+          "prompt": "Taxes help pay for…",
+          "correct": "Roads and schools",
+          "wrong": [
+            "Only toys",
+            "Only games",
+            "Private secrets"
+          ]
+        },
+        {
+          "prompt": "When you earn later…",
+          "correct": "Taxes may apply",
+          "wrong": [
+            "Never",
+            "Only on games",
+            "Only on gifts"
+          ]
+        },
+        {
+          "prompt": "Understanding tax…",
+          "correct": "Makes adult money clearer",
+          "wrong": [
+            "Is useless",
+            "Stops fun",
+            "Is only scary"
+          ]
+        },
+        {
+          "prompt": "Community services need…",
+          "correct": "Shared funding",
+          "wrong": [
+            "One person only",
+            "Random ads",
+            "Hidden coins"
+          ]
+        }
+      ]
+    },
+    "Side Hustle": {
+      "learn": "Earn beyond allowance — small jobs teach work, pricing, and responsibility.",
+      "apply": "List one safe side hustle you could try with a parent’s OK.",
+      "quiz": [
+        {
+          "prompt": "Side hustle is…",
+          "correct": "Extra earned work",
+          "wrong": [
+            "Secret debt",
+            "Only gifts",
+            "Only games"
+          ]
+        },
+        {
+          "prompt": "Before hustling…",
+          "correct": "Get parent permission",
+          "wrong": [
+            "Hide work",
+            "Skip safety",
+            "Ignore rules"
+          ]
+        },
+        {
+          "prompt": "Price your hustle by…",
+          "correct": "Covering cost and time",
+          "wrong": [
+            "Guessing zero",
+            "Underpricing always",
+            "Ignoring effort"
+          ]
+        },
+        {
+          "prompt": "Extra income should…",
+          "correct": "Fit your plan",
+          "wrong": [
+            "Disappear",
+            "Replace school",
+            "Hide from family"
+          ]
+        },
+        {
+          "prompt": "Side hustle teaches…",
+          "correct": "Entrepreneurship basics",
+          "wrong": [
+            "Only spending",
+            "Only luck",
+            "Only ads"
+          ]
+        }
+      ]
+    },
+    "Negotiate": {
+      "learn": "Ask for fair value — polite negotiation is part of real-world money.",
+      "apply": "Role-play asking for fair pay on a small job with a parent.",
+      "quiz": [
+        {
+          "prompt": "Negotiate fairly means…",
+          "correct": "Ask for fair value",
+          "wrong": [
+            "Take without asking",
+            "Hide prices",
+            "Ignore people"
+          ]
+        },
+        {
+          "prompt": "Good negotiation is…",
+          "correct": "Polite and clear",
+          "wrong": [
+            "Angry demands",
+            "Secret threats",
+            "Ignoring others"
+          ]
+        },
+        {
+          "prompt": "Prepare to negotiate by…",
+          "correct": "Knowing your costs",
+          "wrong": [
+            "Guessing",
+            "Skipping math",
+            "Hiding effort"
+          ]
+        },
+        {
+          "prompt": "Fair value considers…",
+          "correct": "Work, time, and skill",
+          "wrong": [
+            "Only luck",
+            "Only ads",
+            "Only color"
+          ]
+        },
+        {
+          "prompt": "Walk away when…",
+          "correct": "Deal is unfair or unsafe",
+          "wrong": [
+            "Always accept",
+            "Never speak",
+            "Hide feelings"
+          ]
+        }
+      ]
+    },
+    "Lead & Teach": {
+      "learn": "Help others learn — sharing what you know makes the whole team stronger.",
+      "apply": "Teach one money tip you learned to a friend or sibling.",
+      "quiz": [
+        {
+          "prompt": "Lead and teach others by…",
+          "correct": "Sharing what you learned",
+          "wrong": [
+            "Showing off only",
+            "Keeping secrets",
+            "Skipping practice"
+          ]
+        },
+        {
+          "prompt": "Teaching money skills…",
+          "correct": "Builds your mastery",
+          "wrong": [
+            "Wastes time",
+            "Stops learning",
+            "Is never useful"
+          ]
+        },
+        {
+          "prompt": "Good teachers…",
+          "correct": "Use simple examples",
+          "wrong": [
+            "Use jargon only",
+            "Ignore questions",
+            "Hide steps"
+          ]
+        },
+        {
+          "prompt": "Leadership in money means…",
+          "correct": "Model smart habits",
+          "wrong": [
+            "Spend recklessly",
+            "Hide budgets",
+            "Skip planning"
+          ]
+        },
+        {
+          "prompt": "Help others learn to…",
+          "correct": "Strengthen community",
+          "wrong": [
+            "Create secrets",
+            "Avoid math",
+            "Ignore needs"
+          ]
+        }
+      ]
+    },
+    "Big Decision": {
+      "learn": "Weigh every option — big decisions need time, research, and advice.",
+      "apply": "Use a pros/cons list for one decision you face this month.",
+      "quiz": [
+        {
+          "prompt": "Big decisions need…",
+          "correct": "Comparing all options",
+          "wrong": [
+            "First guess only",
+            "No research",
+            "Only wants"
+          ]
+        },
+        {
+          "prompt": "Before big spends…",
+          "correct": "Sleep and research",
+          "wrong": [
+            "Tap instantly",
+            "Borrow secretly",
+            "Skip parents"
+          ]
+        },
+        {
+          "prompt": "Pros and cons help…",
+          "correct": "See trade-offs",
+          "wrong": [
+            "Hide facts",
+            "Avoid math",
+            "Spend faster"
+          ]
+        },
+        {
+          "prompt": "Ask trusted adults when…",
+          "correct": "Stakes are high",
+          "wrong": [
+            "Never",
+            "Always hide",
+            "Only online strangers"
+          ]
+        },
+        {
+          "prompt": "After deciding…",
+          "correct": "Track results and learn",
+          "wrong": [
+            "Never review",
+            "Repeat blindly",
+            "Ignore outcomes"
+          ]
+        }
+      ]
+    },
+    "Graduation": {
+      "learn": "Chief Money Officer — you blend saving, spending, investing, giving, and leading.",
+      "apply": "Write your personal money pledge for the next year.",
+      "quiz": [
+        {
+          "prompt": "Graduation skill is…",
+          "correct": "Leading your money life",
+          "wrong": [
+            "Ignoring plans",
+            "Never saving",
+            "Only wants"
+          ]
+        },
+        {
+          "prompt": "A CMO…",
+          "correct": "Uses all six level skills",
+          "wrong": [
+            "Only spends",
+            "Only games",
+            "Only luck"
+          ]
+        },
+        {
+          "prompt": "Your money pledge should…",
+          "correct": "Match your values",
+          "wrong": [
+            "Copy ads",
+            "Ignore needs",
+            "Hide budgets"
+          ]
+        },
+        {
+          "prompt": "Keep learning because…",
+          "correct": "Money rules change",
+          "wrong": [
+            "You know everything",
+            "Math stops",
+            "Plans never break"
+          ]
+        },
+        {
+          "prompt": "Celebrate graduation by…",
+          "correct": "Setting next goal",
+          "wrong": [
+            "Spending all",
+            "Quitting tracking",
+            "Ignoring future you"
+          ]
+        }
+      ]
+    }
+  },
+  "teenL4L6": {
+    "Stand Setup": {
+      "learn": "Unit economics start with **COGS**: every dirham spent on lemons, cups, ice, and your time to make one sellable cup.",
+      "apply": "Build a one-cup P&L: list materials, estimate minutes, assign AED cost per cup before pricing.",
+      "quiz": [
+        {
+          "prompt": "COGS per unit includes…",
+          "correct": "Direct materials + production time",
+          "wrong": [
+            "Only marketing",
+            "Only profit",
+            "Customer tips"
+          ]
+        },
+        {
+          "prompt": "Lemons AED 6 + cups AED 4 for 10 drinks. COGS per drink?",
+          "correct": "AED 1",
+          "wrong": [
+            "AED 10",
+            "AED 0.50",
+            "AED 6"
+          ]
+        },
+        {
+          "prompt": "Ignoring your time in COGS leads to…",
+          "correct": "Underpricing and hidden loss",
+          "wrong": [
+            "Automatic profit",
+            "Free inventory",
+            "Higher revenue only"
+          ]
+        },
+        {
+          "prompt": "Costs jumped 20%. Your gut says keep old price. You should…",
+          "correct": "Recalculate break-even first",
+          "wrong": [
+            "Panic quit",
+            "Sell at a loss",
+            "Ignore customers"
+          ]
+        },
+        {
+          "prompt": "Cost AED 2.50/cup. Sell 8 at AED 4. Total profit?",
+          "correct": "AED 12",
+          "wrong": [
+            "AED 32",
+            "AED 8",
+            "AED 20"
+          ]
+        }
+      ]
+    },
+    "Price Pick": {
+      "learn": "Pricing is a signal: too low erodes margin; too high kills volume. Find the band where customers say yes and you stay profitable.",
+      "apply": "Survey three friends: highest price they would pay for your cup; compare to your unit cost + target margin.",
+      "quiz": [
+        {
+          "prompt": "Good price covers…",
+          "correct": "COGS plus target margin",
+          "wrong": [
+            "Only vibes",
+            "Only competitors' logos",
+            "Nothing — price is random"
+          ]
+        },
+        {
+          "prompt": "Unit cost AED 3. Target 25% margin on price. Minimum price?",
+          "correct": "AED 4",
+          "wrong": [
+            "AED 3",
+            "AED 2",
+            "AED 10"
+          ]
+        },
+        {
+          "prompt": "Raising price 10% with same volume…",
+          "correct": "Increases profit if cost fixed",
+          "wrong": [
+            "Always kills sales",
+            "Eliminates COGS",
+            "Is always illegal"
+          ]
+        },
+        {
+          "prompt": "Customers hesitate at AED 6 but buy at AED 5. You feel pressure to drop. Best move?",
+          "correct": "Test value — maybe bundle or smaller size",
+          "wrong": [
+            "Give up selling",
+            "Hide costs",
+            "Price at AED 2"
+          ]
+        },
+        {
+          "prompt": "Cost AED 2, price AED 5, 6 cups sold. Profit?",
+          "correct": "AED 18",
+          "wrong": [
+            "AED 30",
+            "AED 12",
+            "AED 6"
+          ]
+        }
+      ]
+    },
+    "Busy Day": {
+      "learn": "Throughput day: when demand spikes, revenue scales only if you prepared stock and kept price above COGS on every cup.",
+      "apply": "Plan a “busy day” checklist: max cups you can serve, prep time, and minimum price that holds margin at peak volume.",
+      "quiz": [
+        {
+          "prompt": "Busy-day revenue scales with…",
+          "correct": "Cups sold × (price − COGS)",
+          "wrong": [
+            "Luck only",
+            "Ad spend only",
+            "Ignoring costs"
+          ]
+        },
+        {
+          "prompt": "COGS AED 2. Price AED 4. 15 cups sold. Profit?",
+          "correct": "AED 30",
+          "wrong": [
+            "AED 60",
+            "AED 15",
+            "AED 45"
+          ]
+        },
+        {
+          "prompt": "Running out of cups mid-rush means…",
+          "correct": "Lost revenue you cannot recover",
+          "wrong": [
+            "Free marketing",
+            "Lower COGS",
+            "Automatic refund"
+          ]
+        },
+        {
+          "prompt": "Rush feels chaotic. Price drifts down to “move cups.” You should…",
+          "correct": "Hold margin — speed ≠ discount",
+          "wrong": [
+            "Give everything free",
+            "Skip counting",
+            "Close early always"
+          ]
+        },
+        {
+          "prompt": "Prep 20 cups, sell 14 at AED 5 (COGS AED 2). Profit?",
+          "correct": "AED 42",
+          "wrong": [
+            "AED 70",
+            "AED 28",
+            "AED 10"
+          ]
+        }
+      ]
+    },
+    "Profit Smile": {
+      "learn": "P&L in one line: **Profit = Revenue − COGS (and overhead)**. Positive profit funds reinvest and savings.",
+      "apply": "After Lemon City, write revenue, total COGS, and profit in AED — one sentence on what you would change.",
+      "quiz": [
+        {
+          "prompt": "Profit equals…",
+          "correct": "Revenue minus cost",
+          "wrong": [
+            "Cost minus revenue",
+            "Revenue × tax",
+            "Revenue + cost"
+          ]
+        },
+        {
+          "prompt": "Revenue AED 80, COGS AED 50. Profit?",
+          "correct": "AED 30",
+          "wrong": [
+            "AED 130",
+            "AED 50",
+            "AED 80"
+          ]
+        },
+        {
+          "prompt": "High revenue with negative profit means…",
+          "correct": "Costs or price are wrong",
+          "wrong": [
+            "You are winning",
+            "Customers are free",
+            "Math is optional"
+          ]
+        },
+        {
+          "prompt": "You feel great about sales but wallet is flat. Likely cause?",
+          "correct": "Price below true cost",
+          "wrong": [
+            "Too much saving",
+            "Customers paid twice",
+            "COGS is zero"
+          ]
+        },
+        {
+          "prompt": "COGS AED 3/cup × 10 cups. Revenue AED 55. Profit?",
+          "correct": "AED 25",
+          "wrong": [
+            "AED 85",
+            "AED 30",
+            "AED 15"
+          ]
+        }
+      ]
+    },
+    "Reinvest": {
+      "learn": "Retained earnings fuel growth: reinvest profit into better tools, bulk supplies, or marketing that lowers COGS or lifts sales.",
+      "apply": "Pick one reinvestment under AED 50 that could lower cost per cup or attract more customers next week.",
+      "quiz": [
+        {
+          "prompt": "Smart reinvest targets…",
+          "correct": "Lower COGS or increase qualified demand",
+          "wrong": [
+            "Random luxury wants",
+            "Ignoring books",
+            "Secret debt"
+          ]
+        },
+        {
+          "prompt": "Profit AED 40. Reinvest AED 25 in bulk lemons (saves AED 0.50/cup). Break-even cups to recover?",
+          "correct": "50 cups",
+          "wrong": [
+            "5 cups",
+            "0 cups",
+            "1000 cups"
+          ]
+        },
+        {
+          "prompt": "Reinvesting all profit with zero emergency fund…",
+          "correct": "Raises risk if sales dip",
+          "wrong": [
+            "Is always optimal",
+            "Eliminates tax",
+            "Guarantees fame"
+          ]
+        },
+        {
+          "prompt": "Friend says spend profit on sneakers now. You want growth. You…",
+          "correct": "Split: save + reinvest + small reward",
+          "wrong": [
+            "Spend all instantly",
+            "Hide profit",
+            "Quit the stand"
+          ]
+        },
+        {
+          "prompt": "AED 30 profit → AED 20 better sign, AED 10 save. Next month sign lifts sales 15%. This is…",
+          "correct": "ROI thinking",
+          "wrong": [
+            "Gambling",
+            "Waste",
+            "Ignoring COGS"
+          ]
+        }
+      ]
+    },
+    "Interest Intro": {
+      "learn": "Compound interest: savings earn a percentage over time — money makes money when left in a regulated account.",
+      "apply": "Use a calculator: AED 100 at 4% annual for 1 year — estimate interest earned (simple, not compound).",
+      "quiz": [
+        {
+          "prompt": "Interest on savings is…",
+          "correct": "Payment for letting bank use your money",
+          "wrong": [
+            "A game fee",
+            "Always negative",
+            "Same as tax"
+          ]
+        },
+        {
+          "prompt": "AED 200 at 5% simple interest 1 year earns…",
+          "correct": "AED 10",
+          "wrong": [
+            "AED 100",
+            "AED 5",
+            "AED 200"
+          ]
+        },
+        {
+          "prompt": "Compound vs simple: compound pays interest on…",
+          "correct": "Principal + prior interest",
+          "wrong": [
+            "Only fees",
+            "Only loans",
+            "Nothing"
+          ]
+        },
+        {
+          "prompt": "Friend wants to “invest” in a random app promising 50%/week. You feel FOMO. Best step?",
+          "correct": "Research + ask adult — likely scam",
+          "wrong": [
+            "Transfer immediately",
+            "Borrow to invest",
+            "Share password"
+          ]
+        },
+        {
+          "prompt": "Goal AED 500 in 10 months. Save AED 50/month. Interest small. On track?",
+          "correct": "Yes — consistent saves",
+          "wrong": [
+            "No — impossible",
+            "Only if you gamble",
+            "Skip tracking"
+          ]
+        }
+      ]
+    },
+    "Rainy Day": {
+      "learn": "Emergency fund: 3–6 months of essential expenses in accessible savings — shocks happen (repairs, medical, job loss).",
+      "apply": "Estimate your share of monthly essentials in AED; set a first milestone at one week of essentials.",
+      "quiz": [
+        {
+          "prompt": "Emergency fund covers…",
+          "correct": "Unexpected essential costs",
+          "wrong": [
+            "Only vacation",
+            "Only gadgets",
+            "Luxury always"
+          ]
+        },
+        {
+          "prompt": "Essentials AED 400/month. Starter goal = 1 week. Target?",
+          "correct": "AED 100",
+          "wrong": [
+            "AED 4000",
+            "AED 10",
+            "AED 0"
+          ]
+        },
+        {
+          "prompt": "Investing emergency fund in volatile crypto…",
+          "correct": "Wrong bucket — too risky",
+          "wrong": [
+            "Is always smart",
+            "Is required",
+            "Beats savings always"
+          ]
+        },
+        {
+          "prompt": "Phone breaks — repair AED 350. No fund. You feel stressed. Lesson?",
+          "correct": "Rainy-day fund reduces panic",
+          "wrong": [
+            "Debt is free",
+            "Ignore it",
+            "Never save"
+          ]
+        },
+        {
+          "prompt": "Income AED 200/month. Save AED 40/month to e-fund. Months to AED 200?",
+          "correct": "5 months",
+          "wrong": [
+            "1 month",
+            "40 months",
+            "Never"
+          ]
+        }
+      ]
+    },
+    "Plan Steps": {
+      "learn": "SMART goals decompose: Specific, Measurable, Achievable, Relevant, Time-bound — break AED targets into weekly deposits.",
+      "apply": "Convert one big goal (e.g. AED 600 laptop) into 12 weekly AED amounts; note start date.",
+      "quiz": [
+        {
+          "prompt": "SMART goal needs…",
+          "correct": "Clear amount and deadline",
+          "wrong": [
+            "Vague someday",
+            "No numbers",
+            "Only luck"
+          ]
+        },
+        {
+          "prompt": "AED 480 in 12 weeks requires weekly save of…",
+          "correct": "AED 40",
+          "wrong": [
+            "AED 12",
+            "AED 480",
+            "AED 4"
+          ]
+        },
+        {
+          "prompt": "Missing a weekly deposit should trigger…",
+          "correct": "Adjust plan, not quit",
+          "wrong": [
+            "Abandon goal",
+            "Hide from family",
+            "Borrow secretly"
+          ]
+        },
+        {
+          "prompt": "Goal feels far away — motivation dips. Best habit?",
+          "correct": "Automate weekly transfer",
+          "wrong": [
+            "Hope only",
+            "Delete goal",
+            "Spend to feel better"
+          ]
+        },
+        {
+          "prompt": "AED 300 goal, 10 weeks left, AED 120 saved. Weekly need?",
+          "correct": "AED 18",
+          "wrong": [
+            "AED 300",
+            "AED 0",
+            "AED 50"
+          ]
+        }
+      ]
+    },
+    "Future You": {
+      "learn": "Intertemporal choice: spending now vs. investing in future you — education, skills, and savings compound over decades.",
+      "apply": "Write a 3-line letter from “future you at 25” thanking present you for one money habit you start today.",
+      "quiz": [
+        {
+          "prompt": "Future you benefits most from…",
+          "correct": "Consistent save + skill invest",
+          "wrong": [
+            "Spending every dirham now",
+            "Avoiding all risk",
+            "Never learning tax"
+          ]
+        },
+        {
+          "prompt": "AED 50/month invested 5 years beats one AED 300 splurge because…",
+          "correct": "Time + habit compound",
+          "wrong": [
+            "Splurge always wins",
+            "Math stops",
+            "Banks forbid saving"
+          ]
+        },
+        {
+          "prompt": "Opportunity cost of AED 200 sneakers today might be…",
+          "correct": "AED 200 not saved or invested",
+          "wrong": [
+            "Free money",
+            "Zero trade-off",
+            "Automatic refund"
+          ]
+        },
+        {
+          "prompt": "Peer pressure to spend on nights out. Future-you voice says…",
+          "correct": "Budget fun without killing goals",
+          "wrong": [
+            "Spend all always",
+            "Never go out",
+            "Hide debt"
+          ]
+        },
+        {
+          "prompt": "Pick one: AED 30/week save vs. random AED 120/month. Better for habit?",
+          "correct": "AED 30/week automate",
+          "wrong": [
+            "Random is always best",
+            "Never save",
+            "Borrow weekly"
+          ]
+        }
+      ]
+    },
+    "Ad Alert": {
+      "learn": "Performance marketing targets your dopamine — “limited time” and influencer codes are designed to bypass your budget.",
+      "apply": "Screenshot one ad; list three tactics it uses (urgency, social proof, discount framing).",
+      "quiz": [
+        {
+          "prompt": "Influencer code often…",
+          "correct": "Makes wants feel like deals",
+          "wrong": [
+            "Guarantees quality",
+            "Replaces research",
+            "Is always cheapest"
+          ]
+        },
+        {
+          "prompt": "“Only 2 left!” triggers…",
+          "correct": "Scarcity bias",
+          "wrong": [
+            "Better math",
+            "Free shipping always",
+            "Automatic refund"
+          ]
+        },
+        {
+          "prompt": "Compare final checkout price because…",
+          "correct": "Fees and shipping change total",
+          "wrong": [
+            "Ads never lie",
+            "Stars are enough",
+            "Color matters most"
+          ]
+        },
+        {
+          "prompt": "Drop feels irresistible at midnight. Budget says wait. You…",
+          "correct": "Sleep — revisit with list",
+          "wrong": [
+            "Buy on credit instantly",
+            "Share card details",
+            "Ignore budget forever"
+          ]
+        },
+        {
+          "prompt": "AED 199 “sale” item was AED 189 last month. This is…",
+          "correct": "Fake urgency / inflated anchor",
+          "wrong": [
+            "Always honest",
+            "Required by law to buy",
+            "Best quality signal"
+          ]
+        }
+      ]
+    },
+    "Quality Check": {
+      "learn": "Total cost of ownership: cheap upfront + short life can beat “premium” — calculate cost per use or per year.",
+      "apply": "Compare two headphones: price ÷ expected months of use = monthly cost.",
+      "quiz": [
+        {
+          "prompt": "AED 60 item lasting 2 years vs AED 30 lasting 4 months. Cheaper per month?",
+          "correct": "AED 60 / 24 months",
+          "wrong": [
+            "AED 30 always",
+            "Price tag only",
+            "Whichever is shiny"
+          ]
+        },
+        {
+          "prompt": "Quality signal includes…",
+          "correct": "Materials, warranty, reviews",
+          "wrong": [
+            "Only influencer",
+            "Only color",
+            "Only box size"
+          ]
+        },
+        {
+          "prompt": "“Too cheap to be true” often means…",
+          "correct": "Hidden failure or scam",
+          "wrong": [
+            "Best value always",
+            "Free forever",
+            "No returns ever good"
+          ]
+        },
+        {
+          "prompt": "You regret cheap shoes after 2 weeks. Emotion?",
+          "correct": "Lesson — factor durability",
+          "wrong": [
+            "Never buy again",
+            "Blame luck only",
+            "Ignore budget"
+          ]
+        },
+        {
+          "prompt": "AED 120 jacket, 3 winters. AED 40 jacket, 1 winter. Cost per winter?",
+          "correct": "AED 40 vs AED 40 — tie on paper; check comfort",
+          "wrong": [
+            "AED 120 is always worse",
+            "Cannot calculate",
+            "Free second jacket"
+          ]
+        }
+      ]
+    },
+    "Review Read": {
+      "learn": "Crowd wisdom is noisy — weight verified purchases, detailed pros/cons, and photos over star spam.",
+      "apply": "Read 5 reviews for one product; note one red flag and one green flag.",
+      "quiz": [
+        {
+          "prompt": "Verified purchase tag means…",
+          "correct": "Reviewer likely bought item",
+          "wrong": [
+            "Perfect product",
+            "Paid advertisement",
+            "No returns"
+          ]
+        },
+        {
+          "prompt": "All 5-star, zero detail reviews suggest…",
+          "correct": "Possible fake reviews",
+          "wrong": [
+            "Must buy instantly",
+            "Guaranteed quality",
+            "Lowest price ever"
+          ]
+        },
+        {
+          "prompt": "Compare reviews across…",
+          "correct": "Multiple sites and dates",
+          "wrong": [
+            "One emoji tweet",
+            "Only influencer story",
+            "Packaging color"
+          ]
+        },
+        {
+          "prompt": "Reviews say “great” but photos show damage. You feel uneasy. Trust…",
+          "correct": "Photos + detailed negatives",
+          "wrong": [
+            "Stars only",
+            "Hype only",
+            "Ignore gut"
+          ]
+        },
+        {
+          "prompt": "Before AED 400 purchase, minimum research time?",
+          "correct": "Enough to read 10+ substantive reviews",
+          "wrong": [
+            "0 seconds — buy",
+            "Only watch unboxing",
+            "Never compare"
+          ]
+        }
+      ]
+    },
+    "Return Rules": {
+      "learn": "Consumer rights vary by retailer — know return window, restocking fees, and condition rules before big buys.",
+      "apply": "Find return policy for a store you use; note days, receipt need, and refund type.",
+      "quiz": [
+        {
+          "prompt": "Return window starts usually from…",
+          "correct": "Purchase date",
+          "wrong": [
+            "Your birthday",
+            "Never ends",
+            "Random guess"
+          ]
+        },
+        {
+          "prompt": "Opened electronics may…",
+          "correct": "Have restocking fee or shorter window",
+          "wrong": [
+            "Always full refund anytime",
+            "Never return",
+            "Double your money"
+          ]
+        },
+        {
+          "prompt": "Keep receipt/digital proof to…",
+          "correct": "Validate purchase date",
+          "wrong": [
+            "Impress friends",
+            "Avoid tax forever",
+            "Skip warranty"
+          ]
+        },
+        {
+          "prompt": "Final sale tag makes you nervous. You should…",
+          "correct": "Decide if risk worth discount",
+          "wrong": [
+            "Buy without reading",
+            "Assume full refund",
+            "Hide from seller"
+          ]
+        },
+        {
+          "prompt": "Online return: who pays shipping back?",
+          "correct": "Check policy — often buyer unless defective",
+          "wrong": [
+            "Always seller",
+            "Always free",
+            "Never specified"
+          ]
+        }
+      ]
+    },
+    "Scam Shield": {
+      "learn": "Social engineering: urgency + secrecy + irreversible payment (gift cards, crypto, wire) = scam pattern.",
+      "apply": "Review UAE/common scam signs with a parent; agree on a code word before sending money online.",
+      "quiz": [
+        {
+          "prompt": "Gift card payment for “refund” is…",
+          "correct": "Almost always scam",
+          "wrong": [
+            "Bank standard",
+            "Required for school",
+            "Tax refund path"
+          ]
+        },
+        {
+          "prompt": "OTP/code request from “bank” DM…",
+          "correct": "Never share — call official number",
+          "wrong": [
+            "Share fast",
+            "Post publicly",
+            "Forward to friends"
+          ]
+        },
+        {
+          "prompt": "Too-good job paying AED 500/day for clicks…",
+          "correct": "Verify company — likely fraud",
+          "wrong": [
+            "Start immediately",
+            "Pay signup fee",
+            "Share ID photo"
+          ]
+        },
+        {
+          "prompt": "Pressure + secrecy (“don’t tell parents”) feels wrong. You…",
+          "correct": "Pause and tell trusted adult",
+          "wrong": [
+            "Obey stranger",
+            "Send money",
+            "Delete evidence"
+          ]
+        },
+        {
+          "prompt": "Secure habit: verify URL and…",
+          "correct": "Use official app, not random links",
+          "wrong": [
+            "Click all ads",
+            "Reuse one password",
+            "Share screen"
+          ]
+        }
+      ]
+    },
+    "Split Fair": {
+      "learn": "Cost allocation in groups: agree method upfront — equal split, by item, or by income share.",
+      "apply": "Plan a AED 120 group meal; assign who pays what before ordering.",
+      "quiz": [
+        {
+          "prompt": "Fair split starts with…",
+          "correct": "Agreed rules before spending",
+          "wrong": [
+            "Surprise bill at end",
+            "One person guesses",
+            "Ignore vegetarians"
+          ]
+        },
+        {
+          "prompt": "Three friends, unequal orders. Fairest default?",
+          "correct": "Pay for what you ordered",
+          "wrong": [
+            "Split total equally always",
+            "Loudest person pays zero",
+            "Random"
+          ]
+        },
+        {
+          "prompt": "Someone cannot pay share. Group should…",
+          "correct": "Discuss kindly — adjust plan",
+          "wrong": [
+            "Public shame",
+            "Ghost them",
+            "Hide total"
+          ]
+        },
+        {
+          "prompt": "You ordered less but feel guilty. Emotion vs math?",
+          "correct": "Speak up — fairness helps friendship",
+          "wrong": [
+            "Pay for everyone silently",
+            "Leave without talking",
+            "Borrow secretly"
+          ]
+        },
+        {
+          "prompt": "AED 90 bill, you ate AED 25. Others split rest. Your share?",
+          "correct": "AED 25",
+          "wrong": [
+            "AED 90",
+            "AED 45",
+            "AED 0"
+          ]
+        }
+      ]
+    },
+    "Group Goal": {
+      "learn": "Shared sinking fund: transparent ledger, deadline, and what happens if someone drops out.",
+      "apply": "Draft group trip fund: target AED, weekly deposit per person, treasurer role.",
+      "quiz": [
+        {
+          "prompt": "Group savings need…",
+          "correct": "Written agreement",
+          "wrong": [
+            "Verbal vibe only",
+            "One secret holder",
+            "No deadline"
+          ]
+        },
+        {
+          "prompt": "Treasurer should…",
+          "correct": "Share ledger weekly",
+          "wrong": [
+            "Hide balance",
+            "Spend early",
+            "Never receipt"
+          ]
+        },
+        {
+          "prompt": "Member misses two deposits. Team…",
+          "correct": "Talk early — adjust or exit rule",
+          "wrong": [
+            "Ignore forever",
+            "Split silently",
+            "Cancel goal with no plan"
+          ]
+        },
+        {
+          "prompt": "Excitement fades mid-way. Motivation tool?",
+          "correct": "Visual progress + small milestone reward",
+          "wrong": [
+            "Spend fund on snacks",
+            "Quit quietly",
+            "Borrow to cover"
+          ]
+        },
+        {
+          "prompt": "AED 600 goal, 4 people, 10 weeks. Each per week?",
+          "correct": "AED 15",
+          "wrong": [
+            "AED 600",
+            "AED 4",
+            "AED 60"
+          ]
+        }
+      ]
+    },
+    "Talk Money": {
+      "learn": "Financial transparency with friends reduces conflict — discuss budgets before plans, not after the bill.",
+      "apply": "Before next outing, message: “My budget is AED X — what works for you?”",
+      "quiz": [
+        {
+          "prompt": "Talking money early…",
+          "correct": "Prevents awkward splits",
+          "wrong": [
+            "Ruins all fun",
+            "Is always rude",
+            "Is only for adults"
+          ]
+        },
+        {
+          "prompt": "Friend spends freely; you cannot. Healthy response?",
+          "correct": "Suggest lower-cost plan",
+          "wrong": [
+            "Borrow to match",
+            "Ghost them",
+            "Shame them"
+          ]
+        },
+        {
+          "prompt": "“I can’t afford that” is…",
+          "correct": "Honest boundary",
+          "wrong": [
+            "Always failure",
+            "Never say aloud",
+            "Only online"
+          ]
+        },
+        {
+          "prompt": "Group chat plans expensive trip. You feel anxious. First step?",
+          "correct": "Share your range privately or in chat",
+          "wrong": [
+            "Say yes then panic",
+            "Lie about reason",
+            "Cancel last second"
+          ]
+        },
+        {
+          "prompt": "Good money talk is…",
+          "correct": "Clear, kind, specific",
+          "wrong": [
+            "Vague and delayed",
+            "Only after debt",
+            "Always public fight"
+          ]
+        }
+      ]
+    },
+    "Team Budget": {
+      "learn": "Project budget: line items, owners, contingency (10–15%), and sign-off before spending club/class funds.",
+      "apply": "Budget a AED 500 class event: venue, food, materials, buffer — assign owners.",
+      "quiz": [
+        {
+          "prompt": "Contingency buffer covers…",
+          "correct": "Surprise costs",
+          "wrong": [
+            "Leader’s sneakers",
+            "Only profit",
+            "Nothing"
+          ]
+        },
+        {
+          "prompt": "AED 500 budget, 10% buffer reserved. Spendable plan?",
+          "correct": "AED 450 base + AED 50 buffer",
+          "wrong": [
+            "AED 550",
+            "AED 500 no buffer",
+            "AED 400"
+          ]
+        },
+        {
+          "prompt": "No owner on a line item means…",
+          "correct": "Risk nobody tracks it",
+          "wrong": [
+            "Automatic success",
+            "Free money",
+            "Teacher pays"
+          ]
+        },
+        {
+          "prompt": "Mid-project overrun on food. Team should…",
+          "correct": "Use buffer or trim another line",
+          "wrong": [
+            "Ignore total",
+            "Hide receipts",
+            "Quit event"
+          ]
+        },
+        {
+          "prompt": "Sign-off before spend prevents…",
+          "correct": "Unauthorized purchases",
+          "wrong": [
+            "All learning",
+            "All fun",
+            "All saving"
+          ]
+        }
+      ]
+    },
+    "Win Together": {
+      "learn": "Close the loop: retrospective on budget vs actual, thank contributors, document lessons for next event.",
+      "apply": "After a group project, run 15-min retro: what worked, what cost surprised us.",
+      "quiz": [
+        {
+          "prompt": "Retrospective asks…",
+          "correct": "Plan vs actual and why",
+          "wrong": [
+            "Who to blame only",
+            "Nothing",
+            "Only selfies"
+          ]
+        },
+        {
+          "prompt": "Celebrating success includes…",
+          "correct": "Recognizing finance lead",
+          "wrong": [
+            "Ignoring helpers",
+            "Spending leftover secretly",
+            "Deleting ledger"
+          ]
+        },
+        {
+          "prompt": "Leftover AED 40 in club fund should…",
+          "correct": "Follow agreed policy (roll or donate)",
+          "wrong": [
+            "Split randomly",
+            "Disappear",
+            "One person keeps"
+          ]
+        },
+        {
+          "prompt": "Team tension after overspend. Leader should…",
+          "correct": "Facilitate calm review",
+          "wrong": [
+            "Quit silently",
+            "Hide numbers",
+            "Shame individuals"
+          ]
+        },
+        {
+          "prompt": "Documenting lessons helps…",
+          "correct": "Next team start stronger",
+          "wrong": [
+            "Nothing ever",
+            "Only teachers",
+            "Avoid all events"
+          ]
+        }
+      ]
+    },
+    "Master Mix": {
+      "learn": "Personal finance stack: earn → budget → save → invest → protect → give — tune weights to life stage.",
+      "apply": "Draw your money stack with % targets for each layer this month.",
+      "quiz": [
+        {
+          "prompt": "CMO mindset balances…",
+          "correct": "Today’s joy and tomorrow’s security",
+          "wrong": [
+            "Only spending",
+            "Only hiding cash",
+            "Only games"
+          ]
+        },
+        {
+          "prompt": "Income AED 800/month. Needs 50%, save 20%, invest learning 10%, fun 20%. Fun AED?",
+          "correct": "AED 160",
+          "wrong": [
+            "AED 800",
+            "AED 80",
+            "AED 400"
+          ]
+        },
+        {
+          "prompt": "Skipping insurance/protection layer…",
+          "correct": "Exposes you to big shocks",
+          "wrong": [
+            "Is always smart",
+            "Is illegal",
+            "Is free"
+          ]
+        },
+        {
+          "prompt": "Every dirham perfect stress. Healthier view?",
+          "correct": "Directionally correct beats perfect",
+          "wrong": [
+            "Quit tracking",
+            "All or nothing",
+            "Never adjust"
+          ]
+        },
+        {
+          "prompt": "Review stack quarterly to…",
+          "correct": "Rebalance life changes",
+          "wrong": [
+            "Never change",
+            "Spend all",
+            "Avoid tax"
+          ]
+        }
+      ]
+    },
+    "Real Scenario": {
+      "learn": "Decision matrix: list options, score impact on goals, risk, and reversibility — then choose.",
+      "apply": "Apply a 3-column matrix to one real choice: buy used phone now vs. save 2 more months.",
+      "quiz": [
+        {
+          "prompt": "Reversible decision (small buy) vs irreversible (contract)…",
+          "correct": "Spend more research on irreversible",
+          "wrong": [
+            "Treat same",
+            "Ignore contracts",
+            "Always rush"
+          ]
+        },
+        {
+          "prompt": "Option A: AED 200 now. Option B: AED 240 in 3 months with save plan. Matrix checks…",
+          "correct": "Goal fit and cash flow",
+          "wrong": [
+            "Only color",
+            "Only ads",
+            "Only friends"
+          ]
+        },
+        {
+          "prompt": "Sunk cost fallacy: keeping bad purchase because…",
+          "correct": "You already paid",
+          "wrong": [
+            "Is always rational",
+            "Improves profit",
+            "Is required"
+          ]
+        },
+        {
+          "prompt": "Pressure to decide in 5 minutes on AED 2000 laptop. You…",
+          "correct": "Walk away — high stakes need time",
+          "wrong": [
+            "Sign immediately",
+            "Borrow max",
+            "Share OTP"
+          ]
+        },
+        {
+          "prompt": "After choice, schedule…",
+          "correct": "Review date to learn outcome",
+          "wrong": [
+            "Never think again",
+            "Hide receipt",
+            "Blame others only"
+          ]
+        }
+      ]
+    },
+    "Give & Grow": {
+      "learn": "Effective altruism lite: give with intention — % of income, vetted causes, tax-aware where applicable.",
+      "apply": "Pick a cause; set give cap (e.g. 3% of allowance) that does not break emergency fund.",
+      "quiz": [
+        {
+          "prompt": "Sustainable giving means…",
+          "correct": "Budgeted % not guilt spikes",
+          "wrong": [
+            "Give until broke",
+            "Never track",
+            "Only random"
+          ]
+        },
+        {
+          "prompt": "Income AED 400, give cap 5%. Max give/month?",
+          "correct": "AED 20",
+          "wrong": [
+            "AED 400",
+            "AED 200",
+            "AED 0 always"
+          ]
+        },
+        {
+          "prompt": "Verify charity via…",
+          "correct": "Registered status + impact reports",
+          "wrong": [
+            "Random DM",
+            "Gift cards",
+            "Secret links"
+          ]
+        },
+        {
+          "prompt": "Friend fundraises; you are tight this month. You…",
+          "correct": "Small amount or honest “not this month”",
+          "wrong": [
+            "Borrow to donate",
+            "Shame yourself",
+            "Fake transfer"
+          ]
+        },
+        {
+          "prompt": "Give & grow links generosity to…",
+          "correct": "Long-term values and planning",
+          "wrong": [
+            "Impulse only",
+            "Public praise only",
+            "Tax evasion"
+          ]
+        }
+      ]
+    },
+    "Seed Invest": {
+      "learn": "Risk/return tradeoff: diversified low-cost index concepts beat stock-picking for most beginners.",
+      "apply": "Read one page on diversification; list three asset types (cash, bonds, equities).",
+      "quiz": [
+        {
+          "prompt": "Diversification reduces…",
+          "correct": "Single-company risk",
+          "wrong": [
+            "All risk to zero",
+            "Need to learn",
+            "Tax always"
+          ]
+        },
+        {
+          "prompt": "“Guaranteed 20% monthly” investment is…",
+          "correct": "Likely fraud",
+          "wrong": [
+            "Bank default",
+            "School requirement",
+            "Same as savings"
+          ]
+        },
+        {
+          "prompt": "Emergency fund before aggressive invest because…",
+          "correct": "Avoid selling at loss in shock",
+          "wrong": [
+            "Banks forbid save",
+            "Invest is illegal",
+            "Cash earns most"
+          ]
+        },
+        {
+          "prompt": "Friend mocks “boring” index fund. You feel FOMO on meme stock. You…",
+          "correct": "Stick to plan — hype ≠ strategy",
+          "wrong": [
+            "All-in meme",
+            "Borrow to trade",
+            "Share login"
+          ]
+        },
+        {
+          "prompt": "Time horizon 10+ years allows…",
+          "correct": "More equity risk tolerance",
+          "wrong": [
+            "Only gambling",
+            "No planning",
+            "Daily panic sell"
+          ]
+        }
+      ]
+    },
+    "Portfolio Play": {
+      "learn": "Asset allocation by age/goals: younger long horizon → higher equity share; near goal → shift to stability.",
+      "apply": "Sketch sample split for age 16 vs age 60 (not advice — learning exercise).",
+      "quiz": [
+        {
+          "prompt": "Portfolio spread means…",
+          "correct": "Not all eggs one basket",
+          "wrong": [
+            "One hot stock",
+            "Hide all cash",
+            "Ignore fees"
+          ]
+        },
+        {
+          "prompt": "Rebalancing sells winners partly to…",
+          "correct": "Maintain target mix",
+          "wrong": [
+            "Maximize tax always",
+            "Eliminate profit",
+            "Avoid all gain"
+          ]
+        },
+        {
+          "prompt": "High fee fund 2%/year vs index 0.2% over decades…",
+          "correct": "Fees compound against you",
+          "wrong": [
+            "Fees do not matter",
+            "Higher fee always wins",
+            "Math stops"
+          ]
+        },
+        {
+          "prompt": "Market drops 15%; panic sell everything. Better CMO move?",
+          "correct": "Review plan — maybe hold if horizon long",
+          "wrong": [
+            "Sell all always",
+            "Borrow more stock",
+            "Never look again"
+          ]
+        },
+        {
+          "prompt": "Goal in 2 years (laptop fund) should be mostly…",
+          "correct": "Stable/savings-like",
+          "wrong": [
+            "Volatile crypto",
+            "Single stock",
+            "Leveraged bets"
+          ]
+        }
+      ]
+    },
+    "Tax Basics": {
+      "learn": "Tax funds public goods — income/VAT concepts; keep records if you earn beyond allowance.",
+      "apply": "With a parent, find one public service taxes fund in your emirate.",
+      "quiz": [
+        {
+          "prompt": "VAT is…",
+          "correct": "Consumption tax on goods/services",
+          "wrong": [
+            "Video game rank",
+            "Bank password",
+            "Allowance fee"
+          ]
+        },
+        {
+          "prompt": "Side income may…",
+          "correct": "Require tracking for tax reporting",
+          "wrong": [
+            "Never matter",
+            "Is always illegal",
+            "Is tax-free always"
+          ]
+        },
+        {
+          "prompt": "Keeping simple income log helps…",
+          "correct": "Accurate reporting if required",
+          "wrong": [
+            "Avoid school",
+            "Hide savings",
+            "Skip budget"
+          ]
+        },
+        {
+          "prompt": "“Cash only so no tax” from friend sounds…",
+          "correct": "Risky / possibly illegal advice",
+          "wrong": [
+            "Expert finance",
+            "School rule",
+            "Required"
+          ]
+        },
+        {
+          "prompt": "Taxes and fees are…",
+          "correct": "Part of real-world money math",
+          "wrong": [
+            "Optional fiction",
+            "Only for companies",
+            "Never in UAE"
+          ]
+        }
+      ]
+    },
+    "Side Hustle": {
+      "learn": "Micro-business: validate demand, price above cost, track revenue/expense, comply with family/school rules.",
+      "apply": "Draft one-page hustle plan: offer, price, cost, hours, parent approval checkbox.",
+      "quiz": [
+        {
+          "prompt": "Validate hustle by…",
+          "correct": "Small test before big spend",
+          "wrong": [
+            "Buy inventory truck",
+            "Quit school",
+            "Ignore costs"
+          ]
+        },
+        {
+          "prompt": "Revenue AED 300, expenses AED 180. Profit?",
+          "correct": "AED 120",
+          "wrong": [
+            "AED 480",
+            "AED 180",
+            "AED 300"
+          ]
+        },
+        {
+          "prompt": "Underpricing to beat friends…",
+          "correct": "May not cover time + materials",
+          "wrong": [
+            "Always wins long-term",
+            "Is tax free",
+            "Is required"
+          ]
+        },
+        {
+          "prompt": "Hustle grows; school suffers. Balance move?",
+          "correct": "Cap hours — protect education",
+          "wrong": [
+            "Drop school",
+            "Hide grades",
+            "Sleep 2 hours"
+          ]
+        },
+        {
+          "prompt": "Separate hustle ledger helps…",
+          "correct": "See true profit",
+          "wrong": [
+            "Mix with lunch money randomly",
+            "Avoid all math",
+            "Never invoice"
+          ]
+        }
+      ]
+    },
+    "Negotiate": {
+      "learn": "BATNA: Best Alternative To Negotiated Agreement — know your walk-away before talking price.",
+      "apply": "Role-play tutoring rate: your cost (time), market rate, minimum acceptable.",
+      "quiz": [
+        {
+          "prompt": "BATNA is…",
+          "correct": "Your best option if deal fails",
+          "wrong": [
+            "Always accept first offer",
+            "Random number",
+            "Friend’s opinion only"
+          ]
+        },
+        {
+          "prompt": "Employer offers AED 40/hr; your BATNA is AED 35 elsewhere. Leverage?",
+          "correct": "Moderate — know floor",
+          "wrong": [
+            "Must take AED 10",
+            "No research needed",
+            "Walk always rude"
+          ]
+        },
+        {
+          "prompt": "Polite negotiation includes…",
+          "correct": "Data on value you deliver",
+          "wrong": [
+            "Threats",
+            "Ghosting",
+            "Lies on resume"
+          ]
+        },
+        {
+          "prompt": "Pressure “sign now or lose offer.” You feel rushed. You…",
+          "correct": "Ask time to review — legit offers wait",
+          "wrong": [
+            "Sign blank",
+            "Share bank login",
+            "Accept any wage"
+          ]
+        },
+        {
+          "prompt": "Win-win deal means…",
+          "correct": "Both sides gain vs alternatives",
+          "wrong": [
+            "Winner takes all",
+            "Secret sabotage",
+            "Ignore costs"
+          ]
+        }
+      ]
+    },
+    "Lead & Teach": {
+      "learn": "Teaching solidifies mastery — explain concepts simply (Feynman) to spot gaps in your own understanding.",
+      "apply": "Teach a younger sibling “profit = revenue − cost” with a 3-minute example.",
+      "quiz": [
+        {
+          "prompt": "Explain simply to…",
+          "correct": "Find gaps in your knowledge",
+          "wrong": [
+            "Show off only",
+            "Confuse them",
+            "Skip practice"
+          ]
+        },
+        {
+          "prompt": "Good mentor…",
+          "correct": "Asks questions back",
+          "wrong": [
+            "Gives all answers",
+            "Mocks mistakes",
+            "Ignores budget"
+          ]
+        },
+        {
+          "prompt": "Peer asks risky “investment.” You lead by…",
+          "correct": "Sharing scam signs + adult referral",
+          "wrong": [
+            "Join blindly",
+            "Share passwords",
+            "Pressure them"
+          ]
+        },
+        {
+          "prompt": "Nervous teaching. Growth mindset says…",
+          "correct": "Practice improves clarity",
+          "wrong": [
+            "Never try",
+            "Only experts teach",
+            "Hide knowledge"
+          ]
+        },
+        {
+          "prompt": "Lead & teach builds…",
+          "correct": "Community financial literacy",
+          "wrong": [
+            "Secret clubs",
+            "More debt",
+            "Less math"
+          ]
+        }
+      ]
+    },
+    "Big Decision": {
+      "learn": "Major forks (university path, first car, gap year) need multi-criteria analysis + advisor input.",
+      "apply": "List 3 criteria for one big decision; score two options 1–5 each.",
+      "quiz": [
+        {
+          "prompt": "Big decision checklist includes…",
+          "correct": "Cost, timeline, reversibility",
+          "wrong": [
+            "Only Instagram polls",
+            "Only luck",
+            "Only color"
+          ]
+        },
+        {
+          "prompt": "AED 15,000 over 4 years vs AED 25,000 over 2 years — compare…",
+          "correct": "Total cost and opportunity",
+          "wrong": [
+            "Only logo",
+            "Only friends",
+            "Only hype"
+          ]
+        },
+        {
+          "prompt": "Consult mentors because…",
+          "correct": "They see blind spots",
+          "wrong": [
+            "They decide for you",
+            "You avoid thinking",
+            "Rules never change"
+          ]
+        },
+        {
+          "prompt": "Fear of missing out on path friends chose. You…",
+          "correct": "Run your own matrix",
+          "wrong": [
+            "Copy without research",
+            "Borrow to match",
+            "Hide feelings only"
+          ]
+        },
+        {
+          "prompt": "Document decision rationale to…",
+          "correct": "Learn from future outcomes",
+          "wrong": [
+            "Never review",
+            "Blame others",
+            "Avoid all change"
+          ]
+        }
+      ]
+    },
+    "Graduation": {
+      "learn": "Chief Money Officer pledge: continuous learning, ethical earning, transparent giving, and calm under market noise.",
+      "apply": "Write your CMO pledge: 3 habits you keep, 2 you stop, 1 person you will mentor.",
+      "quiz": [
+        {
+          "prompt": "CMO graduation means…",
+          "correct": "Owning your full money life",
+          "wrong": [
+            "Knowing everything forever",
+            "Never mistakes",
+            "Only spending"
+          ]
+        },
+        {
+          "prompt": "Lifelong learning because…",
+          "correct": "Rules, tools, and scams evolve",
+          "wrong": [
+            "Finance never changes",
+            "Apps replace thinking",
+            "School was enough"
+          ]
+        },
+        {
+          "prompt": "Ethical earning excludes…",
+          "correct": "Scams and hidden harm",
+          "wrong": [
+            "All business",
+            "All saving",
+            "All teaching"
+          ]
+        },
+        {
+          "prompt": "Calm under noise (hype, crashes) comes from…",
+          "correct": "Written plan + emergency fund",
+          "wrong": [
+            "Panic always",
+            "Ignore all news",
+            "All-in daily"
+          ]
+        },
+        {
+          "prompt": "Next quest after graduation is…",
+          "correct": "Apply stack in real adult milestones",
+          "wrong": [
+            "Stop tracking",
+            "Spend all",
+            "Avoid tax forever"
+          ]
+        }
+      ]
+    }
+  }
+}

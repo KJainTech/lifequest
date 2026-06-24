@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../core/tokens/lq_tokens.dart';
 import '../core/tokens/lq_typography.dart';
 
-/// Elevated card with soft layered shadow per §4.2
 class LQCard extends StatelessWidget {
   const LQCard({
     super.key,
@@ -13,6 +12,7 @@ class LQCard extends StatelessWidget {
     this.elevation = 1,
     this.onTap,
     this.borderRadius = LQRadius.card,
+    this.selected = false,
   });
 
   final LQColors colors;
@@ -21,6 +21,7 @@ class LQCard extends StatelessWidget {
   final int elevation;
   final VoidCallback? onTap;
   final double borderRadius;
+  final bool selected;
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +32,16 @@ class LQCard extends StatelessWidget {
       _ => LQElevation.e1(colors.ink),
     };
 
-    final card = Container(
+    final card = AnimatedContainer(
+      duration: const Duration(milliseconds: 180),
+      curve: Curves.easeOutCubic,
       decoration: BoxDecoration(
-        color: colors.surface,
+        color: selected ? colors.surfaceMuted : colors.surface,
         borderRadius: BorderRadius.circular(borderRadius),
+        border: Border.all(
+          color: selected ? colors.brand : colors.border,
+          width: selected ? 2 : 1,
+        ),
         boxShadow: shadows,
       ),
       padding: padding,
@@ -54,7 +61,6 @@ class LQCard extends StatelessWidget {
   }
 }
 
-/// Hero progress card used on home dashboard
 class LQHeroCard extends StatelessWidget {
   const LQHeroCard({
     super.key,
@@ -85,12 +91,22 @@ class LQHeroCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text('Level $level', style: LQTypography.h3(colors)),
-              const Spacer(),
-              Text(
-                '${_formatNumber(xp)} XP',
-                style: LQTypography.caption(colors),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: colors.brand.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(LQRadius.chip),
+                ),
+                child: Text(
+                  'Level $level',
+                  style: LQTypography.caption(colors).copyWith(
+                    color: colors.brandDeep,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
               ),
+              const Spacer(),
+              Text('${_formatNumber(xp)} XP', style: LQTypography.caption(colors)),
             ],
           ),
           const SizedBox(height: LQSpacing.sm),
@@ -98,8 +114,8 @@ class LQHeroCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(LQRadius.pill),
             child: LinearProgressIndicator(
               value: xpProgress,
-              minHeight: 6,
-              backgroundColor: colors.canvasEnd,
+              minHeight: 8,
+              backgroundColor: colors.border,
               valueColor: AlwaysStoppedAnimation(colors.brand),
             ),
           ),
@@ -145,19 +161,21 @@ class _TrendChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tint = positive ? colors.success : colors.warn;
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: LQSpacing.md,
         vertical: LQSpacing.xs,
       ),
       decoration: BoxDecoration(
-        color: (positive ? colors.success : colors.warn).withValues(alpha: 0.15),
+        color: tint.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(LQRadius.chip),
+        border: Border.all(color: tint.withValues(alpha: 0.25)),
       ),
       child: Text(
         label,
         style: LQTypography.caption(colors).copyWith(
-          color: positive ? colors.success : colors.warn,
+          color: tint,
           fontWeight: FontWeight.w600,
         ),
       ),

@@ -68,4 +68,30 @@ class CloudFunctionsService {
     });
     return result.data;
   }
+
+  Future<Map<String, dynamic>> generateAdaptiveLesson({
+    required String lessonId,
+    required String ageBand,
+    required String guide,
+    String locale = 'en',
+    String? title,
+    String? subtitle,
+    String? conceptSlug,
+    int? questLevel,
+    int? stageInLevel,
+  }) async {
+    final callable = _functions.httpsCallable('generateAdaptiveLesson');
+    final result = await callable.call<Map<String, dynamic>>({
+      'lessonId': lessonId,
+      'ageBand': ageBand,
+      'guide': guide,
+      'locale': locale,
+      if (title != null) 'title': title,
+      if (subtitle != null) 'subtitle': subtitle,
+      if (conceptSlug != null) 'conceptSlug': conceptSlug,
+      if (questLevel != null) 'questLevel': questLevel,
+      if (stageInLevel != null) 'stageInLevel': stageInLevel,
+    });
+    return result.data;
+  }
 }

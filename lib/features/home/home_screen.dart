@@ -10,19 +10,20 @@ import '../../core/tokens/lq_typography.dart';
 import '../../data/content/lesson_catalog.dart';
 import '../../data/content/lesson_progression.dart';
 import '../../data/models/lq_models.dart';
-import '../../design/lq_badge.dart';
+import '../../data/providers/app_providers.dart';
 import '../../design/lq_button.dart';
-import '../../design/lq_canvas.dart';
 import '../../design/lq_card.dart';
-import '../../design/lq_icons.dart';
-import '../../features/city/city_preview_painter.dart';
+import '../../design/lq_immersive_scene.dart';
+import '../../design/stat_pill.dart';
+import '../../features/city/city_buildings.dart';
+import '../../features/city/city_map_widget.dart';
 import '../../features/city/city_providers.dart';
 import '../../features/onboarding/age_band.dart';
 import '../../features/onboarding/auth_service.dart';
-import '../../data/providers/app_providers.dart';
-import '../../design/stat_pill.dart';
+import '../../design/guide_mascot.dart';
+import '../../design/penny_mascot.dart';
 
-/// Home dashboard per §5.6 — daily hub
+/// Home — play hub only. Balance & card live under Me.
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
@@ -50,102 +51,188 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final profile = ref.watch(userProfileProvider).valueOrNull;
     final stats = ref.watch(userStatsProvider).valueOrNull ?? UserStats.empty;
     final lessonsAsync = ref.watch(userLessonsProvider);
-    final progress = lessonsAsync.valueOrNull ?? const <LessonProgress>[];
-    final currentLesson = LessonProgression.currentLesson(progress, profile);
-    final journeyDone = LessonProgression.isJourneyComplete(progress, profile);
+    final guide = profile?.guide ?? 'penny';
     final name = profile?.displayName ?? 'Explorer';
-    final initial = name.isNotEmpty ? name[0].toUpperCase() : 'E';
-    final xpForLevel = stats.level * 100;
-    final xpProgress = xpForLevel > 0
-        ? (stats.xp % xpForLevel) / xpForLevel
-        : 0.0;
 
-    return LQCanvas(
+    return LQImmersiveScene(
       colors: colors,
       child: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.all(LQSpacing.gutter),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildGreeting(colors, name: name, initial: initial),
-                    const SizedBox(height: LQSpacing.xxl),
-                    LQHeroCard(
-                      colors: colors,
-                      level: stats.level,
-                      xp: stats.xp,
-                      xpProgress: xpProgress.clamp(0.0, 1.0),
-                      lqScore: stats.lqScore,
-                    ).animate().fadeIn().slideY(begin: 0.1, end: 0),
-                    const SizedBox(height: LQSpacing.lg),
-                    _buildTodayLesson(colors, currentLesson, journeyDone),
-                    const SizedBox(height: LQSpacing.xxl),
-                    Text('Your Badges', style: LQTypography.h2(colors)),
-                    const SizedBox(height: LQSpacing.lg),
-                    _buildBadgeShelf(colors),
-                    const SizedBox(height: LQSpacing.xxl),
-                    _buildCityPreview(colors),
-                    const SizedBox(height: LQSpacing.lg),
-                  ],
+        child: lessonsAsync.when(
+          loading: () => _HomeLoading(colors: colors),
+          error: (_, __) => _HomeError(colors: colors),
+          data: (progress) {
+            final currentLesson = LessonProgression.currentLesson(progress, profile);
+            final journeyDone = LessonProgression.isJourneyComplete(progress, profile);
+            final completed = LessonProgression.completedCount(progress, profile);
+            final journeyPct = LessonProgression.journeyProgress(progress, profile);
+
+            return CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.all(LQSpacing.gutter),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        _HomeHeader(
+                          colors: colors,
+                          name: name,
+                          guide: guide,
+                          streak: stats.streak.count,
+                          onProfile: () => context.go('/profile'),
+                        ),
+                        const SizedBox(height: LQSpacing.xl),
+                        Text('Your quest', style: LQTypography.h2(colors)),
+                        const SizedBox(height: LQSpacing.sm),
+                        _TodayQuestCard(
+                          colors: colors,
+                          current: currentLesson,
+                          journeyDone: journeyDone,
+                          completed: completed,
+                        ).animate().fadeIn().slideY(begin: 0.06, end: 0),
+                        const SizedBox(height: LQSpacing.lg),
+                        LQButton(
+                          label: 'View full quest map',
+                          colors: colors,
+                          variant: LQButtonVariant.secondary,
+                          expanded: true,
+                          onPressed: () => context.go('/learn'),
+                        ),
+                        const SizedBox(height: LQSpacing.lg),
+                        _JourneyStrip(
+                          colors: colors,
+                          completed: completed,
+                          journeyPct: journeyPct,
+                        ),
+                        const SizedBox(height: LQSpacing.lg),
+                        _CityTeaser(colors: colors),
+                        const SizedBox(height: LQSpacing.lg),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ],
+              ],
+            );
+          },
         ),
       ),
     );
   }
+}
 
-  Widget _buildGreeting(LQColors colors,
-      {required String name, required String initial}) {
+class _HomeLoading extends StatelessWidget {
+  const _HomeLoading({required this.colors});
+  final LQColors colors;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircularProgressIndicator(color: colors.brand),
+          const SizedBox(height: LQSpacing.lg),
+          Text('Loading your quest…', style: LQTypography.bodySm(colors)),
+        ],
+      ),
+    );
+  }
+}
+
+class _HomeError extends StatelessWidget {
+  const _HomeError({required this.colors});
+  final LQColors colors;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(LQSpacing.gutter),
+        child: Text(
+          'Could not load your progress. Pull to refresh or try again.',
+          style: LQTypography.bodySm(colors),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
+}
+
+class _HomeHeader extends StatelessWidget {
+  const _HomeHeader({
+    required this.colors,
+    required this.name,
+    required this.guide,
+    required this.streak,
+    required this.onProfile,
+  });
+
+  final LQColors colors;
+  final String name;
+  final String guide;
+  final int streak;
+  final VoidCallback onProfile;
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(
-          radius: 24,
-          backgroundColor: colors.brand.withValues(alpha: 0.2),
-          child: Text(
-            initial,
-            style: LQTypography.h3(colors).copyWith(color: colors.brand),
-          ),
+        GuideMascot(
+          guide: LQGuideX.fromId(guide),
+          size: 52,
+          state: PennyGuideState.happy,
         ),
         const SizedBox(width: LQSpacing.md),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Marhaba, $name', style: LQTypography.h2(colors)),
-              Text('Ready for today\'s quest?', style: LQTypography.bodySm(colors)),
+              Text('Hey, $name!', style: LQTypography.h2(colors)),
+              if (streak > 0)
+                Text(
+                  '🔥 $streak-day streak — keep it going!',
+                  style: LQTypography.bodySm(colors),
+                )
+              else
+                Text(
+                  'Ready for today\'s adventure?',
+                  style: LQTypography.bodySm(colors),
+                ),
             ],
           ),
         ),
         IconButton(
-          onPressed: () {},
-          icon: LQDuotoneIcon(
-            icon: LQIconType.notification,
-            primaryColor: colors.inkSoft,
-            secondaryColor: colors.inkSoft.withValues(alpha: 0.2),
-          ),
-        ),
-        IconButton(
-          onPressed: () => context.go('/showcase'),
-          icon: LQDuotoneIcon(
-            icon: LQIconType.settings,
-            primaryColor: colors.inkSoft,
-            secondaryColor: colors.inkSoft.withValues(alpha: 0.2),
+          tooltip: 'My profile & coins',
+          onPressed: onProfile,
+          icon: CircleAvatar(
+            radius: 18,
+            backgroundColor: colors.accentMint,
+            child: Text(
+              name.isNotEmpty ? name[0].toUpperCase() : 'E',
+              style: LQTypography.label(colors).copyWith(color: colors.brand),
+            ),
           ),
         ),
       ],
     );
   }
+}
 
-  Widget _buildTodayLesson(
-    LQColors colors,
-    LessonMeta? current,
-    bool journeyDone,
-  ) {
+class _TodayQuestCard extends StatelessWidget {
+  const _TodayQuestCard({
+    required this.colors,
+    required this.current,
+    required this.journeyDone,
+    required this.completed,
+  });
+
+  final LQColors colors;
+  final LessonMeta? current;
+  final bool journeyDone;
+  final int completed;
+
+  @override
+  Widget build(BuildContext context) {
     if (journeyDone) {
       return LQCard(
         colors: colors,
@@ -153,35 +240,27 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                StatPill(colors: colors, label: 'Complete', variant: StatPillVariant.xp),
-                const Spacer(),
-                StatPill(colors: colors, label: '6/6', variant: StatPillVariant.coins),
-              ],
-            ),
+            StatPill(colors: colors, label: 'Programme complete', variant: StatPillVariant.xp),
             const SizedBox(height: LQSpacing.lg),
-            Text('Coin Keeper champion!', style: LQTypography.h2(colors)),
+            Text('Chief Money Officer!', style: LQTypography.h2(colors)),
             const SizedBox(height: LQSpacing.sm),
             Text(
-              'Replay lessons, grow your city, and keep your streak alive.',
+              'You finished all $kTotalStages stages. Replay or grow your city!',
               style: LQTypography.bodySm(colors),
             ),
-            const SizedBox(height: LQSpacing.xxl),
+            const SizedBox(height: LQSpacing.xl),
             LQButton(
-              label: 'Replay a lesson',
+              label: 'Pick a lesson',
               colors: colors,
               expanded: true,
               onPressed: () => context.go('/learn'),
             ),
           ],
         ),
-      ).animate(delay: 100.ms).fadeIn().slideY(begin: 0.1, end: 0);
+      );
     }
 
     final lesson = current ?? kCurriculum.first;
-    final stageLabel = 'Stage ${lesson.conceptOrder}';
-
     return LQCard(
       colors: colors,
       elevation: 2,
@@ -190,7 +269,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         children: [
           Row(
             children: [
-              StatPill(colors: colors, label: stageLabel, variant: StatPillVariant.xp),
+              StatPill(
+                colors: colors,
+                label: 'Level ${lesson.questLevel} · Stage ${lesson.stageInLevel}',
+                variant: StatPillVariant.xp,
+              ),
               const Spacer(),
               StatPill(
                 colors: colors,
@@ -201,16 +284,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
           const SizedBox(height: LQSpacing.lg),
           Text(lesson.title, style: LQTypography.h2(colors)),
-          const SizedBox(height: LQSpacing.sm),
+          const SizedBox(height: LQSpacing.xs),
           Text(lesson.subtitle, style: LQTypography.bodySm(colors)),
-          const SizedBox(height: LQSpacing.xxl),
+          const SizedBox(height: LQSpacing.xl),
           LQButton(
-            label: current == null ? 'Explore path' : 'Start',
+            label: 'Play now',
             colors: colors,
             expanded: true,
             onPressed: () {
               if (current != null) {
-                context.go('/lesson/${current.id}');
+                context.push('/lesson/${current!.id}');
               } else {
                 context.go('/learn');
               }
@@ -218,84 +301,79 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
         ],
       ),
-    ).animate(delay: 100.ms).fadeIn().slideY(begin: 0.1, end: 0);
-  }
-
-  Widget _buildBadgeShelf(LQColors colors) {
-    final badgesAsync = ref.watch(userBadgesProvider);
-
-    return badgesAsync.when(
-      loading: () => const SizedBox(height: 100, child: Center(child: CircularProgressIndicator())),
-      error: (_, __) => Text('Badges unavailable', style: LQTypography.bodySm(colors)),
-      data: (badges) {
-        if (badges.isEmpty) {
-          return LQCard(
-            colors: colors,
-            child: Text(
-              'Complete your first lesson to earn badges',
-              style: LQTypography.bodySm(colors),
-            ),
-          );
-        }
-        return SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: badges.map((b) {
-              return Padding(
-                padding: const EdgeInsets.only(right: LQSpacing.md),
-                child: LQBadge(
-                  colors: colors,
-                  title: badgeTitle(b.id),
-                  subtitle: 'Earned',
-                  icon: LQDuotoneIcon(
-                    icon: LQIconType.trophy,
-                    size: 28,
-                    primaryColor: colors.gold,
-                    secondaryColor: colors.gold.withValues(alpha: 0.3),
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-        );
-      },
     );
   }
+}
 
-  Widget _buildCityPreview(LQColors colors) {
-    final towersAsync = ref.watch(userTowersProvider);
-    final count = towersAsync.valueOrNull?.length ?? 0;
-    final towers = towersAsync.valueOrNull ?? const [];
+class _JourneyStrip extends StatelessWidget {
+  const _JourneyStrip({
+    required this.colors,
+    required this.completed,
+    required this.journeyPct,
+  });
 
+  final LQColors colors;
+  final int completed;
+  final double journeyPct;
+
+  @override
+  Widget build(BuildContext context) {
     return LQCard(
       colors: colors,
-      onTap: () => context.go('/city'),
+      onTap: () => context.go('/awards'),
       child: Row(
         children: [
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Your City', style: LQTypography.h3(colors)),
+                Text('Journey progress', style: LQTypography.h3(colors)),
                 const SizedBox(height: LQSpacing.xs),
                 Text(
-                  towersAsync.isLoading
-                      ? 'Loading skyline…'
-                      : count == 0
-                          ? 'Build your first tower'
-                          : '$count ${count == 1 ? 'tower' : 'towers'} built · Tap to visit',
+                  '$completed / $kTotalStages stages · ${(journeyPct * 100).round()}%',
                   style: LQTypography.bodySm(colors),
                 ),
               ],
             ),
           ),
-          SizedBox(
-            width: 72,
-            height: 48,
-            child: CustomPaint(
-              painter: CityPreviewPainter(towers: towers, colors: colors),
-            ),
+          Icon(Icons.emoji_events_outlined, color: colors.gold, size: 28),
+        ],
+      ),
+    );
+  }
+}
+
+class _CityTeaser extends ConsumerWidget {
+  const _CityTeaser({required this.colors});
+  final LQColors colors;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final towers = ref.watch(userTowersProvider).valueOrNull ?? const [];
+    final lessons = ref.watch(userLessonsProvider).valueOrNull ?? const [];
+    final profile = ref.watch(userProfileProvider).valueOrNull;
+    final snapshot = buildCityProgress(
+      lessonProgress: lessons,
+      towers: towers,
+      profile: profile,
+    );
+
+    return LQCard(
+      colors: colors,
+      onTap: () => context.go('/city'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Build Lemon City', style: LQTypography.h3(colors)),
+          const SizedBox(height: LQSpacing.xs),
+          Text(
+            snapshot.builtCount == 0
+                ? 'Complete a lesson to raise your first building'
+                : '${snapshot.builtCount} buildings so far — tap to visit',
+            style: LQTypography.bodySm(colors),
           ),
+          const SizedBox(height: LQSpacing.md),
+          CityMapPreview(colors: colors, snapshot: snapshot),
         ],
       ),
     );

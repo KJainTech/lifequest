@@ -44,6 +44,7 @@ class UserStats {
     required this.lqScore,
     required this.businessIQ,
     required this.streak,
+    this.conceptSkills = const {},
     this.updatedAt,
   });
 
@@ -53,6 +54,7 @@ class UserStats {
   final int lqScore;
   final BusinessIQ businessIQ;
   final Streak streak;
+  final Map<String, int> conceptSkills;
   final String? updatedAt;
 
   static const empty = UserStats(
@@ -62,9 +64,12 @@ class UserStats {
     lqScore: 0,
     businessIQ: BusinessIQ(profit: 0, decision: 0, resilience: 0),
     streak: Streak(count: 0),
+    conceptSkills: {},
   );
 
-  factory UserStats.fromMap(Map<String, dynamic> map) => UserStats(
+  factory UserStats.fromMap(Map<String, dynamic> map) {
+    final rawSkills = map['conceptSkills'] as Map<String, dynamic>? ?? {};
+    return UserStats(
         xp: (map['xp'] as num?)?.toInt() ?? 0,
         level: (map['level'] as num?)?.toInt() ?? 1,
         coins: (map['coins'] as num?)?.toInt() ?? 0,
@@ -73,8 +78,12 @@ class UserStats {
           map['businessIQ'] as Map<String, dynamic>? ?? {},
         ),
         streak: Streak.fromMap(map['streak'] as Map<String, dynamic>? ?? {}),
+        conceptSkills: rawSkills.map(
+          (k, v) => MapEntry(k, (v as num).toInt()),
+        ),
         updatedAt: map['updatedAt'] as String?,
       );
+  }
 }
 
 class UserProfile {

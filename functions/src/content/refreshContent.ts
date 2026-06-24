@@ -1,7 +1,7 @@
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
 import { z } from 'zod';
 import { AgeBandSchema, GuideSchema, LocaleSchema, RegionSchema } from '@lifequest/types';
-import { fallbackContent } from './fallbackContent';
+import { legacyProfitFallback } from './fallbackContent';
 import { db, nowIso } from '../lib/firebase';
 
 const RefreshPayloadSchema = z.object({
@@ -19,7 +19,7 @@ export const refreshContent = onCall(async (request) => {
   }
 
   const params = RefreshPayloadSchema.parse(request.data ?? {});
-  const content = fallbackContent(params);
+  const content = legacyProfitFallback(params);
   const variantId = `${params.ageBand}_${params.locale}_${params.guide}`;
 
   await db.doc(`content/${params.concept}/variants/${variantId}`).set({

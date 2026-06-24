@@ -88,4 +88,18 @@ describe('computeLessonAwards', () => {
     expect(awards.coins).toBe(0);
     expect(awards.tower).toBeNull();
   });
+
+  it('partial quiz score yields correct XP not full bonus', () => {
+    const awards = computeLessonAwards({
+      currentStats: baseStats,
+      quizScore: 2,
+      gameWon: true,
+      gameProfit: 10,
+      lessonId: 'lesson_2',
+      isFirstProfit: false,
+      alreadyCompleted: false,
+    });
+    expect(awards.xp).toBe(50);
+    expect(awards.coins).toBe(14);
+  });
 });

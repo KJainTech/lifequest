@@ -3,8 +3,10 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../data/services/lesson_completion_service.dart';
 import '../../../app/bootstrap/firebase_providers.dart';
 import '../../../app/theme/lq_theme.dart';
+import '../../../core/audio/lq_sound_service.dart';
 import '../../../core/haptics/lq_haptics.dart';
 import '../../../core/tokens/lq_tokens.dart';
 import '../../../core/tokens/lq_typography.dart';
@@ -16,8 +18,8 @@ import '../../../design/stat_pill.dart';
 import '../../../features/onboarding/auth_service.dart';
 import '../../../data/content/lesson_catalog.dart';
 import '../../../data/content/lesson_progression.dart';
-import '../../../data/content/lesson_progression.dart';
 import '../../../design/lq_celebration.dart';
+import '../../../data/providers/app_providers.dart';
 import '../../city/city_providers.dart';
 import '../lesson_session.dart';
 
@@ -43,14 +45,20 @@ class _RewardPhaseViewState extends ConsumerState<RewardPhaseView> {
     final session = ref.read(lessonSessionProvider);
     if (session == null) return;
 
+    final completion = ref.read(lessonCompletionServiceProvider);
+    if (completion == null) {
+      ref.read(lessonSessionProvider.notifier).setError('Please sign in again.');
+      return;
+    }
+
     ref.read(lessonSessionProvider.notifier).setLoading(true);
     try {
-      final result = await ref.read(cloudFunctionsProvider).completeLesson(
-            lessonId: session.lessonId,
-            quizScore: session.quizScore ?? 0,
-            gameWon: session.gameWon ?? false,
-            gameProfit: session.gameProfit ?? 0,
-          );
+      final result = await completion.complete(
+        lessonId: session.lessonId,
+        quizScore: session.quizScore ?? 0,
+        gameWon: session.gameWon ?? false,
+        gameProfit: session.gameProfit ?? 0,
+      );
       ref.read(lessonSessionProvider.notifier).setCompletion({
         'xp': result.xp,
         'coins': result.coins,
@@ -60,10 +68,18 @@ class _RewardPhaseViewState extends ConsumerState<RewardPhaseView> {
         'towerName': result.towerName,
         'badgeUnlocked': result.badgeUnlocked,
       });
+      ref.invalidate(userLessonsProvider);
+      ref.invalidate(userStatsProvider);
+      ref.invalidate(userTowersProvider);
+      ref.invalidate(userBadgesProvider);
       LQHaptics.levelUp();
+      LQSound.celebrate();
+      Future.delayed(const Duration(milliseconds: 350), () => LQSound.coin());
       setState(() => _loaded = true);
-    } catch (e) {
-      ref.read(lessonSessionProvider.notifier).setError('$e');
+    } catch (_) {
+      ref.read(lessonSessionProvider.notifier).setError(
+            'Could not save progress — tap Retry or go back to home.',
+          );
     }
   }
 
@@ -111,6 +127,31 @@ class _RewardPhaseViewState extends ConsumerState<RewardPhaseView> {
     final nextLesson = LessonProgression.nextAfter(session.lessonId);
     final journeyDone = nextLesson == null;
 
+    final meta = lessonById(session.lessonId);
+    final isLastInLevel = meta != null &&
+        meta.stageInLevel == stagesInQuestLevel(meta.questLevel);
+    final isGraduation = meta?.conceptOrder == kTotalStages;
+
+    void _leaveLesson(VoidCallback navigate) {
+      if (towerName != null) {
+        ref.read(pendingCityCelebrationProvider.notifier).state = towerName;
+      }
+      ref.invalidate(userTowersProvider);
+      ref.invalidate(userLessonsProvider);
+
+      if (isGraduation) {
+        ref.read(lessonSessionProvider.notifier).beginPostRewardCeremony();
+        return;
+      }
+      if (isLastInLevel && nextLesson != null) {
+        ref.read(lessonSessionProvider.notifier).beginPostRewardCeremony();
+        return;
+      }
+
+      ref.read(lessonSessionProvider.notifier).clear();
+      navigate();
+    }
+
     return Stack(
       children: [
         LQCelebrationBurst(colors: colors, active: stars >= 4),
@@ -130,13 +171,15 @@ class _RewardPhaseViewState extends ConsumerState<RewardPhaseView> {
                     ),
                   ),
                   const SizedBox(height: LQSpacing.xxxl),
-                  LQSuccessPop(
-                    delay: 120.ms,
-                    child: Text(
-                      journeyDone ? 'Journey complete!' : 'Stage complete!',
-                      style: LQTypography.display(colors),
+                    LQSuccessPop(
+                      delay: 120.ms,
+                      child: Text(
+                        journeyDone
+                            ? 'Programme complete!'
+                            : 'Stage complete!',
+                        style: LQTypography.display(colors),
+                      ),
                     ),
-                  ),
                   const SizedBox(height: LQSpacing.lg),
                   _StarsRow(colors: colors, count: stars),
                   const SizedBox(height: LQSpacing.xxl),
@@ -175,16 +218,13 @@ class _RewardPhaseViewState extends ConsumerState<RewardPhaseView> {
                     colors: colors,
                     expanded: true,
                     onPressed: () {
-                      if (towerName != null) {
-                        ref.read(pendingCityCelebrationProvider.notifier).state =
-                            towerName;
-                      }
-                      ref.read(lessonSessionProvider.notifier).clear();
-                      if (nextLesson != null) {
-                        context.go('/lesson/${nextLesson.id}');
-                      } else {
-                        context.go('/home');
-                      }
+                      _leaveLesson(() {
+                        if (nextLesson != null) {
+                          context.go('/lesson/${nextLesson.id}');
+                        } else {
+                          context.go('/home');
+                        }
+                      });
                     },
                   ).animate().fadeIn(delay: 650.ms),
                   const SizedBox(height: LQSpacing.md),
@@ -194,12 +234,7 @@ class _RewardPhaseViewState extends ConsumerState<RewardPhaseView> {
                     variant: LQButtonVariant.ghost,
                     expanded: true,
                     onPressed: () {
-                      if (towerName != null) {
-                        ref.read(pendingCityCelebrationProvider.notifier).state =
-                            towerName;
-                      }
-                      ref.read(lessonSessionProvider.notifier).clear();
-                      context.go('/city');
+                      _leaveLesson(() => context.push('/city'));
                     },
                   ).animate().fadeIn(delay: 720.ms),
                   const SizedBox(height: LQSpacing.lg),
