@@ -27,7 +27,8 @@ jobs:
           node-version: "20"
       - run: npm ci && npm run build
         working-directory: packages/types
-      - run: npm ci && npm test && npm run build
+      - run: bash scripts/prepare-functions-deploy.sh
+      - run: npm test
         working-directory: functions
 
   dashboard:
