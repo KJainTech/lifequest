@@ -58,6 +58,7 @@ jobs:
     name: Flutter + Next.js hosting
     runs-on: ubuntu-latest
     needs: firebase
+    if: ${{ always() && needs.firebase.result != 'cancelled' }}
     steps:
       - uses: actions/checkout@v4
 
