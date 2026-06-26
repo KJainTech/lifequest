@@ -48,6 +48,9 @@ final routerProvider = Provider<GoRouter>((ref) {
       final path = state.uri.path;
       if (path == '/' || path == '/showcase') return null;
 
+      // Concept games — open standalone from direct links (no onboarding gate).
+      if (path.startsWith('/concept-games')) return null;
+
       final user = ref.read(authProvider).valueOrNull;
       final profile = ref.read(userProfileProvider).valueOrNull;
 
@@ -141,17 +144,16 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const WalletScreen(),
       ),
       GoRoute(
+        path: '/concept-games/:gameId',
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => ConceptGamePracticeScreen(
+          gameId: conceptGameFromParam(state.pathParameters['gameId']),
+        ),
+      ),
+      GoRoute(
         path: '/concept-games',
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) => const ConceptGamesHubScreen(),
-        routes: [
-          GoRoute(
-            path: ':gameId',
-            builder: (context, state) => ConceptGamePracticeScreen(
-              gameId: conceptGameFromParam(state.pathParameters['gameId']),
-            ),
-          ),
-        ],
       ),
       GoRoute(
         path: '/faq',

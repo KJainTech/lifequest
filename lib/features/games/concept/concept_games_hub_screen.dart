@@ -7,6 +7,7 @@ import '../../../app/theme/lq_theme.dart';
 import '../../../core/tokens/lq_tokens.dart';
 import '../../../core/tokens/lq_typography.dart';
 import '../../../design/lq_immersive_scene.dart';
+import 'concept_game_navigation.dart';
 import 'concept_game_types.dart';
 
 /// Browse and play all five money concept mini-games.
@@ -33,7 +34,7 @@ class ConceptGamesHubScreen extends ConsumerWidget {
                 child: Row(
                   children: [
                     IconButton(
-                      onPressed: () => context.canPop() ? context.pop() : context.go('/learn'),
+                      onPressed: () => leaveConceptGamesHub(context),
                       icon: Icon(Icons.arrow_back_rounded, color: colors.ink),
                     ),
                     Expanded(
@@ -42,7 +43,7 @@ class ConceptGamesHubScreen extends ConsumerWidget {
                         children: [
                           Text('Concept Games', style: LQTypography.display(colors)),
                           Text(
-                            'Five quick games — tap any to practice',
+                            'Practice mode — no login needed · tap any game',
                             style: LQTypography.bodySm(colors),
                           ),
                         ],
@@ -65,13 +66,7 @@ class ConceptGamesHubScreen extends ConsumerWidget {
                         colors: colors,
                         info: info,
                         delay: (i * 60).ms,
-                        onTap: () {
-                          if (id == ConceptGameId.lemonCity) {
-                            context.push('/lesson/lesson_6');
-                          } else {
-                            context.push('/concept-games/${id.name}');
-                          }
-                        },
+                        onTap: () => context.go('/concept-games/${id.name}'),
                       ),
                     );
                   },
