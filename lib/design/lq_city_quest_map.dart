@@ -275,9 +275,11 @@ class _StageNodeState extends State<_StageNode> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          '+${widget.coinPreview} coins · AED lessons',
+                          isExitChallengeStage(widget.meta)
+                              ? 'Level check · 80% to pass · +${widget.coinPreview} coins'
+                              : '+${widget.coinPreview} coins · AED lessons',
                           style: LQTypography.micro(c).copyWith(
-                            color: c.gold,
+                            color: isExitChallengeStage(widget.meta) ? c.brand : c.gold,
                             fontWeight: FontWeight.w700,
                           ),
                         ),

@@ -16,6 +16,10 @@ import '../../design/lq_progress_animations.dart';
 import '../../design/lq_quiz_choice.dart';
 import '../../design/penny_mascot.dart';
 import '../../features/onboarding/auth_service.dart';
+import '../../app/bootstrap/firebase_providers.dart';
+import '../../data/providers/app_providers.dart';
+import '../../data/services/lesson_completion_service.dart';
+import '../../features/city/city_providers.dart';
 import '../learn/lesson_session.dart';
 
 /// Exit Challenge — level-end assessment (DevPlan Day 30–32).
@@ -34,6 +38,7 @@ class _ExitChallengeViewState extends ConsumerState<ExitChallengeView> {
   int? _selected;
   bool _done = false;
   bool _showFeedback = false;
+  bool _saving = false;
   late final List<_ExitQ> _questions;
 
   @override
@@ -43,7 +48,8 @@ class _ExitChallengeViewState extends ConsumerState<ExitChallengeView> {
   }
 
   List<_ExitQ> _buildQuestions(int level) {
-    final lessons = lessonsForQuestLevel(level).take(5);
+    final count = stagesInQuestLevel(level) - 1;
+    final lessons = lessonsForQuestLevel(level).take(count);
     final qs = <_ExitQ>[];
     for (final meta in lessons) {
       final content = buildLessonContent(meta.id, '9-12');
@@ -81,14 +87,39 @@ class _ExitChallengeViewState extends ConsumerState<ExitChallengeView> {
     }
   }
 
-  void _continue(bool passed) {
+  Future<void> _continue(bool passed) async {
     final notifier = ref.read(lessonSessionProvider.notifier);
-    if (passed) {
-      notifier.advanceExitChallenge(passed: true);
-    } else {
+    if (!passed) {
       notifier.finishCeremony();
-      context.go('/learn');
+      if (mounted) context.go('/learn');
+      return;
     }
+
+    final session = ref.read(lessonSessionProvider);
+    if (session == null || _saving) return;
+
+    setState(() => _saving = true);
+    final total = _questions.length;
+    final quizScore = total == 0 ? 5 : ((_correct / total) * 5).round().clamp(0, 5);
+
+    try {
+      final completion = ref.read(lessonCompletionServiceProvider);
+      if (completion != null) {
+        await completion.complete(
+          lessonId: session.lessonId,
+          quizScore: quizScore,
+          gameWon: true,
+          gameProfit: 0,
+        );
+        ref.invalidate(userLessonsProvider);
+        ref.invalidate(userStatsProvider);
+        ref.invalidate(userTowersProvider);
+      }
+    } catch (_) {}
+
+    if (!mounted) return;
+    setState(() => _saving = false);
+    notifier.advanceExitChallenge(passed: true);
   }
 
   @override
@@ -115,10 +146,16 @@ class _ExitChallengeViewState extends ConsumerState<ExitChallengeView> {
                   borderRadius: BorderRadius.circular(LQRadius.chip),
                 ),
                 child: Text(
-                  'Exit Challenge · Level ${widget.questLevel}',
+                  'Exit Challenge · Stage ${widget.questLevel}.${stagesInQuestLevel(widget.questLevel)}',
                   style: LQTypography.label(colors).copyWith(color: colors.brand),
                   textAlign: TextAlign.center,
                 ),
+              ),
+              const SizedBox(height: LQSpacing.sm),
+              Text(
+                'Review from stages ${widget.questLevel}.1–${widget.questLevel}.${stagesInQuestLevel(widget.questLevel) - 1} · score 80% or higher to pass',
+                style: LQTypography.caption(colors),
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: LQSpacing.lg),
               GuideMascot(guide: guide, size: 100, state: PennyGuideState.think),
@@ -206,10 +243,12 @@ class _ExitChallengeViewState extends ConsumerState<ExitChallengeView> {
                 ),
                 const Spacer(flex: 2),
                 LQButton(
-                  label: passed ? 'Continue' : 'Back to map',
+                  label: passed
+                      ? (_saving ? 'Saving…' : 'Continue')
+                      : 'Back to map',
                   colors: colors,
                   expanded: true,
-                  onPressed: () => _continue(passed),
+                  onPressed: _saving ? null : () => _continue(passed),
                 ),
               ],
             ],

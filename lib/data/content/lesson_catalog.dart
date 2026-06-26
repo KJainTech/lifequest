@@ -15,6 +15,7 @@ export 'curriculum_builder.dart'
         firstOrderForQuestLevel,
         stageCoinPreview,
         stageLabel,
+        isExitChallengeStage,
         tierLabel,
         timeGateLabel;
 

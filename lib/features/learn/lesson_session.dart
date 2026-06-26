@@ -102,6 +102,15 @@ class LessonSessionNotifier extends StateNotifier<LessonSession?> {
   LessonSessionNotifier() : super(null);
 
   void start(String lessonId) {
+    final meta = lessonById(lessonId);
+    if (meta != null && isExitChallengeStage(meta)) {
+      state = LessonSession(
+        lessonId: lessonId,
+        phase: LessonPhase.exitChallenge,
+        pendingQuestLevel: meta.questLevel,
+      );
+      return;
+    }
     state = LessonSession(lessonId: lessonId);
   }
 
@@ -191,14 +200,7 @@ class LessonSessionNotifier extends StateNotifier<LessonSession?> {
       state = state!.copyWith(phase: LessonPhase.cityFinale);
       return;
     }
-
-    if (meta.stageInLevel == stagesInQuestLevel(meta.questLevel)) {
-      state = state!.copyWith(
-        phase: LessonPhase.exitChallenge,
-        pendingQuestLevel: meta.questLevel,
-      );
-      return;
-    }
+    // Exit Challenge is stage N.M (last stage per level) — opened directly, not after reward.
   }
 
   void advanceExitChallenge({required bool passed}) {

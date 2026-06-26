@@ -194,8 +194,13 @@ String timeGateLabel(int questLevel) {
 /// Stage label shown in UI — e.g. 1.1 for Level 1 Stage 1.
 String stageLabel(LessonMeta meta) => '${meta.questLevel}.${meta.stageInLevel}';
 
+/// Final stage of each level — level-end Exit Challenge (not a full lesson loop).
+bool isExitChallengeStage(LessonMeta meta) =>
+    meta.stageInLevel == stagesInQuestLevel(meta.questLevel);
+
 /// Estimated coins on a strong finish (quiz + game) — shown on the quest map.
 int stageCoinPreview(LessonMeta meta) {
+  if (isExitChallengeStage(meta)) return 25;
   if (meta.questLevel == 1) {
     return switch (meta.stageInLevel) {
       1 || 2 => 10,
@@ -203,7 +208,6 @@ int stageCoinPreview(LessonMeta meta) {
       _ => 25,
     };
   }
-  final last = stagesInQuestLevel(meta.questLevel);
   final base = 8 + meta.questLevel * 2;
-  return meta.stageInLevel == last ? base + 10 : base;
+  return base;
 }
