@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>LifeQuest — Product Guide (Kid · Parent · Admin)</title>
+  <style>
+    @page { margin: 18mm; }
+    @media print {
+      .no-print { display: none; }
+      section { break-inside: avoid; }
+    }
+    :root {
+      --brand: #28B77F;
+      --gold: #FFB018;
+      --ink: #152620;
+      --muted: #5C7268;
+      --surface: #F4FAF7;
+    }
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      color: var(--ink);
+      line-height: 1.55;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 24px;
+      background: #fff;
+    }
+    h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+    h2 {
+      font-size: 1.25rem;
+      color: var(--brand);
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 6px;
+      margin-top: 2rem;
+    }
+    h3 { font-size: 1.05rem; margin-top: 1.25rem; }
+    .subtitle { color: var(--muted); margin-bottom: 1.5rem; }
+    .badge {
+      display: inline-block;
+      background: var(--surface);
+      border: 1px solid var(--brand);
+      color: var(--brand);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-right: 6px;
+    }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.92rem; }
+    th, td { border: 1px solid #dce8e2; padding: 8px 10px; text-align: left; }
+    th { background: var(--surface); }
+    ul { padding-left: 1.25rem; }
+    li { margin: 4px 0; }
+    .callout {
+      background: var(--surface);
+      border-left: 4px solid var(--brand);
+      padding: 12px 16px;
+      margin: 16px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .url { font-family: monospace; font-size: 0.88rem; word-break: break-all; }
+    footer { margin-top: 3rem; font-size: 0.85rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <p class="no-print callout">To save as PDF: open in Chrome → Print → Save as PDF.</p>
+
+  <h1>LifeQuest Product Guide</h1>
+  <p class="subtitle">Financial literacy for ages 5–17 · UAE-first · AED currency · v1.7.0</p>
+  <p><strong>Kid app:</strong> <span class="url">https://lifequest-97bf9.web.app</span></p>
+  <p><strong>Parent dashboard:</strong> <span class="url">https://lifequest-dashboard.web.app</span></p>
+
+  <h2>How LifeQuest works (everyone)</h2>
+  <p>LifeQuest is a <strong>proficiency-based</strong> money game. Children progress through <strong>6 levels</strong> and <strong>48 stages</strong>, not by age alone — screening and quiz mastery set the path.</p>
+  <div class="callout">
+    <strong>Lesson loop (strict):</strong> Read → Quiz → Game → Reward. The game cannot be “won” without understanding the lesson concept.
+  </div>
+  <ul>
+    <li><strong>Currency:</strong> All real-money examples use <strong>AED</strong> (UAE dirhams). In-app “coins” are game rewards, not dollars.</li>
+    <li><strong>City:</strong> Each completed stage builds a plot in your personal city.</li>
+    <li><strong>Economy:</strong> XP, coins, streak, and LQ score are server-authoritative — the app never fakes rewards.</li>
+    <li><strong>No competition:</strong> No leaderboards or addictive loops (school-safe design).</li>
+  </ul>
+
+  <h2>Level 1 · Coin Keeper — stage names</h2>
+  <table>
+    <tr><th>Stage</th><th>Title</th><th>What they learn</th><th>Typical reward</th></tr>
+    <tr><td>1.1</td><td>Counting the Cost</td><td>Add up prices in AED before spending</td><td>+10 coins</td></tr>
+    <tr><td>1.2</td><td>The Trade-off</td><td>Choosing one thing means giving up another</td><td>+10 coins</td></tr>
+    <tr><td>1.3</td><td>Needs Before Wants</td><td>Must-haves before fun extras</td><td>+15 coins</td></tr>
+    <tr><td>1.4</td><td>Work and Get Paid</td><td>Earning AED through jobs and effort</td><td>+15 coins</td></tr>
+    <tr><td>1.5</td><td>Exit Challenge</td><td>Level 1 review — 80%+ quiz mastery to advance</td><td>+25 coins</td></tr>
+  </table>
+  <p>Levels 2–6 follow the same pattern with more stages (L2=6 … L6=11). Unlocking the next level requires completing all prior stages and <strong>80% average quiz mastery</strong>, plus time gates on higher levels.</p>
+
+  <h2><span class="badge">Kid app</span> What you see &amp; do</h2>
+  <h3>Tabs</h3>
+  <ul>
+    <li><strong>Home</strong> — streak, next stage, city preview</li>
+    <li><strong>Learn</strong> — <strong>City map</strong> (default) or list view; tap a stage to play</li>
+    <li><strong>City</strong> — full map, tap plots to build / replay lessons</li>
+    <li><strong>Awards</strong> — quest ladder L1–L6, badges, stats</li>
+    <li><strong>Me</strong> — profile, wallet, parent gate</li>
+  </ul>
+  <h3>City map (Learn tab)</h3>
+  <p>Stages appear on a zigzag path over your skyline. Green check = done; highlighted card = your current stage. Tap an unlocked stage to start the lesson loop.</p>
+  <h3>Lesson game</h3>
+  <p>After each quiz, kids play <strong>Lemon City</strong> — set a price in AED, serve customers, and learn profit (price must stay above cost).</p>
+  <h3>Demo child login</h3>
+  <p>See <code>docs/DEMO_ACCOUNTS.md</code> — e.g. <strong>vidya.child@lifequest.app</strong> / <strong>Vidya2026!</strong> → Splash → “Play as Vidya (demo)”.</p>
+
+  <h2><span class="badge">Parent</span> Dashboard</h2>
+  <p class="url">https://lifequest-dashboard.web.app</p>
+  <ul>
+    <li>Sign in and link your child’s account (or use demo parent with pre-linked Vidya).</li>
+    <li>View: stages completed, quiz mastery, streak, session time, city progress.</li>
+    <li>Cannot edit child XP/coins — read-only progress mirror.</li>
+    <li>Demo: <strong>vidya.parent@lifequest.app</strong> → “Fill demo login”.</li>
+  </ul>
+
+  <h2><span class="badge">Admin</span> Console</h2>
+  <p class="url">https://lifequest-admin.web.app/login</p>
+  <ul>
+    <li>Requires admin custom claim on Firebase Auth.</li>
+    <li>Content refresh, user lookup, economy oversight (AED-first copy in generated lessons).</li>
+    <li>Demo: <strong>vidya.admin@lifequest.app</strong>.</li>
+  </ul>
+
+  <h2>Design &amp; quality rules</h2>
+  <ul>
+    <li>Colours: brand green <code>#28B77F</code>, gold <code>#FFB018</code>, teal info <code>#00BEAA</code> — no off-brand purple/navy in kid UI.</li>
+    <li>Animations: spring press (0.96 scale), celebrate on rewards, reduced-motion respected.</li>
+    <li>Games teach one concept each; Lemon City requires price &gt; cost to win (profit).</li>
+  </ul>
+
+  <h2>Testing checklist</h2>
+  <ol>
+    <li>Learn tab → City map shows Level 1 stages 1.1–1.5 with correct titles.</li>
+    <li>Tap stage 1.1 → Read → Quiz → Game (Pick the Deal) → Reward.</li>
+    <li>City tab → plot builds after completion.</li>
+    <li>Parent dashboard loads linked child without permission errors.</li>
+    <li>Run <code>flutter test</code> — all unit tests pass.</li>
+  </ol>
+
+  <footer>
+    LifeQuest · UAE-first financial literacy · Print date: June 2026<br />
+    Source of truth: <code>docs/BIBLE.md</code> · Support: project maintainers
+  </footer>
+</body>
+</html>

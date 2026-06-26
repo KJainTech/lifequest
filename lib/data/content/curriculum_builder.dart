@@ -39,29 +39,29 @@ const kMasteryQuizScore = 4;
 
 const kLegacyFirstSix = <({String title, String subtitle, String concept})>[
   (
-    title: 'Needs vs Wants',
-    subtitle: 'Needs first — wants can wait',
-    concept: 'needs_vs_wants',
+    title: 'Counting the Cost',
+    subtitle: 'Add up what things really cost in AED',
+    concept: 'counting_cost',
   ),
   (
-    title: 'Saving Jar',
-    subtitle: 'Coins for a goal, not for today',
-    concept: 'saving_jar',
+    title: 'The Trade-off',
+    subtitle: 'When you pick one thing, you give up another',
+    concept: 'trade_off',
   ),
   (
-    title: 'Smart Spending',
-    subtitle: 'Spend on purpose, not impulse',
-    concept: 'smart_spending',
+    title: 'Needs Before Wants',
+    subtitle: 'Must-haves before fun spending',
+    concept: 'needs_before_wants',
   ),
   (
-    title: 'Budget Basics',
-    subtitle: 'Give every coin a job',
-    concept: 'budget_basics',
+    title: 'Work and Get Paid',
+    subtitle: 'Earn AED by helping out and doing jobs',
+    concept: 'work_and_paid',
   ),
   (
-    title: 'Cost of Goods',
-    subtitle: 'What it takes to make something',
-    concept: 'cost_of_goods',
+    title: 'Exit Challenge',
+    subtitle: 'Show what you learned in Level 1',
+    concept: 'exit_challenge',
   ),
   (
     title: 'Profit = Revenue − Cost',
@@ -72,11 +72,11 @@ const kLegacyFirstSix = <({String title, String subtitle, String concept})>[
 
 const kLevelStageTitles = <List<({String title, String subtitle})>>[
   [
-    (title: 'Hello Coins', subtitle: 'Meet money and where it lives'),
-    (title: 'Needs First', subtitle: 'Must-haves before fun spending'),
-    (title: 'Want Later', subtitle: 'Extras can wait their turn'),
-    (title: 'Coin Count', subtitle: 'Add up small piles fast'),
-    (title: 'First Choice', subtitle: 'Pick one smart spend'),
+    (title: 'Counting the Cost', subtitle: 'Add up what things really cost in AED'),
+    (title: 'The Trade-off', subtitle: 'When you pick one thing, you give up another'),
+    (title: 'Needs Before Wants', subtitle: 'Must-haves before fun spending'),
+    (title: 'Work and Get Paid', subtitle: 'Earn AED by helping out and doing jobs'),
+    (title: 'Exit Challenge', subtitle: 'Show what you learned in Level 1'),
   ],
   [
     (title: 'Compare Prices', subtitle: 'Same snack, different cost'),
@@ -189,4 +189,21 @@ String timeGateLabel(int questLevel) {
   if (days < 30) return '$days-day gate';
   if (days < 90) return '${days ~/ 30} month gate';
   return '${days ~/ 30} months gate';
+}
+
+/// Stage label shown in UI — e.g. 1.1 for Level 1 Stage 1.
+String stageLabel(LessonMeta meta) => '${meta.questLevel}.${meta.stageInLevel}';
+
+/// Estimated coins on a strong finish (quiz + game) — shown on the quest map.
+int stageCoinPreview(LessonMeta meta) {
+  if (meta.questLevel == 1) {
+    return switch (meta.stageInLevel) {
+      1 || 2 => 10,
+      3 || 4 => 15,
+      _ => 25,
+    };
+  }
+  final last = stagesInQuestLevel(meta.questLevel);
+  final base = 8 + meta.questLevel * 2;
+  return meta.stageInLevel == last ? base + 10 : base;
 }

@@ -13,7 +13,9 @@ import '../../data/providers/app_providers.dart';
 import '../../design/lq_card.dart';
 import '../../design/lq_immersive_scene.dart';
 import '../../features/city/city_buildings.dart';
+import '../../design/lq_city_quest_map.dart';
 import '../../features/onboarding/auth_service.dart';
+import '../../app/bootstrap/firebase_providers.dart';
 
 /// Learn tab — 6 levels · 48 stages · proficiency-gated path.
 class LearnScreen extends ConsumerStatefulWidget {
@@ -25,6 +27,7 @@ class LearnScreen extends ConsumerStatefulWidget {
 
 class _LearnScreenState extends ConsumerState<LearnScreen> {
   int _expandedLevel = 1;
+  bool _mapView = true;
   final _scrollController = ScrollController();
   final _currentNodeKey = GlobalKey();
 
@@ -53,6 +56,7 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
   Widget build(BuildContext context) {
     final colors = ref.watch(lqColorsProvider);
     final profile = ref.watch(userProfileProvider).valueOrNull;
+    final stats = ref.watch(userStatsProvider).valueOrNull ?? UserStats.empty;
     final lessonsAsync = ref.watch(userLessonsProvider);
     final progressList = lessonsAsync.valueOrNull ?? const [];
     final placement = LessonProgression.displayQuestLevel(progressList, profile);
@@ -127,7 +131,11 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
                           ],
                         ),
                         const SizedBox(height: LQSpacing.lg),
-                        _ConceptGamesBanner(colors: colors),
+                        _ViewToggle(
+                          colors: colors,
+                          mapView: _mapView,
+                          onChanged: (v) => setState(() => _mapView = v),
+                        ),
                         const SizedBox(height: LQSpacing.lg),
                         _LevelPicker(
                           colors: colors,
@@ -165,41 +173,146 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
                     ),
                   ),
                 ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, i) {
-                      final meta = lessonsForQuestLevel(_expandedLevel)[i];
-                      final status = LessonProgression.statusFor(meta, progress, profile);
-                      final isCurrent = current?.id == meta.id;
-                      final stored = progress
-                          .where((p) => p.lessonId == meta.id)
-                          .firstOrNull;
-                      return Padding(
-                        padding: EdgeInsets.only(
-                          left: LQSpacing.gutter,
-                          right: LQSpacing.gutter,
-                          bottom: LQSpacing.md,
-                        ),
-                        child: _LessonNode(
-                          key: isCurrent ? _currentNodeKey : null,
-                          colors: colors,
-                          meta: meta,
-                          status: status,
-                          isCurrent: isCurrent,
-                          quizScore: stored?.quizScore,
-                          onTap: status == LessonStatus.locked || !levelUnlocked
-                              ? null
-                              : () => context.push('/lesson/${meta.id}'),
-                        ).animate(delay: (i * 35).ms).fadeIn().slideX(begin: 0.04, end: 0),
-                      );
-                    },
-                    childCount: stageCount,
+                if (_mapView)
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: LQSpacing.gutter),
+                      child: LQCityQuestMap(
+                        colors: colors,
+                        questLevel: _expandedLevel,
+                        progress: progress,
+                        profile: profile,
+                        levelUnlocked: levelUnlocked,
+                        levelPct: levelPct,
+                        currentLessonId: current?.id,
+                        coins: stats.coins,
+                        currentNodeKey: _currentNodeKey,
+                        onStageTap: (meta) {
+                          final status = LessonProgression.statusFor(meta, progress, profile);
+                          if (status != LessonStatus.locked && levelUnlocked) {
+                            context.push('/lesson/${meta.id}');
+                          }
+                        },
+                      ),
+                    ),
+                  )
+                else
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, i) {
+                        final meta = lessonsForQuestLevel(_expandedLevel)[i];
+                        final status = LessonProgression.statusFor(meta, progress, profile);
+                        final isCurrent = current?.id == meta.id;
+                        final stored = progress
+                            .where((p) => p.lessonId == meta.id)
+                            .firstOrNull;
+                        return Padding(
+                          padding: EdgeInsets.only(
+                            left: LQSpacing.gutter,
+                            right: LQSpacing.gutter,
+                            bottom: LQSpacing.md,
+                          ),
+                          child: _LessonNode(
+                            key: isCurrent ? _currentNodeKey : null,
+                            colors: colors,
+                            meta: meta,
+                            status: status,
+                            isCurrent: isCurrent,
+                            quizScore: stored?.quizScore,
+                            onTap: status == LessonStatus.locked || !levelUnlocked
+                                ? null
+                                : () => context.push('/lesson/${meta.id}'),
+                          ).animate(delay: (i * 35).ms).fadeIn().slideX(begin: 0.04, end: 0),
+                        );
+                      },
+                      childCount: stageCount,
+                    ),
                   ),
-                ),
                 const SliverToBoxAdapter(child: SizedBox(height: 100)),
               ],
             );
           },
+        ),
+      ),
+    );
+  }
+}
+
+class _ViewToggle extends StatelessWidget {
+  const _ViewToggle({
+    required this.colors,
+    required this.mapView,
+    required this.onChanged,
+  });
+
+  final LQColors colors;
+  final bool mapView;
+  final ValueChanged<bool> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        color: colors.surfaceMuted,
+        borderRadius: BorderRadius.circular(LQRadius.pill),
+        border: Border.all(color: colors.border),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: _ToggleChip(
+              colors: colors,
+              label: 'City map',
+              selected: mapView,
+              onTap: () => onChanged(true),
+            ),
+          ),
+          Expanded(
+            child: _ToggleChip(
+              colors: colors,
+              label: 'List',
+              selected: !mapView,
+              onTap: () => onChanged(false),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ToggleChip extends StatelessWidget {
+  const _ToggleChip({
+    required this.colors,
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
+
+  final LQColors colors;
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        decoration: BoxDecoration(
+          color: selected ? colors.brand : Colors.transparent,
+          borderRadius: BorderRadius.circular(LQRadius.pill),
+        ),
+        child: Text(
+          label,
+          textAlign: TextAlign.center,
+          style: LQTypography.label(colors).copyWith(
+            color: selected ? colors.surface : colors.inkSoft,
+            fontWeight: FontWeight.w700,
+          ),
         ),
       ),
     );
@@ -478,7 +591,7 @@ class _LessonNode extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Stage ${meta.stageInLevel}',
+                  'Stage ${stageLabel(meta)}',
                   style: LQTypography.caption(colors).copyWith(color: colors.brand),
                 ),
                 Text(meta.title, style: LQTypography.h3(colors)),
@@ -571,52 +684,5 @@ extension _FirstOrNull<E> on Iterable<E> {
   E? get firstOrNull {
     final it = iterator;
     return it.moveNext() ? it.current : null;
-  }
-}
-
-class _ConceptGamesBanner extends StatelessWidget {
-  const _ConceptGamesBanner({required this.colors});
-
-  final LQColors colors;
-
-  @override
-  Widget build(BuildContext context) {
-    return LQCard(
-      colors: colors,
-      onTap: () => context.push('/concept-games'),
-      child: Row(
-        children: [
-          Container(
-            width: 48,
-            height: 48,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(LQRadius.control),
-              gradient: const LinearGradient(
-                colors: [
-                  Color(0xFF2D9F6F),
-                  Color(0xFF4A7FD4),
-                  Color(0xFFE07A4A),
-                ],
-              ),
-            ),
-            child: const Icon(Icons.sports_esports_outlined, color: Colors.white),
-          ),
-          const SizedBox(width: LQSpacing.md),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Concept Games', style: LQTypography.h3(colors)),
-                Text(
-                  '5 mini-games — needs, saving, budget, deals & Lemon City',
-                  style: LQTypography.bodySm(colors),
-                ),
-              ],
-            ),
-          ),
-          Icon(Icons.chevron_right_rounded, color: colors.inkSoft),
-        ],
-      ),
-    );
   }
 }

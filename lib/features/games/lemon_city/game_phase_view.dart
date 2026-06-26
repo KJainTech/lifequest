@@ -7,7 +7,6 @@ import '../../../app/theme/lq_theme.dart';
 import '../../../core/tokens/lq_tokens.dart';
 import '../../../core/tokens/lq_typography.dart';
 import '../../../data/content/concept_skills.dart';
-import '../../../data/content/lesson_catalog.dart';
 import '../../../data/models/lesson_content.dart';
 import '../../../data/repositories/content_repository.dart';
 import '../../../design/guide_mascot.dart';
@@ -15,9 +14,6 @@ import '../../../design/lq_canvas.dart';
 import '../../../design/penny_mascot.dart';
 import '../../../features/onboarding/auth_service.dart';
 import '../../learn/lesson_session.dart';
-import '../concept/concept_game_result.dart';
-import '../concept/concept_game_types.dart';
-import '../concept/concept_mini_game_player.dart';
 import 'lemon_city_game.dart';
 
 /// GAME phase — Lemon City wrapper per §5.10
@@ -37,40 +33,6 @@ class _GamePhaseViewState extends ConsumerState<GamePhaseView> {
   void dispose() {
     _game?.disposeGame();
     super.dispose();
-  }
-
-  Future<void> _onConceptGameFinished(ConceptGameResult result) async {
-    if (_submitting) return;
-    setState(() {
-      _submitting = true;
-      _guideMessage = result.message;
-    });
-
-    try {
-      final session = ref.read(lessonSessionProvider)!;
-      final stats = ref.read(userStatsProvider).valueOrNull;
-      final difficulty = gameDifficultyForConceptSkills(
-        stats?.conceptSkills ?? const {},
-        session.lessonId,
-      );
-      await ref.read(cloudFunctionsProvider).submitGamePlay(
-            lessonId: session.lessonId,
-            profit: result.profit,
-            revenue: result.revenue,
-            cost: result.cost,
-            won: result.won,
-            difficulty: difficulty,
-          );
-    } catch (_) {}
-
-    if (!mounted) return;
-    ref.read(lessonSessionProvider.notifier).setGameResult(
-          won: result.won,
-          profit: result.profit,
-          revenue: result.revenue,
-          cost: result.cost,
-        );
-    setState(() => _submitting = false);
   }
 
   Future<void> _onGameFinished(LemonCityResult result) async {
@@ -142,20 +104,6 @@ class _GamePhaseViewState extends ConsumerState<GamePhaseView> {
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (e, _) => Center(child: Text('Let\'s try that again.')),
       data: (content) {
-        final meta = lessonById(session.lessonId);
-        final gameId = meta != null ? conceptGameFor(meta) : ConceptGameId.lemonCity;
-
-        if (gameId != ConceptGameId.lemonCity) {
-          if (_submitting && session.phase == LessonPhase.reward) {
-            return const SizedBox.shrink();
-          }
-          return ConceptMiniGamePlayer(
-            gameId: gameId,
-            colors: colors,
-            onFinished: _onConceptGameFinished,
-          );
-        }
-
         _initGame(content.gameConfig, session.lessonId);
         final game = _game!;
 

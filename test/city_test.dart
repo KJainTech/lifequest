@@ -20,7 +20,7 @@ void main() {
 
   test('city has 48 building plots across 6 districts', () {
     expect(kCityBuildings.length, kTotalStages);
-    expect(cityBuildingForLesson('lesson_1')?.name, 'Needs vs Wants');
+    expect(cityBuildingForLesson('lesson_1')?.name, 'Counting the Cost');
     expect(cityBuildingForLesson('lesson_48')?.name, 'Graduation');
   });
 

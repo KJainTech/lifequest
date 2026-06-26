@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../features/games/concept/concept_game_practice_screen.dart';
-import '../features/games/concept/concept_game_types.dart';
-import '../features/games/concept/concept_games_hub_screen.dart';
 import '../features/money/money_hub_screen.dart';
 import '../features/faq/faq_screen.dart';
 import '../features/city/city_screen.dart';
@@ -47,9 +44,6 @@ final routerProvider = Provider<GoRouter>((ref) {
     redirect: (context, state) {
       final path = state.uri.path;
       if (path == '/' || path == '/showcase') return null;
-
-      // Concept games — open standalone from direct links (no onboarding gate).
-      if (path.startsWith('/concept-games')) return null;
 
       final user = ref.read(authProvider).valueOrNull;
       final profile = ref.read(userProfileProvider).valueOrNull;
@@ -142,18 +136,6 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/wallet',
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) => const WalletScreen(),
-      ),
-      GoRoute(
-        path: '/concept-games/:gameId',
-        parentNavigatorKey: _rootNavigatorKey,
-        builder: (context, state) => ConceptGamePracticeScreen(
-          gameId: conceptGameFromParam(state.pathParameters['gameId']),
-        ),
-      ),
-      GoRoute(
-        path: '/concept-games',
-        parentNavigatorKey: _rootNavigatorKey,
-        builder: (context, state) => const ConceptGamesHubScreen(),
       ),
       GoRoute(
         path: '/faq',

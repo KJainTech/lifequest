@@ -12,21 +12,21 @@ export const QUEST_LEVEL_NAMES = [
 ] as const;
 
 const LEGACY_FIRST_SIX = [
-  { title: 'Needs vs Wants', subtitle: 'Needs first — wants can wait' },
-  { title: 'Saving Jar', subtitle: 'Coins for a goal, not for today' },
-  { title: 'Smart Spending', subtitle: 'Spend on purpose, not impulse' },
-  { title: 'Budget Basics', subtitle: 'Give every coin a job' },
-  { title: 'Cost of Goods', subtitle: 'What it takes to make something' },
+  { title: 'Counting the Cost', subtitle: 'Add up what things really cost in AED' },
+  { title: 'The Trade-off', subtitle: 'When you pick one thing, you give up another' },
+  { title: 'Needs Before Wants', subtitle: 'Must-haves before fun spending' },
+  { title: 'Work and Get Paid', subtitle: 'Earn AED by helping out and doing jobs' },
+  { title: 'Exit Challenge', subtitle: 'Show what you learned in Level 1' },
   { title: 'Profit = Revenue − Cost', subtitle: 'Run your stand and learn when you earn' },
 ];
 
 const LEVEL_STAGE_TITLES: { title: string; subtitle: string }[][] = [
   [
-    { title: 'Hello Coins', subtitle: 'Meet money and where it lives' },
-    { title: 'Needs First', subtitle: 'Food and shelter before fun' },
-    { title: 'Want Later', subtitle: 'Fun stuff can wait' },
-    { title: 'Coin Count', subtitle: 'Add up small piles fast' },
-    { title: 'First Choice', subtitle: 'Pick one smart spend' },
+    { title: 'Counting the Cost', subtitle: 'Add up what things really cost in AED' },
+    { title: 'The Trade-off', subtitle: 'When you pick one thing, you give up another' },
+    { title: 'Needs Before Wants', subtitle: 'Must-haves before fun spending' },
+    { title: 'Work and Get Paid', subtitle: 'Earn AED by helping out and doing jobs' },
+    { title: 'Exit Challenge', subtitle: 'Show what you learned in Level 1' },
   ],
   [
     { title: 'Compare Prices', subtitle: 'Same snack, different cost' },

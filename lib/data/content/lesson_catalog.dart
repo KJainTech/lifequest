@@ -13,6 +13,8 @@ export 'curriculum_builder.dart'
         QuestTier,
         stagesInQuestLevel,
         firstOrderForQuestLevel,
+        stageCoinPreview,
+        stageLabel,
         tierLabel,
         timeGateLabel;
 
