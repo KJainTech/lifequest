@@ -12,10 +12,10 @@ export const QUEST_LEVEL_NAMES = [
 ] as const;
 
 const LEGACY_FIRST_SIX = [
-  { title: 'Needs vs Wants', subtitle: 'Spot the difference before you spend' },
-  { title: 'Saving Jar', subtitle: 'Set a goal and watch it grow' },
-  { title: 'Smart Spending', subtitle: 'Compare before you buy' },
-  { title: 'Budget Basics', subtitle: 'Plan your AED for the week' },
+  { title: 'Needs vs Wants', subtitle: 'Needs first — wants can wait' },
+  { title: 'Saving Jar', subtitle: 'Coins for a goal, not for today' },
+  { title: 'Smart Spending', subtitle: 'Spend on purpose, not impulse' },
+  { title: 'Budget Basics', subtitle: 'Give every coin a job' },
   { title: 'Cost of Goods', subtitle: 'What it takes to make something' },
   { title: 'Profit = Revenue − Cost', subtitle: 'Run your stand and learn when you earn' },
 ];

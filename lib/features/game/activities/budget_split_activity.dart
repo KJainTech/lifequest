@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../core/tokens/lq_tokens.dart';
 import '../../../core/tokens/lq_typography.dart';
+import '../../../data/content/money_concept_copy.dart';
 import '../../../design/lq_button.dart';
 
 /// Needs / Wants / Save sliders that sum to 100 — values stay until user changes them.
@@ -47,15 +48,13 @@ class _BudgetSplitActivityState extends State<BudgetSplitActivity> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
-          'Split 100% across needs, wants, and save',
-          style: LQTypography.caption(c).copyWith(color: c.inkSoft),
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: LQSpacing.md),
+        _IntroCard(colors: c, text: MoneyConceptCopy.budgetIntro),
+        const SizedBox(height: LQSpacing.lg),
         _SplitRow(
           colors: c,
-          label: 'Needs',
+          label: MoneyConceptCopy.needsTitle,
+          purpose: MoneyConceptCopy.needsPurpose,
+          example: MoneyConceptCopy.needsExample,
           value: _needs,
           accent: c.success,
           enabled: _correct == null,
@@ -63,7 +62,9 @@ class _BudgetSplitActivityState extends State<BudgetSplitActivity> {
         ),
         _SplitRow(
           colors: c,
-          label: 'Wants',
+          label: MoneyConceptCopy.wantsTitle,
+          purpose: MoneyConceptCopy.wantsPurpose,
+          example: MoneyConceptCopy.wantsExample,
           value: _wants,
           accent: c.coral,
           enabled: _correct == null,
@@ -71,7 +72,9 @@ class _BudgetSplitActivityState extends State<BudgetSplitActivity> {
         ),
         _SplitRow(
           colors: c,
-          label: 'Save',
+          label: MoneyConceptCopy.saveTitle,
+          purpose: MoneyConceptCopy.savePurpose,
+          example: MoneyConceptCopy.saveExample,
           value: _save,
           accent: c.brand,
           enabled: _correct == null,
@@ -79,7 +82,7 @@ class _BudgetSplitActivityState extends State<BudgetSplitActivity> {
         ),
         const SizedBox(height: LQSpacing.sm),
         Text(
-          'Total: $_total%',
+          'All three must add to 100% — Total: $_total%',
           style: LQTypography.label(c).copyWith(
             color: totalOk ? c.success : c.warn,
           ),
@@ -88,7 +91,7 @@ class _BudgetSplitActivityState extends State<BudgetSplitActivity> {
         if (_correct == null) ...[
           const SizedBox(height: LQSpacing.lg),
           LQButton(
-            label: 'Confirm split',
+            label: 'Confirm my plan',
             colors: c,
             expanded: true,
             enabled: totalOk,
@@ -97,7 +100,7 @@ class _BudgetSplitActivityState extends State<BudgetSplitActivity> {
         ] else if (_correct!) ...[
           const SizedBox(height: LQSpacing.md),
           Text(
-            'Strong budget split!',
+            'Great plan — essentials first, some fun, and coins for future-you.',
             style: LQTypography.bodySm(c).copyWith(color: c.success),
             textAlign: TextAlign.center,
           ).animate().fadeIn(),
@@ -111,7 +114,7 @@ class _BudgetSplitActivityState extends State<BudgetSplitActivity> {
         ] else ...[
           const SizedBox(height: LQSpacing.md),
           Text(
-            'Try needs ~50%, wants ~30%, save ~20% (must total 100%).',
+            'Try about 50% needs, 30% wants, 20% save — and make sure the total is 100%.',
             style: LQTypography.bodySm(c),
             textAlign: TextAlign.center,
           ),
@@ -134,10 +137,36 @@ class _BudgetSplitActivityState extends State<BudgetSplitActivity> {
   }
 }
 
+class _IntroCard extends StatelessWidget {
+  const _IntroCard({required this.colors, required this.text});
+
+  final LQColors colors;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(LQSpacing.md),
+      decoration: BoxDecoration(
+        color: colors.brand.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(LQRadius.control),
+        border: Border.all(color: colors.brand.withValues(alpha: 0.25)),
+      ),
+      child: Text(
+        text,
+        style: LQTypography.bodySm(colors),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+}
+
 class _SplitRow extends StatelessWidget {
   const _SplitRow({
     required this.colors,
     required this.label,
+    required this.purpose,
+    required this.example,
     required this.value,
     required this.accent,
     required this.enabled,
@@ -146,6 +175,8 @@ class _SplitRow extends StatelessWidget {
 
   final LQColors colors;
   final String label;
+  final String purpose;
+  final String example;
   final int value;
   final Color accent;
   final bool enabled;
@@ -159,9 +190,22 @@ class _SplitRow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(label, style: LQTypography.label(colors).copyWith(color: accent)),
-              const Spacer(),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(label, style: LQTypography.label(colors).copyWith(color: accent)),
+                    const SizedBox(height: 2),
+                    Text(purpose, style: LQTypography.caption(colors)),
+                    Text(
+                      example,
+                      style: LQTypography.micro(colors).copyWith(color: colors.inkSoft),
+                    ),
+                  ],
+                ),
+              ),
               Text('$value%', style: LQTypography.h3(colors).copyWith(color: accent)),
             ],
           ),

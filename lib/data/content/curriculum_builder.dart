@@ -40,22 +40,22 @@ const kMasteryQuizScore = 4;
 const kLegacyFirstSix = <({String title, String subtitle, String concept})>[
   (
     title: 'Needs vs Wants',
-    subtitle: 'Spot the difference before you spend',
+    subtitle: 'Needs first — wants can wait',
     concept: 'needs_vs_wants',
   ),
   (
     title: 'Saving Jar',
-    subtitle: 'Set a goal and watch it grow',
+    subtitle: 'Coins for a goal, not for today',
     concept: 'saving_jar',
   ),
   (
     title: 'Smart Spending',
-    subtitle: 'Compare before you buy',
+    subtitle: 'Spend on purpose, not impulse',
     concept: 'smart_spending',
   ),
   (
     title: 'Budget Basics',
-    subtitle: 'Plan your AED for the week',
+    subtitle: 'Give every coin a job',
     concept: 'budget_basics',
   ),
   (
@@ -73,8 +73,8 @@ const kLegacyFirstSix = <({String title, String subtitle, String concept})>[
 const kLevelStageTitles = <List<({String title, String subtitle})>>[
   [
     (title: 'Hello Coins', subtitle: 'Meet money and where it lives'),
-    (title: 'Needs First', subtitle: 'Food and shelter before fun'),
-    (title: 'Want Later', subtitle: 'Fun stuff can wait'),
+    (title: 'Needs First', subtitle: 'Must-haves before fun spending'),
+    (title: 'Want Later', subtitle: 'Extras can wait their turn'),
     (title: 'Coin Count', subtitle: 'Add up small piles fast'),
     (title: 'First Choice', subtitle: 'Pick one smart spend'),
   ],
@@ -83,7 +83,7 @@ const kLevelStageTitles = <List<({String title, String subtitle})>>[
     (title: 'Wait a Day', subtitle: 'Sleep on big wants'),
     (title: 'Deal Detective', subtitle: 'Spot real vs fake deals'),
     (title: 'Shopping List', subtitle: 'Stick to your plan'),
-    (title: 'Small Budget', subtitle: 'AED 20 for the week'),
+    (title: 'Small Budget', subtitle: 'Split AED 20 into jobs'),
     (title: 'Spend Smart', subtitle: 'Every dirham has a job'),
   ],
   [
@@ -92,8 +92,8 @@ const kLevelStageTitles = <List<({String title, String subtitle})>>[
     (title: 'Oops Fix', subtitle: 'Adjust when you overspend'),
     (title: 'Needs Bucket', subtitle: 'Protect essentials first'),
     (title: 'Review Day', subtitle: 'Look back and learn'),
-    (title: 'Goal Glow', subtitle: 'Name your saving dream'),
-    (title: 'Jar Rules', subtitle: 'Every coin has a job'),
+    (title: 'Goal Glow', subtitle: 'Name what your jar is for'),
+    (title: 'Jar Rules', subtitle: 'Spend, Save, and Give jars'),
   ],
   [
     (title: 'Stand Setup', subtitle: 'Cost to make one cup'),

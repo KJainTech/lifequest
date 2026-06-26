@@ -98,7 +98,7 @@ class MoneyHubScreen extends ConsumerWidget {
                     LQBalanceHero(
                       colors: colors,
                       coins: snap.coins,
-                      subtitle: 'Coins available to use',
+                      subtitle: '${snap.availableCoins} to spend · ${snap.savingsJar} in save jar',
                     ),
                     const SizedBox(height: LQSpacing.xxl),
                     GridView.count(
@@ -124,7 +124,7 @@ class MoneyHubScreen extends ConsumerWidget {
                         LQMoneyFeatureTile(
                           colors: colors,
                           title: 'Savings',
-                          subtitle: '${snap.savingsJar} coins in jar',
+                          subtitle: '${snap.savingsJar} coins for goals — not for spending today',
                           icon: Icons.savings_rounded,
                           iconBg: colors.blue,
                           onTap: () => context.go('/awards'),

@@ -60,19 +60,19 @@ LessonContent _lesson1(String ageBand) {
     readParagraphs: [
       ReadParagraph(
         text: young
-            ? 'A **need** is something you must have to live — like food, water, and a safe home.'
-            : 'Needs are essentials: food, shelter, clothes for school, and transport to get there.',
+            ? 'A **need** is something you must have to stay healthy and safe — food, water, school supplies, and a home.'
+            : '**Needs** are must-pay costs: food, shelter, clothes for school, and getting there safely.',
       ),
       ReadParagraph(
         text: young
-            ? 'A **want** is something fun or extra — like a fancy toy, candy, or a new game skin.'
-            : 'Wants are extras you could skip for now — snacks, trendy gadgets, or in-game upgrades.',
+            ? 'A **want** is extra fun — a toy, candy, or game skin. Nice to have, but you could wait.'
+            : '**Wants** are optional extras — snacks, trendy gear, or in-app upgrades. Fun, not required.',
       ),
       ReadParagraph(
-        text: 'Before you spend, ask: "Do I **need** this or **want** this?" Needs come first!',
+        text: '**Spending** means using coins now. Before you spend, ask: "Is this a need or a want?" Pay needs first.',
       ),
       ReadParagraph(
-        text: 'In Lemon City you will price drinks wisely — just like choosing needs before wants.',
+        text: 'In Lemon City you will choose prices wisely — just like picking needs before wants in real life.',
       ),
     ],
     quizQuestions: _quiz1(),
@@ -88,18 +88,18 @@ LessonContent _lesson2(String ageBand) {
     title: 'Saving Jar',
     readParagraphs: [
       ReadParagraph(
-        text: 'A **saving jar** holds money for a goal — a book, a bike, or a family trip.',
+        text: 'A **saving jar** is for money you do **not** spend today. It sits aside for something you want later.',
       ),
       ReadParagraph(
         text: young
-            ? 'Put a little in every time you get coins. Small drops fill a big jar!'
-            : 'Pay yourself first: move a slice of every coin pile into the jar before spending.',
+            ? 'Pick one goal — a book, bike, or trip. Drop a few coins in the jar each time you get allowance.'
+            : 'Name one goal with a target and date — e.g. "AED 50 by Friday." Add a slice every time money arrives.',
       ),
       ReadParagraph(
-        text: 'Goals need a **target** and a **deadline**. "AED 50 by Friday" beats "save someday."',
+        text: '**Save first, spend second.** Move coins to the jar before buying wants — that is how big goals happen.',
       ),
       ReadParagraph(
-        text: 'Run your stand in Lemon City — keep some profit for your jar, not just spending money.',
+        text: 'In Lemon City, keep part of your stand profit for the jar, not just pocket money for today.',
       ),
     ],
     quizQuestions: _quiz2(),
@@ -115,18 +115,18 @@ LessonContent _lesson3(String ageBand) {
     title: 'Smart Spending',
     readParagraphs: [
       ReadParagraph(
-        text: 'Smart spenders **compare** before they buy — same item, different prices.',
+        text: '**Smart spending** means using coins on purpose — not because an ad or friend rushed you.',
       ),
       ReadParagraph(
-        text: 'Check **quality** too: cheap shoes that break fast can cost more over time.',
+        text: 'Compare before you buy: same item, different shops, different prices. Check quality too.',
       ),
       ReadParagraph(
         text: young
-            ? 'Wait 24 hours on big wants. If you still want it tomorrow, maybe it is worth it.'
+            ? 'On big wants, wait one day. If you still want it tomorrow, it may be worth your coins.'
             : 'Use the 24-hour rule on wants over AED 20 — impulse fades, good choices stay.',
       ),
       ReadParagraph(
-        text: 'In Lemon City, pick a price customers will pay **and** that covers your costs.',
+        text: 'In Lemon City, pick a price customers will pay **and** that covers what the drink cost you.',
       ),
     ],
     quizQuestions: _quiz3(),
@@ -142,18 +142,18 @@ LessonContent _lesson4(String ageBand) {
     title: 'Budget Basics',
     readParagraphs: [
       ReadParagraph(
-        text: 'A **budget** is a plan for your money — how much goes to needs, saves, and fun.',
+        text: 'A **budget** is a plan that gives every coin a job before you spend — needs, save, and wants.',
       ),
       ReadParagraph(
         text: young
-            ? 'Try the **3 jars**: Spend, Save, Share. Split your coins when they arrive.'
-            : 'A simple split: 50% needs, 30% goals, 20% fun — adjust with your family.',
+            ? 'Try three jars: **Spend** (this week\'s needs and wants), **Save** (your goal jar), **Share** (helping others).'
+            : 'A simple split: about 50% needs, 30% wants, 20% save — adjust with your family.',
       ),
       ReadParagraph(
-        text: 'Track what you spend for one week. You cannot improve what you do not measure.',
+        text: '**Needs** cover must-haves. **Save** is for future-you. **Wants** are fun left after the first two.',
       ),
       ReadParagraph(
-        text: 'Your Lemon City day is a mini-budget: cost, price, and profit all in one stand.',
+        text: 'Your Lemon City stand is a mini-budget: what you spend to make drinks, what you charge, and what you keep.',
       ),
     ],
     quizQuestions: _quiz4(),
@@ -294,8 +294,8 @@ List<QuizQuestion> _quiz2() => [
         id: 'q1',
         level: CognitiveLevel.recall,
         prompt: 'What is a saving jar for?',
-        options: ['Hiding coins forever', 'A goal you are working toward', 'Paying strangers', 'Buying snacks only'],
-        explanation: 'A jar tracks money for a specific goal.',
+        options: ['Spending on snacks today', 'A goal you are working toward', 'Paying strangers', 'Hiding coins forever'],
+        explanation: 'The jar holds coins for a future goal — not for spending right now.',
       ),
       const QuizQuestion(
         id: 'q2',

@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
+import '../../../data/content/money_concept_copy.dart';
 import '../../../core/tokens/lq_tokens.dart';
 import '../../../core/tokens/lq_typography.dart';
 import '../../../data/models/stage_activity.dart';
 import '../../../design/lq_button.dart';
 import '../../../design/lq_quiz_choice.dart';
+
+String? _bucketHint(String label) {
+  final lower = label.toLowerCase();
+  if (lower.contains('need')) return MoneyConceptCopy.needsBucketHint;
+  if (lower.contains('want')) return MoneyConceptCopy.wantsBucketHint;
+  return null;
+}
 
 class DragDropBucketActivity extends StatefulWidget {
   const DragDropBucketActivity({
@@ -47,7 +55,9 @@ class _DragDropBucketActivityState extends State<DragDropBucketActivity> {
       } else {
         _bucketB.add(item);
       }
-      _feedback = ok ? 'Nice sort!' : 'Think: need or want?';
+      _feedback = ok
+          ? 'Right bucket — needs are must-haves, wants are extras.'
+          : 'Needs = must-haves (food, school). Wants = fun extras.';
     });
     if (_remaining.isEmpty) {
       setState(() => _done = true);
@@ -61,7 +71,7 @@ class _DragDropBucketActivityState extends State<DragDropBucketActivity> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          'Drag each item into the right bucket',
+          'Sort each item — needs keep you going, wants are optional fun.',
           style: LQTypography.caption(c).copyWith(color: c.inkSoft),
           textAlign: TextAlign.center,
         ),
@@ -72,6 +82,7 @@ class _DragDropBucketActivityState extends State<DragDropBucketActivity> {
               child: _BucketColumn(
                 colors: c,
                 label: widget.activity.dragTargetA,
+                hint: _bucketHint(widget.activity.dragTargetA),
                 accent: c.success,
                 items: _bucketA,
                 bucketId: 'A',
@@ -83,6 +94,7 @@ class _DragDropBucketActivityState extends State<DragDropBucketActivity> {
               child: _BucketColumn(
                 colors: c,
                 label: widget.activity.dragTargetB,
+                hint: _bucketHint(widget.activity.dragTargetB),
                 accent: c.coral,
                 items: _bucketB,
                 bucketId: 'B',
@@ -133,6 +145,7 @@ class _BucketColumn extends StatelessWidget {
   const _BucketColumn({
     required this.colors,
     required this.label,
+    this.hint,
     required this.accent,
     required this.items,
     required this.bucketId,
@@ -141,6 +154,7 @@ class _BucketColumn extends StatelessWidget {
 
   final LQColors colors;
   final String label;
+  final String? hint;
   final Color accent;
   final List<String> items;
   final String bucketId;
@@ -172,6 +186,14 @@ class _BucketColumn extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
+              if (hint != null) ...[
+                const SizedBox(height: 2),
+                Text(
+                  hint!,
+                  style: LQTypography.micro(colors).copyWith(color: colors.inkSoft),
+                  textAlign: TextAlign.center,
+                ),
+              ],
               const SizedBox(height: LQSpacing.sm),
               ...items.map(
                 (i) => Padding(

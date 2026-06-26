@@ -54,7 +54,7 @@ const kStageCopyByTitle = <String, StageCopy>{
     ],
   ),
   'Needs First': StageCopy(
-    learn: 'Needs keep you healthy and safe — food, shelter, and school supplies come first.',
+    learn: 'Needs are must-haves — food, shelter, school. Pay these before fun spending.',
     apply: 'Name one need you covered today before any fun spending.',
     quiz: [
       StageQuizItem('A **need** is something that…', 'Keeps you safe and healthy', [
@@ -85,7 +85,7 @@ const kStageCopyByTitle = <String, StageCopy>{
     ],
   ),
   'Want Later': StageCopy(
-    learn: 'Wants are fun but optional — they can wait until needs and savings are covered.',
+    learn: 'Wants are fun extras — games, treats, trends. They can wait until needs and save are covered.',
     apply: 'Pick one want and write why it can wait until next week.',
     quiz: [
       StageQuizItem('A **want** is…', 'Nice but not essential', [
@@ -175,7 +175,7 @@ const kStageCopyByTitle = <String, StageCopy>{
   ),
   // Legacy L1 titles (lessons 1–5 bespoke — kept for bank completeness)
   'Needs vs Wants': StageCopy(
-    learn: 'Needs keep you going; wants are extras. Spot the difference before you spend.',
+    learn: 'Spending uses coins now. Ask first: is it a need (must-have) or a want (extra fun)?',
     apply: 'Sort one purchase today into need or want.',
     quiz: [
       StageQuizItem('A need is…', 'Essential for health or school', [
@@ -202,8 +202,8 @@ const kStageCopyByTitle = <String, StageCopy>{
     ],
   ),
   'Saving Jar': StageCopy(
-    learn: 'A saving jar holds coins for a goal — watching it grow builds patience.',
-    apply: 'Name a goal and move AED 2 into your jar today.',
+    learn: 'A saving jar is not for spending today — it holds coins for one goal you want later.',
+    apply: 'Name your goal and move AED 2 into the jar before any want-spending.',
     quiz: [
       StageQuizItem('A saving jar is for…', 'Future goals', [
         'Instant spending',
@@ -233,7 +233,7 @@ const kStageCopyByTitle = <String, StageCopy>{
     ],
   ),
   'Smart Spending': StageCopy(
-    learn: 'Compare options before you buy — same item, different shops, different prices.',
+    learn: 'Smart spending means choosing on purpose — compare price, check quality, skip impulse buys.',
     apply: 'Check two prices for one item you want this week.',
     quiz: [
       StageQuizItem('Compare before you buy to…', 'Find better value', [
@@ -264,8 +264,8 @@ const kStageCopyByTitle = <String, StageCopy>{
     ],
   ),
   'Budget Basics': StageCopy(
-    learn: 'A weekly budget lists money in and out — plan AED before you spend it.',
-    apply: 'Write a simple AED plan for this week with one need and one save line.',
+    learn: 'A budget gives every coin a job: needs (must-pay), save (future-you), wants (fun left over).',
+    apply: 'Split this week\'s AED into one need line, one save line, and one want line.',
     quiz: [
       StageQuizItem('A budget is…', 'A money plan', [
         'A type of game',
@@ -731,8 +731,8 @@ const kStageCopyByTitle = <String, StageCopy>{
     ],
   ),
   'Jar Rules': StageCopy(
-    learn: 'Every coin has a job — jar rules split spend, save, and give clearly.',
-    apply: 'Label jars: Spend, Save, Give — move today’s coins accordingly.',
+    learn: 'Three jars, three jobs: Spend (this week), Save (your goal), Give (help others with a plan).',
+    apply: 'Label Spend, Save, Give — sort today\'s coins into the right jar.',
     quiz: [
       StageQuizItem('Jar rules mean…', 'Every coin has a job', [
         'Throw coins anywhere',

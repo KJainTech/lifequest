@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../features/games/concept/concept_game_practice_screen.dart';
+import '../features/games/concept/concept_game_types.dart';
+import '../features/games/concept/concept_games_hub_screen.dart';
 import '../features/money/money_hub_screen.dart';
 import '../features/faq/faq_screen.dart';
 import '../features/city/city_screen.dart';
@@ -136,6 +139,19 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/wallet',
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) => const WalletScreen(),
+      ),
+      GoRoute(
+        path: '/concept-games',
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => const ConceptGamesHubScreen(),
+        routes: [
+          GoRoute(
+            path: ':gameId',
+            builder: (context, state) => ConceptGamePracticeScreen(
+              gameId: conceptGameFromParam(state.pathParameters['gameId']),
+            ),
+          ),
+        ],
       ),
       GoRoute(
         path: '/faq',

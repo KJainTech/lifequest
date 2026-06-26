@@ -127,6 +127,8 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
                           ],
                         ),
                         const SizedBox(height: LQSpacing.lg),
+                        _ConceptGamesBanner(colors: colors),
+                        const SizedBox(height: LQSpacing.lg),
                         _LevelPicker(
                           colors: colors,
                           selected: _expandedLevel,
@@ -569,5 +571,52 @@ extension _FirstOrNull<E> on Iterable<E> {
   E? get firstOrNull {
     final it = iterator;
     return it.moveNext() ? it.current : null;
+  }
+}
+
+class _ConceptGamesBanner extends StatelessWidget {
+  const _ConceptGamesBanner({required this.colors});
+
+  final LQColors colors;
+
+  @override
+  Widget build(BuildContext context) {
+    return LQCard(
+      colors: colors,
+      onTap: () => context.push('/concept-games'),
+      child: Row(
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(LQRadius.control),
+              gradient: const LinearGradient(
+                colors: [
+                  Color(0xFF2D9F6F),
+                  Color(0xFF4A7FD4),
+                  Color(0xFFE07A4A),
+                ],
+              ),
+            ),
+            child: const Icon(Icons.sports_esports_outlined, color: Colors.white),
+          ),
+          const SizedBox(width: LQSpacing.md),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Concept Games', style: LQTypography.h3(colors)),
+                Text(
+                  '5 mini-games — needs, saving, budget, deals & Lemon City',
+                  style: LQTypography.bodySm(colors),
+                ),
+              ],
+            ),
+          ),
+          Icon(Icons.chevron_right_rounded, color: colors.inkSoft),
+        ],
+      ),
+    );
   }
 }

@@ -5,6 +5,7 @@ import '../../app/theme/lq_theme.dart';
 import '../../core/tokens/lq_tokens.dart';
 import '../../core/tokens/lq_typography.dart';
 import '../../data/content/lesson_catalog.dart';
+import '../../data/content/stage_content_bank.dart';
 import '../../data/content/stage_activity_config.dart';
 import '../../data/models/stage_activity.dart';
 import '../../data/repositories/content_repository.dart';
@@ -96,6 +97,9 @@ class _ActivityPhaseViewState extends ConsumerState<ActivityPhaseView> {
         }
 
         final activity = activities[_activityIndex];
+        final conceptTip = _activityIndex == 0
+            ? snippetFor(meta, teen: ageBand == '13-17').learn
+            : null;
 
         return SingleChildScrollView(
           padding: const EdgeInsets.all(LQSpacing.gutter),
@@ -112,6 +116,23 @@ class _ActivityPhaseViewState extends ConsumerState<ActivityPhaseView> {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: LQSpacing.sm),
+                if (conceptTip != null) ...[
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(LQSpacing.md),
+                    decoration: BoxDecoration(
+                      color: colors.surface.withValues(alpha: 0.9),
+                      borderRadius: BorderRadius.circular(LQRadius.control),
+                      border: Border.all(color: colors.border),
+                    ),
+                    child: Text(
+                      conceptTip,
+                      style: LQTypography.bodySm(colors),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  const SizedBox(height: LQSpacing.md),
+                ],
                 Text(
                   activity.prompt,
                   style: LQTypography.h3(colors),
