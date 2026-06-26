@@ -232,14 +232,14 @@ class _SliderQuizActivityState extends State<SliderQuizActivity> {
   @override
   void initState() {
     super.initState();
-    _value = widget.activity.sliderCorrect;
+    _value = widget.activity.sliderMin;
   }
 
   @override
   void didUpdateWidget(covariant SliderQuizActivity oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.activity.prompt != widget.activity.prompt) {
-      _value = widget.activity.sliderCorrect;
+      _value = widget.activity.sliderMin;
       _correct = null;
     }
   }
@@ -320,7 +320,6 @@ class _SliderQuizActivityState extends State<SliderQuizActivity> {
             expanded: true,
             onPressed: () => setState(() {
               _correct = null;
-              _value = a.sliderCorrect;
             }),
           ),
         ],

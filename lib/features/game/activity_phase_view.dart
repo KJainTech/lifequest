@@ -12,6 +12,7 @@ import '../../features/onboarding/age_band.dart';
 import '../../features/onboarding/auth_service.dart';
 import '../learn/lesson_session.dart';
 import '../learn/quiz/quiz_phase_view.dart';
+import 'activities/budget_split_activity.dart';
 import 'activities/stage_activity_widgets.dart';
 import 'simulators/stage_simulators.dart';
 
@@ -161,6 +162,13 @@ class _ActivityBody extends StatelessWidget {
           onComplete: onComplete,
         );
       case StageActivityKind.slider:
+        if (promptUsesBudgetSplit(activity.prompt)) {
+          return BudgetSplitActivity(
+            colors: colors,
+            prompt: activity.prompt,
+            onComplete: onComplete,
+          );
+        }
         return SliderQuizActivity(
           activity: activity,
           colors: colors,

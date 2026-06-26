@@ -19,6 +19,7 @@ import '../../../features/onboarding/auth_service.dart';
 import '../../../data/content/lesson_catalog.dart';
 import '../../../data/content/lesson_progression.dart';
 import '../../../design/lq_celebration.dart';
+import '../../../design/lq_progress_animations.dart';
 import '../../../data/providers/app_providers.dart';
 import '../../city/city_providers.dart';
 import '../lesson_session.dart';
@@ -124,6 +125,7 @@ class _RewardPhaseViewState extends ConsumerState<RewardPhaseView> {
     final coins = (result['coins'] as num?)?.toInt() ?? 0;
     final lqScore = (result['lqScore'] as num?)?.toInt() ?? 0;
     final towerName = result['towerName'] as String?;
+    final badgeUnlocked = result['badgeUnlocked'] as String?;
     final nextLesson = LessonProgression.nextAfter(session.lessonId);
     final journeyDone = nextLesson == null;
 
@@ -155,6 +157,7 @@ class _RewardPhaseViewState extends ConsumerState<RewardPhaseView> {
     return Stack(
       children: [
         LQCelebrationBurst(colors: colors, active: stars >= 4),
+        LQCoinFlyOverlay(colors: colors, count: coins ~/ 5 + 4, active: coins > 0),
         LQCanvas(
           colors: colors,
           child: SafeArea(
@@ -183,15 +186,15 @@ class _RewardPhaseViewState extends ConsumerState<RewardPhaseView> {
                   const SizedBox(height: LQSpacing.lg),
                   _StarsRow(colors: colors, count: stars),
                   const SizedBox(height: LQSpacing.xxl),
-                  Wrap(
-                    spacing: LQSpacing.sm,
-                    alignment: WrapAlignment.center,
-                    children: [
-                      StatPill(colors: colors, label: '+$xp XP', variant: StatPillVariant.xp),
-                      StatPill(colors: colors, label: '+$coins coins', variant: StatPillVariant.coins),
-                      StatPill(colors: colors, label: 'LQ $lqScore', variant: StatPillVariant.trend),
-                    ],
-                  ).animate().fadeIn(delay: 450.ms),
+                  LQRewardReveal(
+                    colors: colors,
+                    xp: xp,
+                    coins: coins,
+                    lqScore: lqScore,
+                    badgeLabel: badgeUnlocked != null
+                        ? badgeTitle(badgeUnlocked)
+                        : null,
+                  ),
                   if (towerName != null) ...[
                     const SizedBox(height: LQSpacing.lg),
                     LQSuccessPop(
@@ -226,7 +229,7 @@ class _RewardPhaseViewState extends ConsumerState<RewardPhaseView> {
                         }
                       });
                     },
-                  ).animate().fadeIn(delay: 650.ms),
+                  ).animate().fadeIn(delay: 380.ms),
                   const SizedBox(height: LQSpacing.md),
                   LQButton(
                     label: 'See my city',
@@ -236,7 +239,7 @@ class _RewardPhaseViewState extends ConsumerState<RewardPhaseView> {
                     onPressed: () {
                       _leaveLesson(() => context.go('/city'));
                     },
-                  ).animate().fadeIn(delay: 720.ms),
+                  ).animate().fadeIn(delay: 460.ms),
                   const SizedBox(height: LQSpacing.lg),
                 ],
               ),

@@ -100,10 +100,13 @@ class _QuizPhaseViewState extends ConsumerState<QuizPhaseView> {
     if (_submitting || _showExplanation) return;
     LQSound.unlock();
     final correct = index == correctIndex;
+    final hint = explanation.trim().isEmpty
+        ? (correct ? 'Great choice!' : 'Think again — read each option carefully.')
+        : explanation;
     setState(() {
       _selected = index;
       _lastCorrect = correct;
-      _explanation = explanation;
+      _explanation = hint;
       if (correct) {
         _scorePulse++;
         _showSuccessToast = true;
@@ -156,15 +159,14 @@ class _QuizPhaseViewState extends ConsumerState<QuizPhaseView> {
     }
   }
 
-  QuizChoiceState _choiceState(int i) {
+  QuizChoiceState _choiceState(int i, int correctDisplayedIndex) {
     if (!_showExplanation) {
       if (_selected == null) return QuizChoiceState.idle;
       if (_selected == i) return QuizChoiceState.selected;
       return QuizChoiceState.dimmed;
     }
-    if (_selected == i) {
-      return _lastCorrect == true ? QuizChoiceState.correct : QuizChoiceState.incorrect;
-    }
+    if (i == correctDisplayedIndex) return QuizChoiceState.correct;
+    if (_selected == i && _lastCorrect == false) return QuizChoiceState.incorrect;
     return QuizChoiceState.dimmed;
   }
 
@@ -281,21 +283,9 @@ class _QuizPhaseViewState extends ConsumerState<QuizPhaseView> {
                   ),
                   const SizedBox(height: LQSpacing.sm),
                   AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 280),
+                    duration: const Duration(milliseconds: 220),
                     switchInCurve: Curves.easeOutCubic,
                     switchOutCurve: Curves.easeInCubic,
-                    transitionBuilder: (child, animation) {
-                      return FadeTransition(opacity: animation, child: child);
-                    },
-                    layoutBuilder: (currentChild, previousChildren) {
-                      return Stack(
-                        alignment: Alignment.topCenter,
-                        children: [
-                          ...previousChildren,
-                          if (currentChild != null) currentChild,
-                        ],
-                      );
-                    },
                     child: Container(
                       key: ValueKey('prompt-$qIndex'),
                       width: double.infinity,
@@ -323,7 +313,7 @@ class _QuizPhaseViewState extends ConsumerState<QuizPhaseView> {
                           key: ValueKey('q$qIndex-opt$i'),
                           label: displayedOptions[i],
                           colors: colors,
-                          state: _choiceState(i),
+                          state: _choiceState(i, correctDisplayedIndex),
                           indexLabel: i < _optionLabels.length ? _optionLabels[i] : '${i + 1}',
                           enabled: !_showExplanation && !_submitting,
                           onTap: () => _onSelect(
@@ -338,6 +328,7 @@ class _QuizPhaseViewState extends ConsumerState<QuizPhaseView> {
                   if (_showExplanation && _explanation != null) ...[
                     Container(
                       width: double.infinity,
+                      constraints: const BoxConstraints(minHeight: 48),
                       padding: const EdgeInsets.all(LQSpacing.lg),
                       decoration: BoxDecoration(
                         color: colors.surface.withValues(alpha: 0.92),
@@ -351,6 +342,8 @@ class _QuizPhaseViewState extends ConsumerState<QuizPhaseView> {
                         _explanation!,
                         style: LQTypography.bodySm(colors),
                         textAlign: TextAlign.center,
+                        maxLines: 5,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ).animate().fadeIn(duration: 280.ms).slideY(begin: 0.08, end: 0),
                     const SizedBox(height: LQSpacing.md),
@@ -361,7 +354,7 @@ class _QuizPhaseViewState extends ConsumerState<QuizPhaseView> {
                       size: LQButtonSize.lg,
                       expanded: true,
                       onPressed: _submitting ? null : () => _continue(questions.length),
-                    ).animate().fadeIn(delay: 120.ms).slideY(begin: 0.12, end: 0),
+                    ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.12, end: 0),
                   ] else
                     const SizedBox(height: LQTouch.minTarget + LQSpacing.md),
                   if (_submitting)

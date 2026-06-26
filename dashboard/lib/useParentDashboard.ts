@@ -48,6 +48,17 @@ const QUEST_LEVEL_NAMES = [
 ];
 
 const STAGES_PER_LEVEL = [5, 6, 7, 9, 10, 11];
+const PARENT_CHILD_STORAGE_KEY = "lq_parent_selected_child";
+
+function readStoredChildId(): string | null {
+  if (typeof window === "undefined") return null;
+  return sessionStorage.getItem(PARENT_CHILD_STORAGE_KEY);
+}
+
+function storeChildId(id: string) {
+  if (typeof window === "undefined") return;
+  sessionStorage.setItem(PARENT_CHILD_STORAGE_KEY, id);
+}
 
 function questLevelFromCompleted(completedCount: number): number {
   let remaining = completedCount;
@@ -69,9 +80,14 @@ function questLevelName(completedCount: number, journeyDone: boolean): string {
 export function useParentDashboard(childIdParam?: string | null) {
   const [user, setUser] = useState<User | null>(null);
   const [children, setChildren] = useState<ChildSummary[]>([]);
-  const [selectedChildId, setSelectedChildId] = useState<string | null>(
-    childIdParam ?? null,
+  const [selectedChildId, setSelectedChildIdState] = useState<string | null>(
+    childIdParam ?? readStoredChildId(),
   );
+
+  const setSelectedChildId = (id: string | null) => {
+    setSelectedChildIdState(id);
+    if (id) storeChildId(id);
+  };
   const [profileName, setProfileName] = useState<string>("Explorer");
   const [stats, setStats] = useState<ChildStats | null>(null);
   const [lessons, setLessons] = useState<LessonProgressRow[]>([]);
@@ -118,8 +134,17 @@ export function useParentDashboard(childIdParam?: string | null) {
         }));
         if (!cancelled) {
           setChildren(rows);
-          if (!selectedChildId && rows.length > 0) {
-            setSelectedChildId(rows[0].uid);
+          if (rows.length > 0) {
+            setSelectedChildIdState((current) => {
+              if (current != null) return current;
+              const saved = readStoredChildId();
+              const preferred =
+                childIdParam ??
+                (saved && rows.some((r) => r.uid === saved) ? saved : null) ??
+                rows[0].uid;
+              if (preferred) storeChildId(preferred);
+              return preferred;
+            });
           }
         }
       } catch (e) {

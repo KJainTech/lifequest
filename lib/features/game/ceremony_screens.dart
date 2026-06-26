@@ -12,6 +12,7 @@ import '../../data/content/lesson_definitions.dart';
 import '../../design/guide_mascot.dart';
 import '../../design/lq_button.dart';
 import '../../design/lq_canvas.dart';
+import '../../design/lq_progress_animations.dart';
 import '../../design/lq_quiz_choice.dart';
 import '../../design/penny_mascot.dart';
 import '../../features/onboarding/auth_service.dart';
@@ -32,6 +33,7 @@ class _ExitChallengeViewState extends ConsumerState<ExitChallengeView> {
   int _correct = 0;
   int? _selected;
   bool _done = false;
+  bool _showFeedback = false;
   late final List<_ExitQ> _questions;
 
   @override
@@ -62,19 +64,21 @@ class _ExitChallengeViewState extends ConsumerState<ExitChallengeView> {
     final ok = i == _questions[_q].correct;
     setState(() {
       _selected = i;
+      _showFeedback = true;
       if (ok) _correct++;
     });
-    Future.delayed(const Duration(milliseconds: 1200), () {
-      if (!mounted) return;
-      if (_q + 1 >= _questions.length) {
-        setState(() => _done = true);
-      } else {
-        setState(() {
-          _q++;
-          _selected = null;
-        });
-      }
-    });
+  }
+
+  void _nextQuestion() {
+    if (_q + 1 >= _questions.length) {
+      setState(() => _done = true);
+    } else {
+      setState(() {
+        _q++;
+        _selected = null;
+        _showFeedback = false;
+      });
+    }
   }
 
   void _continue(bool passed) {
@@ -133,23 +137,56 @@ class _ExitChallengeViewState extends ConsumerState<ExitChallengeView> {
                 const SizedBox(height: LQSpacing.lg),
                 Expanded(
                   child: ListView(
-                    children: List.generate(_questions[_q].options.length, (i) {
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 8),
-                        child: LQQuizChoice(
-                          label: _questions[_q].options[i],
-                          colors: colors,
-                          state: _selected == null
-                              ? QuizChoiceState.idle
-                              : i == _questions[_q].correct
-                                  ? QuizChoiceState.correct
-                                  : _selected == i
-                                      ? QuizChoiceState.incorrect
-                                      : QuizChoiceState.dimmed,
-                          onTap: _selected == null ? () => _pick(i) : null,
+                    children: [
+                      ...List.generate(_questions[_q].options.length, (i) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: LQQuizChoice(
+                            label: _questions[_q].options[i],
+                            colors: colors,
+                            state: _selected == null
+                                ? QuizChoiceState.idle
+                                : i == _questions[_q].correct
+                                    ? QuizChoiceState.correct
+                                    : _selected == i
+                                        ? QuizChoiceState.incorrect
+                                        : QuizChoiceState.dimmed,
+                            onTap: _selected == null ? () => _pick(i) : null,
+                          ),
+                        );
+                      }),
+                      if (_showFeedback && _selected != null) ...[
+                        const SizedBox(height: LQSpacing.md),
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(LQSpacing.md),
+                          decoration: BoxDecoration(
+                            color: colors.surface,
+                            borderRadius: BorderRadius.circular(LQRadius.control),
+                            border: Border.all(
+                              color: (_selected == _questions[_q].correct
+                                      ? colors.success
+                                      : colors.warn)
+                                  .withValues(alpha: 0.35),
+                            ),
+                          ),
+                          child: Text(
+                            _selected == _questions[_q].correct
+                                ? 'Nice — that shows you remember this level.'
+                                : 'Not quite — the green answer is the strongest choice.',
+                            style: LQTypography.bodySm(colors),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                      );
-                    }),
+                        const SizedBox(height: LQSpacing.md),
+                        LQButton(
+                          label: _q + 1 >= _questions.length ? 'See results' : 'Continue',
+                          colors: colors,
+                          expanded: true,
+                          onPressed: _nextQuestion,
+                        ),
+                      ],
+                    ],
                   ),
                 ),
               ] else ...[
@@ -266,21 +303,12 @@ class LevelCompleteView extends ConsumerWidget {
           child: Column(
             children: [
               const Spacer(),
-              Text(
-                'LEVEL $questLevel COMPLETE!',
-                style: LQTypography.display(colors).copyWith(color: colors.gold),
-                textAlign: TextAlign.center,
-              ).animate().scale(
-                    begin: const Offset(0.5, 0.5),
-                    end: const Offset(1, 1),
-                    curve: Curves.elasticOut,
-                  ),
-              const SizedBox(height: LQSpacing.lg),
-              Text(
-                'You are now a $questName',
-                style: LQTypography.h2(colors),
-                textAlign: TextAlign.center,
-              ).animate(delay: 400.ms).fadeIn(),
+              LQLevelUpBanner(
+                colors: colors,
+                level: questLevel,
+                title: 'You are now a $questName',
+                subtitle: 'New stages unlocked on your quest map.',
+              ),
               const Spacer(flex: 2),
               LQButton(
                 label: 'Read your letter',
@@ -288,7 +316,7 @@ class LevelCompleteView extends ConsumerWidget {
                 expanded: true,
                 onPressed: () =>
                     ref.read(lessonSessionProvider.notifier).advanceLevelComplete(),
-              ),
+              ).animate().fadeIn(delay: 500.ms),
             ],
           ),
         ),

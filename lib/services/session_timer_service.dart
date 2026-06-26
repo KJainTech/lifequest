@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../app/theme/lq_theme.dart';
 import '../core/tokens/lq_tokens.dart';
@@ -9,6 +10,7 @@ import '../core/tokens/lq_typography.dart';
 import '../data/providers/notification_providers.dart';
 import '../data/repositories/notification_repository.dart';
 import '../design/lq_button.dart';
+import '../features/learn/lesson_session.dart';
 
 final _breakNotifiedProvider = StateProvider<bool>((ref) => false);
 
@@ -74,7 +76,12 @@ class _SessionBreakOverlayState extends ConsumerState<SessionBreakOverlay> {
                 label: 'Take a break',
                 colors: colors,
                 expanded: true,
-                onPressed: () => Navigator.of(context).maybePop(),
+                onPressed: () {
+                  ref.read(lessonSessionProvider.notifier).clear();
+                  ref.read(sessionTimerProvider.notifier).resetAfterBreak();
+                  ref.read(_breakNotifiedProvider.notifier).state = false;
+                  context.go('/home');
+                },
               ),
               if (!timer.mustBreak) ...[
                 const SizedBox(height: LQSpacing.sm),
@@ -123,6 +130,11 @@ class SessionTimerNotifier extends StateNotifier<Duration> {
   void snooze15() {
     _snoozedUntil = DateTime.now().add(const Duration(minutes: 15));
     state = state + Duration.zero;
+  }
+
+  void resetAfterBreak() {
+    _snoozedUntil = null;
+    state = Duration.zero;
   }
 
   @override

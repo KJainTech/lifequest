@@ -7,6 +7,7 @@ import '../../core/tokens/lq_tokens.dart';
 import '../../core/tokens/lq_typography.dart';
 import '../../design/lq_button.dart';
 import '../../design/lq_celebration.dart';
+import '../../design/lq_progress_animations.dart';
 
 /// Celebration when a new building rises in Lemon City.
 class CityBuildOverlay extends StatefulWidget {
@@ -40,6 +41,7 @@ class _CityBuildOverlayState extends State<CityBuildOverlay> {
       fit: StackFit.expand,
       children: [
         LQCelebrationBurst(colors: widget.colors, active: true),
+        LQCoinFlyOverlay(colors: widget.colors, count: 8, active: true),
         Positioned(
           left: LQSpacing.gutter,
           right: LQSpacing.gutter,

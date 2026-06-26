@@ -79,6 +79,7 @@ class _CreditScoreSimulatorState extends State<CreditScoreSimulator>
 
   int _step = 0;
   int _score = 620;
+  int? _finalQuizScore;
   late final AnimationController _needle;
   late Animation<double> _needleAnim;
 
@@ -109,7 +110,7 @@ class _CreditScoreSimulatorState extends State<CreditScoreSimulator>
       ..forward();
 
     if (_step >= _decisions.length) {
-      final quizScore = _score >= 720
+      _finalQuizScore = _score >= 720
           ? 5
           : _score >= 650
               ? 4
@@ -118,10 +119,11 @@ class _CreditScoreSimulatorState extends State<CreditScoreSimulator>
                   : _score >= 500
                       ? 2
                       : 1;
-      Future.delayed(const Duration(milliseconds: 800), () {
-        if (mounted) widget.onComplete(quizScore);
-      });
     }
+  }
+
+  void _finishCredit() {
+    if (_finalQuizScore != null) widget.onComplete(_finalQuizScore!);
   }
 
   @override
@@ -185,11 +187,23 @@ class _CreditScoreSimulatorState extends State<CreditScoreSimulator>
         ),
         const SizedBox(height: LQSpacing.lg),
         if (done)
-          Text(
-            'Nice work! Your choices shaped your score.',
-            style: LQTypography.bodySm(colors),
-            textAlign: TextAlign.center,
-          ).animate().fadeIn()
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                'Nice work! Your choices shaped your score.',
+                style: LQTypography.bodySm(colors),
+                textAlign: TextAlign.center,
+              ).animate().fadeIn(),
+              const SizedBox(height: LQSpacing.md),
+              LQButton(
+                label: 'Continue',
+                colors: colors,
+                expanded: true,
+                onPressed: _finishCredit,
+              ),
+            ],
+          )
         else ...[
           Text(
             'Decision ${_step + 1} of ${_decisions.length}',
@@ -206,12 +220,22 @@ class _CreditScoreSimulatorState extends State<CreditScoreSimulator>
           ...decision.choices.map(
             (c) => Padding(
               padding: const EdgeInsets.only(bottom: LQSpacing.sm),
-              child: LQButton(
-                label: c.label,
-                colors: colors,
-                variant: LQButtonVariant.secondary,
-                expanded: true,
-                onPressed: () => _pick(c),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: _ChoiceTag(colors: colors, delta: c.delta),
+                  ),
+                  const SizedBox(height: 4),
+                  LQButton(
+                    label: c.label,
+                    colors: colors,
+                    variant: LQButtonVariant.secondary,
+                    expanded: true,
+                    onPressed: () => _pick(c),
+                  ),
+                ],
               ),
             ),
           ),
@@ -238,6 +262,37 @@ class _Choice {
   const _Choice(this.label, this.delta);
   final String label;
   final int delta;
+}
+
+class _ChoiceTag extends StatelessWidget {
+  const _ChoiceTag({required this.colors, required this.delta});
+
+  final LQColors colors;
+  final int delta;
+
+  @override
+  Widget build(BuildContext context) {
+    final (label, color) = switch (delta) {
+      > 0 => ('Builds trust', colors.success),
+      < 0 => ('Risky move', colors.danger),
+      _ => ('Neutral', colors.inkSoft),
+    };
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(LQRadius.pill),
+        border: Border.all(color: color.withValues(alpha: 0.35)),
+      ),
+      child: Text(
+        label,
+        style: LQTypography.micro(colors).copyWith(
+          color: color,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+    );
+  }
 }
 
 class _ArcGaugePainter extends CustomPainter {
@@ -317,6 +372,7 @@ class _CrashExperimentSimulatorState extends State<CrashExperimentSimulator>
   bool _crashed = false;
   bool _answered = false;
   String? _feedback;
+  int? _score;
 
   static const _points = <Offset>[
     Offset(0, 0.72),
@@ -366,12 +422,12 @@ class _CrashExperimentSimulatorState extends State<CrashExperimentSimulator>
               'Buying the dip can work — but only with savings set aside and '
               'a parent\'s OK. Never use money you need soon.';
       }
+      _score = action == 'STAY' ? 5 : action == 'BUY' ? 3 : 1;
     });
+  }
 
-    final score = action == 'STAY' ? 5 : action == 'BUY' ? 3 : 1;
-    Future.delayed(const Duration(milliseconds: 2200), () {
-      if (mounted) widget.onComplete(score);
-    });
+  void _finish() {
+    if (_score != null) widget.onComplete(_score!);
   }
 
   @override
@@ -483,6 +539,13 @@ class _CrashExperimentSimulatorState extends State<CrashExperimentSimulator>
             style: LQTypography.bodySm(colors),
             textAlign: TextAlign.center,
           ).animate().fadeIn(),
+          const SizedBox(height: LQSpacing.md),
+          LQButton(
+            label: 'Continue',
+            colors: colors,
+            expanded: true,
+            onPressed: _finish,
+          ),
         ],
       ],
     );
