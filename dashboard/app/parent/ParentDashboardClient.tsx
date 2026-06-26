@@ -103,6 +103,7 @@ export default function ParentDashboardClient() {
       setSelectedChildId(uid);
       setChildUidInput("");
       setLinkMessage("Child linked successfully.");
+      window.location.reload();
     } catch (err) {
       setLinkMessage(
         err instanceof Error ? err.message : "Could not link child account.",
@@ -174,7 +175,10 @@ export default function ParentDashboardClient() {
               </button>
             </form>
             {linkMessage && (
-              <p className="mt-3 text-sm text-lq-emerald-700" role="status">
+              <p
+                className={`mt-3 text-sm ${linkMessage.includes("success") ? "text-lq-emerald-700" : "text-red-800"}`}
+                role="status"
+              >
                 {linkMessage}
               </p>
             )}

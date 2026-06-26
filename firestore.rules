@@ -19,12 +19,21 @@ service cloud.firestore {
       return get(/databases/$(database)/documents/users/$(uid)).data;
     }
 
-    function isParentOf(childUid) {
+    function isParentUser() {
       return isSignedIn()
         && exists(/databases/$(database)/documents/users/$(request.auth.uid))
-        && userDoc(request.auth.uid).role == 'parent'
+        && userDoc(request.auth.uid).role == 'parent';
+    }
+
+    function isParentOf(childUid) {
+      return isParentUser()
         && exists(/databases/$(database)/documents/users/$(childUid))
         && userDoc(childUid).parentUid == request.auth.uid;
+    }
+
+    function isLinkedChildDoc() {
+      return isParentUser()
+        && resource.data.parentUid == request.auth.uid;
     }
 
     function isTeacherOfClass(classId) {
@@ -49,7 +58,7 @@ service cloud.firestore {
 
     // Users — profile fields only; no stats here
     match /users/{uid} {
-      allow read: if isOwner(uid) || isParentOf(uid) || isAdmin();
+      allow read: if isOwner(uid) || isAdmin() || isParentOf(uid) || isLinkedChildDoc();
       allow create: if isOwner(uid)
         && request.resource.data.role in ['child', 'parent', 'teacher']
         && !('xp' in request.resource.data)
